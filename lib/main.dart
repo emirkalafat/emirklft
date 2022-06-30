@@ -1,3 +1,5 @@
+import 'package:blog_web_site/app_theme.dart';
+import 'package:blog_web_site/values/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -8,24 +10,26 @@ void main() {
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  final Future<FirebaseApp> _initialization =
+      Firebase.initializeApp(options: firebaseOptions);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: AppTheme.darkThemeData,
       home: FutureBuilder(
           future: _initialization,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
+              // ignore: avoid_print
               print("error");
             }
             if (snapshot.connectionState == ConnectionState.done) {
               return const MyHomePage();
             }
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }),
     );
   }
@@ -43,11 +47,15 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Ahmet Emir Kalafat"),
+        title: const Text(
+          "Ahmet Emir Kalafat",
+          style: TextStyle(fontSize: 32),
+        ),
+        centerTitle: true,
       ),
       body: const Center(
         child: Text(
-          "Herkese Merhaba",
+          "HEy Ben Emir seni lanet olası",
         ),
       ),
     );
