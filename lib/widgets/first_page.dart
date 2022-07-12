@@ -9,8 +9,6 @@ class FirstPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ancestorScaffold = Scaffold.maybeOf(context);
-    final hasDrawer = ancestorScaffold != null && ancestorScaffold.hasDrawer;
     return PageScaffold(
       title: StringConst.mainScreen,
       body: Container(
