@@ -1,3 +1,5 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:blog_web_site/color_schemes.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/wide_screen.dart';
@@ -12,13 +14,22 @@ class WebApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: StringConst.appName,
-      theme: ThemeData(
-        brightness: Brightness.dark,
+    return AdaptiveTheme(
+      light: ThemeData(
+        colorScheme: lightColorScheme,
         useMaterial3: true,
       ),
-      home: const WideScreen(isim: StringConst.appName),
+      dark: ThemeData(
+        colorScheme: darkColorScheme,
+        useMaterial3: true,
+      ),
+      initial: AdaptiveThemeMode.light,
+      builder: (theme, darkTheme) => MaterialApp(
+        theme: theme,
+        darkTheme: darkTheme,
+        title: StringConst.appName,
+        home: const WideScreen(isim: StringConst.appName),
+      ),
     );
   }
 }
