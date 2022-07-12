@@ -14,7 +14,7 @@ class _ResponsiveLayoutState extends State<ResponsiveLayout> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      if (constraints.maxWidth / constraints.maxHeight > 1) {
+      if (constraints.maxWidth / constraints.maxHeight > 1.2) {
         return const NarrowScreen(isim: StringConst.appName);
       } else {
         return const WideScreen(isim: StringConst.appName);

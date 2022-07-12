@@ -20,21 +20,23 @@ class NarrowScreen extends StatefulWidget {
 class _NarrowScreenState extends State<NarrowScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        title: Text(
-          widget.isim,
-          style: GoogleFonts.getFont("Ubuntu"),
+    return Row(
+      children: [
+        buildDrawer(context),
+        Expanded(
+          child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).colorScheme.background,
+              title: Text(
+                widget.isim,
+                style: GoogleFonts.getFont("Ubuntu"),
+              ),
+              centerTitle: true,
+            ),
+            body: const MyBody(),
+          ),
         ),
-        centerTitle: true,
-      ),
-      body: Row(
-        children: [
-          buildDrawer(context),
-          Expanded(child: const MyBody()),
-        ],
-      ),
+      ],
     );
   }
 
