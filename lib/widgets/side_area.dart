@@ -1,25 +1,43 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:animate_icons/animate_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../main.dart';
 import '../values/values.dart';
+import 'page_list_tiles.dart';
 
-class SideArea extends StatelessWidget {
+class SideArea extends ConsumerStatefulWidget {
   const SideArea({
     Key? key,
     required this.controller,
+    required this.selectedPageNameProvider,
   }) : super(key: key);
 
   final AnimateIconController controller;
+  final StateProvider<String> selectedPageNameProvider;
+  @override
+  ConsumerState<SideArea> createState() => _SideAreaState();
+}
 
+class _SideAreaState extends ConsumerState<SideArea> {
   @override
   Widget build(BuildContext context) {
+    final selectedPageName =
+        ref.watch(widget.selectedPageNameProvider.state).state;
     bool onThemePressed() {
       AdaptiveTheme.of(context).mode == AdaptiveThemeMode.dark
           ? AdaptiveTheme.of(context).setLight()
           : AdaptiveTheme.of(context).setDark();
       return true;
       //Navigator.of(context).pop();
+    }
+
+    void _selectPage(BuildContext context, WidgetRef ref, String pageName) {
+      // only change the state if we have selected a different page
+      if (ref.read(widget.selectedPageNameProvider.state).state != pageName) {
+        ref.read(widget.selectedPageNameProvider.state).state = pageName;
+      }
     }
 
     return Drawer(
@@ -36,24 +54,26 @@ class SideArea extends StatelessWidget {
                     backgroundImage: AssetImage('images/profile.jpg'),
                   ),
                 ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.home,
+                for (var pageName in availablePages.keys)
+                  PageListTile(
+                    pageName: pageName,
+                    selectedPageName: selectedPageName,
+                    onPressed: () => _selectPage(context, ref, pageName),
                   ),
-                  title: const Text('Page 1'),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.train,
-                  ),
-                  title: const Text('Page 2'),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
+                //ListTile(
+                //  leading: const Icon(
+                //    Icons.home,
+                //  ),
+                //  title: const Text(StringConst.mainScreen),
+                //  onTap: () {},
+                //),
+                //ListTile(
+                //  leading: const Icon(
+                //    Icons.train,
+                //  ),
+                //  title: const Text('Page 2'),
+                //  onTap: () {},
+                //),
               ],
             ),
           ),
@@ -75,7 +95,7 @@ class SideArea extends StatelessWidget {
                               AdaptiveThemeMode.dark
                           ? Icons.dark_mode
                           : Icons.sunny,
-                      controller: controller,
+                      controller: widget.controller,
                       onStartIconPress: onThemePressed,
                       onEndIconPress: onThemePressed,
                       duration: const Duration(milliseconds: 500),

@@ -1,17 +1,20 @@
 import 'package:animate_icons/animate_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../widgets/my_body.dart';
+import '../widgets/first_page.dart';
 import '../widgets/side_area.dart';
 
 class NarrowScreen extends StatefulWidget {
   const NarrowScreen({
     Key? key,
     required this.isim,
+    required this.selectedPageNameProvider,
   }) : super(key: key);
 
   final String isim;
+  final StateProvider<String> selectedPageNameProvider;
 
   @override
   State<NarrowScreen> createState() => _NarrowScreenState();
@@ -33,7 +36,7 @@ class _NarrowScreenState extends State<NarrowScreen> {
               ),
               centerTitle: true,
             ),
-            body: const MyBody(),
+            body: FirstPage(),
           ),
         ),
       ],
@@ -42,6 +45,9 @@ class _NarrowScreenState extends State<NarrowScreen> {
 
   SideArea buildDrawer(BuildContext context) {
     AnimateIconController controller = AnimateIconController();
-    return SideArea(controller: controller);
+    return SideArea(
+      controller: controller,
+      selectedPageNameProvider: widget.selectedPageNameProvider,
+    );
   }
 }
