@@ -47,6 +47,7 @@ dependencies:
   url_launcher: ^6.1.4
   auto_route: ^4.2.0
   visibility_detector: ^0.3.3
+  youtube_player_iframe: ^2.3.0
   firebase_core: ^1.18.0
   flutterfire_cli: ^0.2.2+2
 

@@ -17,7 +17,7 @@ class FirstPage extends StatelessWidget {
         child: Column(
           children: [
             Flexible(
-              flex: 5,
+              flex: 6,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

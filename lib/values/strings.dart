@@ -7,6 +7,9 @@ class StringConst {
 
   //Uygulama içi yazılar
   static const mainScreen = "Ana Sayfa";
+  static const aboutMeScreen = "Hakkımda";
+  static const latestProjects = "En Son Projelerim";
+  static const contactwithMe = "İletişim";
 
   //web sitesi adresleri
   static const youtubeAdress =

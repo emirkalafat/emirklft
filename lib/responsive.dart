@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class ResponsiveLayout extends StatefulWidget {
   const ResponsiveLayout({
     Key? key,
+    //responsive contents
     required this.menu,
     required this.content,
-    this.breakpoint = 600,
-    this.menuWidth = 240,
+    //responsive values
+    this.breakpoint = 750,
+    this.menuWidth = 260,
   }) : super(key: key);
   final Widget menu;
   final Widget content;
@@ -22,13 +24,14 @@ class _ResponsiveLayoutState extends State<ResponsiveLayout> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     if (screenWidth >= widget.breakpoint) {
+      //wide screen : show content and drawer together
       return Row(
         children: [
           SizedBox(
             width: widget.menuWidth,
             child: widget.menu,
           ),
-          Container(width: 0.5, color: Colors.black),
+          Container(width: 0.5, color: Colors.grey),
           Expanded(child: widget.content),
         ],
       );
@@ -43,16 +46,6 @@ class _ResponsiveLayoutState extends State<ResponsiveLayout> {
           ),
         ),
       );
-      /*LayoutBuilder(builder: (context, constraints) {
-      if (constraints.maxWidth / constraints.maxHeight >
-              1.2 /*&&
-          screenWidth >= breakpoint*/
-          ) {
-        return const NarrowScreen(isim: StringConst.appName);
-      } else {
-        return const WideScreen(isim: StringConst.appName);
-      }
-    });*/
     }
   }
 }

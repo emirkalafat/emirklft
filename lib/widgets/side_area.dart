@@ -37,10 +37,15 @@ class _SideAreaState extends ConsumerState<SideArea> {
       // only change the state if we have selected a different page
       if (ref.read(widget.selectedPageNameProvider.state).state != pageName) {
         ref.read(widget.selectedPageNameProvider.state).state = pageName;
+        //close drawer on screen select when screen has drawer
+        if (Scaffold.maybeOf(context)?.hasDrawer ?? false) {
+          Navigator.of(context).pop();
+        }
       }
     }
 
     return Drawer(
+      backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -60,20 +65,6 @@ class _SideAreaState extends ConsumerState<SideArea> {
                     selectedPageName: selectedPageName,
                     onPressed: () => _selectPage(context, ref, pageName),
                   ),
-                //ListTile(
-                //  leading: const Icon(
-                //    Icons.home,
-                //  ),
-                //  title: const Text(StringConst.mainScreen),
-                //  onTap: () {},
-                //),
-                //ListTile(
-                //  leading: const Icon(
-                //    Icons.train,
-                //  ),
-                //  title: const Text('Page 2'),
-                //  onTap: () {},
-                //),
               ],
             ),
           ),
@@ -83,35 +74,29 @@ class _SideAreaState extends ConsumerState<SideArea> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 const Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    AnimateIcons(
-                      startIcon: AdaptiveTheme.of(context).mode ==
-                              AdaptiveThemeMode.dark
-                          ? Icons.dark_mode
-                          : Icons.sunny,
-                      endIcon: AdaptiveTheme.of(context).mode ==
-                              AdaptiveThemeMode.dark
-                          ? Icons.dark_mode
-                          : Icons.sunny,
-                      controller: widget.controller,
-                      onStartIconPress: onThemePressed,
-                      onEndIconPress: onThemePressed,
-                      duration: const Duration(milliseconds: 500),
-                      clockwise: false,
-                      startIconColor:
-                          Theme.of(context).colorScheme.onBackground,
-                      endIconColor: Theme.of(context).colorScheme.onBackground,
-                    ),
-                    const Text("Temayı Değiştir"),
-                  ],
+                ElevatedButton.icon(
+                  icon: AnimateIcons(
+                    startIcon:
+                        AdaptiveTheme.of(context).mode == AdaptiveThemeMode.dark
+                            ? Icons.dark_mode
+                            : Icons.sunny,
+                    endIcon:
+                        AdaptiveTheme.of(context).mode == AdaptiveThemeMode.dark
+                            ? Icons.dark_mode
+                            : Icons.sunny,
+                    controller: widget.controller,
+                    onStartIconPress: onThemePressed,
+                    onEndIconPress: onThemePressed,
+                    duration: const Duration(milliseconds: 500),
+                    clockwise: false,
+                    startIconColor:
+                        Theme.of(context).colorScheme.onTertiaryContainer,
+                    endIconColor:
+                        Theme.of(context).colorScheme.onTertiaryContainer,
+                  ),
+                  onPressed: onThemePressed,
+                  label: const Text("Temayı Değiştir"),
                 ),
-                //ElevatedButton.icon(
-                //  icon:
-                //  onPressed: onThemePressed,
-                //  label: const Text("Temayı Değiştir"),
-                //),
                 const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: AboutListTile(
