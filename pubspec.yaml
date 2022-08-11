@@ -50,6 +50,10 @@ dependencies:
   youtube_player_iframe: ^2.3.0
   firebase_core: ^1.18.0
   flutterfire_cli: ^0.2.2+2
+  webview_flutter: ^3.0.4
+  webview_flutter_web: ^0.1.0+4
+  flutter_widget_from_html_core: ^0.8.5+3
+
 
 # dev
 dev_dependencies:

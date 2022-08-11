@@ -4,11 +4,13 @@ import 'package:blog_web_site/color_schemes.dart';
 import 'package:blog_web_site/responsive.dart';
 import 'package:blog_web_site/screens/aboutme_page.dart';
 import 'package:blog_web_site/screens/contact.dart';
+import 'package:blog_web_site/screens/enfes_tarifler.dart';
 import 'package:blog_web_site/screens/first_page.dart';
 import 'package:blog_web_site/screens/latest.dart';
 import 'package:blog_web_site/widgets/side_area.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import 'values/values.dart';
 
@@ -20,8 +22,9 @@ void main() {
 final availablePages = <String, WidgetBuilder>{
   StringConst.mainScreen: (_) => const FirstPage(),
   StringConst.aboutMeScreen: (_) => const AboutMePage(),
-  StringConst.latestProjects: (_) => LatestThingsScreen(),
-  StringConst.contactwithMe: (_) => ContactWithMe(),
+  StringConst.latestProjects: (_) => const LatestThingsScreen(),
+  StringConst.contactwithMe: (_) => const ContactWithMe(),
+  StringConst.enfesTarifler: (_) => const EnfesTariflerScreen(),
 };
 
 class WebApp extends ConsumerWidget {

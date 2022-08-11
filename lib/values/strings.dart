@@ -10,6 +10,7 @@ class StringConst {
   static const aboutMeScreen = "Hakkımda";
   static const latestProjects = "En Son Projelerim";
   static const contactwithMe = "İletişim";
+  static const enfesTarifler = "Enfes Tarifler Uygulaması";
 
   //web sitesi adresleri
   static const youtubeAdress =

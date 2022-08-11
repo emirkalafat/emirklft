@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class LatestThingsScreen extends StatefulWidget {
-  LatestThingsScreen({Key? key}) : super(key: key);
+  const LatestThingsScreen({Key? key}) : super(key: key);
 
   @override
   State<LatestThingsScreen> createState() => _LatestThingsScreenState();
@@ -34,9 +34,9 @@ class _LatestThingsScreenState extends State<LatestThingsScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text("En Son Youtube Videosu"),
+                const Text("En Son Youtube Videosu"),
                 Container(
-                  constraints: BoxConstraints(maxWidth: 750),
+                  constraints: const BoxConstraints(maxWidth: 750),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: YoutubePlayerIFrame(
@@ -51,7 +51,7 @@ class _LatestThingsScreenState extends State<LatestThingsScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.arrow_circle_down),
+        child: const Icon(Icons.arrow_circle_down),
         onPressed: () {},
       ),
     );
