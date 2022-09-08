@@ -31,29 +31,35 @@ class ProjectDetails extends StatelessWidget {
   }
 
   buildBodyWidgets(BuildContext context, Map<String, dynamic> project) {
+    final colorScheme = Theme.of(context).colorScheme;
     switch (project['id']) {
       case '1':
         //?Enfes Tarifler Sayfası
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const Text("falan"),
-            const Text("falan"),
-            const Text("falan"),
-            InkWell(
-              onTap: () {
-                _launchUrl(
-                    'https://play.google.com/store/apps/details?id=com.garlicman.flutter_tarif_sitesi');
-              },
-              child: const Image(
-                image: AssetImage('assets/images/googlePlay.png'),
-                height: 50,
+        return Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Card(
+              color: colorScheme.secondary.withOpacity(0.5),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: const Text(
+                    "Bu proje Flutter'ı anlamak ve kendimi geliştirmek için odaklandığım ilk projedir. Kendi yemek tariflerinizi paylaşabildiğiniz ve başkalarının paylaştığı yemek tariflerini inceleyebildiğiniz bir mobil uygulama."),
               ),
             ),
-          ],
-        );
-
-      default:
+          ),
+          const Text("falan"),
+          const Text("falan"),
+          InkWell(
+            onTap: () {
+              _launchUrl(
+                  'https://play.google.com/store/apps/details?id=com.garlicman.flutter_tarif_sitesi');
+            },
+            child: const Image(
+              image: AssetImage('assets/images/googlePlay.png'),
+              height: 50,
+            ),
+          ),
+        ]);
     }
   }
 }
