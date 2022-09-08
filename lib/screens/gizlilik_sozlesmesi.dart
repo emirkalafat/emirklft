@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:blog_web_site/html_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
@@ -6,20 +5,11 @@ import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart
 class EnfesTariflerGizlilikSozlesmesi extends StatelessWidget {
   const EnfesTariflerGizlilikSozlesmesi({super.key});
 
-  void loadLocalHTML() async {
-    final url = Uri.dataFromString(
-      HTMLPages.gizlilik,
-      mimeType: 'text/html',
-      encoding: Encoding.getByName('utf-8'),
-    ).toString();
-    //controller.loadUrl(url);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Enfes Tarifler Gizlilik Sözleşmesi"),
+        title: const Text("Enfes Tarifler Gizlilik Sözleşmesi"),
       ),
       body: SingleChildScrollView(
         child: Padding(
