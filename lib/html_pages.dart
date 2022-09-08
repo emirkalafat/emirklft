@@ -38,17 +38,14 @@ Hizmetimizi geliştirmek için Anonim Verileri kullanırız. Bu bilgiler, Hizmet
 Özellikle katılmayı seçerseniz, Uygulama, coğrafi konum bilgilerinizi toplayabilir. Her durumda, coğrafi konum bilginizin alınmasını mobil cihazınızın ayarlarından engelleyebilirsiniz. <br><br>
  
 Sosyal ağ hesabınızdan bilgi erişimi ve toplama izni vermeyi özellikle tercih ederseniz, sosyal ağ hesabınızdaki temel kişisel bilgileriniz (adınız ve e-posta adresiniz gibi) ve ayrıca sosyal ağ kullanıcı kimliği ( şifreniz değil ) ve Uygulama aracılığıyla paylaştığınız yayınlarla ilgili parametreler. Erişilebilen ve alınabilecek bilgileri kontrol etmek için hesabınızın gizlilik tercihlerini nasıl ayarlayabileceğiniz hakkında daha fazla bilgi için lütfen sosyal ağın gizlilik politikasına bakın.<br><br>
-
 Bu, aynı zamanda, Uygulamayı nasıl kullandığınıza ilişkin otomatik olarak oluşturulmuş bilgilerle ilgili olarak gerçekleşir. Bu tür bilgiler, Uygulamanın nasıl kullanıldığını daha iyi anlamamıza ve bir kullanıcı olarak ihtiyacınıza uygun hizmet üretmemize yardımcı olur.<br><br>
 Uygulama içindeki kullanıcı yetkilendirme özelliklerini etkinleştirirseniz, aşağıdaki ek bilgiler saklanır: <br>
-
 İsim,<br>
 E-posta,<br>
 Telefon numarası (isteğe bağlı);<br>
 Facebook, Twitter, Google+ veya LinkedIn gibi harici bir sağlayıcı tarafından gönderilen ek profil bilgileri.<br><br>
  
 Uygulama sahibine, uygulamanın kullanımı hakkında bilgi vermek için aşağıdaki (bilinmeyen) bilgileri de topluyoruz: <br>
-
 • Uygulamayı açtığınız an,<br>
 • Uygulamanın içinde açtığınız ekranlar ve bu ekranlarda harcadığınız süre,<br>
 • Uygulamadan ayrıldığınız an.<br><br>
@@ -65,7 +62,6 @@ Uygulamadaki fotoğraflar da dahil olmak üzere Veri yüklediğinizde, bu payla�
 <p>
 	<strong>A. Amaçlar </strong><br>
 	Taraflar Kişisel Verileri aşağıdaki amaçlarla işlemektedir: <br><br>
-
 Hizmeti kullanabilmenizi sağlamak için,<br>
 Hizmetimizle ilgili bilgileri güncel tutmak için,<br>
 Hizmetin iyileştirilmesi ve / veya özelleştirilmesi için,<br>
@@ -74,13 +70,9 @@ Sizi tanımak ve dolandırıcılığı önlemek için,<br>
 Destek sağlamak için,<br>
 Kişisel Verilerinizi, bizden bunu talep ettiğiniz takdirde veya yasal olarak yükümlü olduğumuz durumlarda, üçüncü şahıslara iletmek.<br>
 <strong>B. Kişisel Verilerin üçüncü şahıslara iletilmesi </strong> <br><br>
-
 Sizden önceden izin alınmaksızın Kişisel Verilerinizi üçüncü şahıslara satmamaktayız, satmıyor veya kiralamıyoruz. Bununla birlikte, Ücretli Hizmetlerle ilgili ödeme sağlayıcıları aracılığıyla ödeme yapmak gibi Kişisel Verilerinizi size sağlama veya talimatları yerine getirmeniz açısından şart olduğu durumlarda, Kişisel Verilerinizi üçüncü taraflara sağlayabiliriz. <br><br>
-
 Uygun olduğunu düşündüğümüz şekilde Hizmet'in bu tür amaçlar için üçüncü taraflara kullanımı hakkında "toplu anonim veriler" sağlayabiliriz. "Toplam anonim veriler", size geri gönderilemeyen ve bu nedenle Kişisel Veriler olarak sayılmayan verilerdir. Örneğin, Kullanıcıların Hizmeti nasıl kullandığını daha iyi anlamak için toplu anonim verileri kullanabiliriz.<br><br>
-
 Üçüncü bir tarafa geçtiğimiz veya bir üçüncü tarafla birleştiğimiz veya bir yeniden yapılandırmaya tabi olduğumuz durumda, Kişisel Verileriniz de üçüncü kişilere açıklanabilir ve / veya bu üçüncü kişiye devredilebilir. Bu üçüncü taraf, Kişisel Verileri ve bize sağladığınız diğer bilgileri kullanmaya devam etme hakkına sahip olacak. <br><br>
-
 Kişisel Verilerinizi, iyi niyetle, bir mahkeme kararı, halen devam eden adli işlem, cezai veya sivil mahkeme celbi veya kolluk kuvveti makamları tarafından verilen diğer yasal işlem veya taleplere uymanız gerektiğine inandığımız yerlerde ifşa edebiliriz veya egzersiz yapabiliriz Yasal hakları veya yasal iddialara karşı savunmak. <br>
 </p>
 <h2>4. Kişisel Verilerin işlendiği yerler</h2>
@@ -92,7 +84,6 @@ Verilerinizin güvenliği ve diğer Kullanıcıların güvenliği bizim için ç
 </p>
 <h2>6. Üçüncü şahıslarla ilgili sorumluluk sınırları</h2>
 <p>Hizmetimiz üçüncü taraflar tarafından sunulan hizmetler ve ürünler ve / veya ortakların, reklamverenlerin ve diğer üçüncü tarafların web sitelerine veya hizmetlerine köprüler içerebilir. <br>
-
 Tarafların, bu üçüncü tarafların içeriği, web siteleri veya hizmetleri üzerinde herhangi bir kontrolü veya etkisi yoktur. Üçüncü kişi web sitelerinin ve hizmetlerinin kullanımı için farklı gizlilik politikaları uygulanabilir. Bu Gizlilik Beyanı, yalnızca taraflar tarafından Hizmeti kendi amaçları doğrultusunda kullanmanız yoluyla elde edilen Kişisel Verilerle ilgilidir. Taraflar, üçüncü taraf web sitelerinin ve hizmetlerin içeriği, uygulamaları veya işletilmesi ile ilgili herhangi bir sorumluluk kabul etmez.</p>
 <h2>7. Kişisel Verileri Görüntüleme ve Silme</h2>
 <p>Uygulamayı kullanarak toplanan kişisel bilgilere e-posta yoluyla bizimle iletişime geçmek veya silmek için bir istek gönderebilirsiniz. Kimliğinizi doğrulamak için ek bilgi sağlamanız istenebilir.</p>
