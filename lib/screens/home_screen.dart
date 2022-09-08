@@ -9,8 +9,36 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentTheme = AdaptiveTheme.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text("Ahmet Emir Kalafat")),
+      appBar: AppBar(
+        title: InkWell(
+          child: const Text("Ahmet Emir Kalafat"),
+          onTap: () {
+            context.popToNamed('/');
+          },
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: Text('Hakkımda'),
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Text('Projelerim'),
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Text('İletişim'),
+          ),
+          TextButton(
+            onPressed: () {
+              showAboutDialog(context: context);
+            },
+            child: Text('Lisanslar'),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
+        primary: true,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
