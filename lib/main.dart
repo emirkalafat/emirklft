@@ -41,8 +41,9 @@ class _WebAppState extends State<WebApp> {
       builder: (theme, darkTheme) => MaterialApp.router(
         routerDelegate: routerDelegate,
         routeInformationParser: BeamerParser(),
-        backButtonDispatcher:
-            BeamerBackButtonDispatcher(delegate: routerDelegate),
+        backButtonDispatcher: BeamerBackButtonDispatcher(
+          delegate: routerDelegate,
+        ),
         theme: theme,
         darkTheme: darkTheme,
         title: 'Ahmet Emir Kalafat',
