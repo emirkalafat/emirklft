@@ -1,6 +1,7 @@
 import 'package:blog_web_site/screens/hakkimda.dart';
 import 'package:blog_web_site/screens/home_screen.dart';
 import 'package:blog_web_site/screens/projects_screen.dart';
+import 'package:blog_web_site/widgets/my_appbar.dart';
 import 'package:blog_web_site/widgets/responsive_widget.dart';
 import 'package:blog_web_site/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +46,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     final isSmall = ResponsiveWidget.isSmallScreen(context);
     return Scaffold(
       endDrawer: isSmall
@@ -63,14 +65,14 @@ class _HomePageState extends State<HomePage> {
             )
           : null,
       appBar: AppBar(
-        centerTitle: isSmall,
+        centerTitle: ResponsiveWidget.isSmallScreen(context),
         title: InkWell(
           child: const Text("Ahmet Emir Kalafat"),
           onTap: () {
             onPageNameTap(0);
           },
         ),
-        actions: isSmall
+        actions: ResponsiveWidget.isSmallScreen(context)
             ? null
             : [
                 TextButton(
@@ -110,8 +112,8 @@ class _HomePageState extends State<HomePage> {
       body: IndexedStack(
         index: currentIndex,
         children: [
-          AnaSayfa(),
-          HakkimdaPage(),
+          const AnaSayfa(),
+          const HakkimdaPage(),
           MyProjectsPage(projects: widget.projects),
         ],
       ),

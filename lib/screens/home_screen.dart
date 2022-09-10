@@ -8,11 +8,10 @@ class AnaSayfa extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentTheme = AdaptiveTheme.of(context);
-    return SingleChildScrollView(
-      primary: true,
-      child: Center(
+    return Scaffold(
+      body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const Padding(
               padding: EdgeInsets.all(8.0),
