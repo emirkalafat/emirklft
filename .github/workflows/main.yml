@@ -1,5 +1,7 @@
 name: Build and Release APK
-on: push
+on: 
+  push: 
+    branches: [master]
 jobs:
     hosting:
       name: Deploy Website
@@ -30,3 +32,8 @@ jobs:
           env:
             FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
             PROJECT_PATH: ./
+
+        #- name: Depolyo GithubPages Hosting
+        #- uses: blurfireteam/flutter-gh-pages@v7
+        #  with:
+        #    workingDir: ./
