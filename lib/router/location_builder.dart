@@ -25,11 +25,13 @@ final locationBuilder = RoutesLocationBuilder(
                   .where((project) => project['genres'].contains(genreQuery))
               : projects_data.projects;
       final tab = state.queryParameters['tab'];
-      final initialIndex = tab == 'projects'
-          ? 2
-          : tab == 'about'
-              ? 1
-              : 0;
+      final initialIndex = tab == 'contact'
+          ? 3
+          : tab == 'projects'
+              ? 2
+              : tab == 'about'
+                  ? 1
+                  : 0;
       return HomePage(
         initialIndex: initialIndex,
         projects: projects.toList(),

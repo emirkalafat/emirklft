@@ -1,18 +1,28 @@
+import 'dart:convert';
+
+import 'package:blog_web_site/screens/contact.dart';
 import 'package:blog_web_site/screens/hakkimda.dart';
 import 'package:blog_web_site/screens/home_screen.dart';
 import 'package:blog_web_site/screens/projects_screen.dart';
-import 'package:blog_web_site/widgets/my_appbar.dart';
 import 'package:blog_web_site/widgets/responsive_widget.dart';
 import 'package:blog_web_site/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key, required this.initialIndex, required this.projects})
+  HomePage({Key? key, required this.initialIndex, required this.projects})
       : super(key: key);
 
   final int initialIndex;
   final List<Map<String, dynamic>> projects;
+
+  final List<String> menuItems = [
+    'Ana Sayfa',
+    'Hakkımda',
+    'Projelerim',
+    'İletişim',
+  ];
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -25,11 +35,13 @@ class _HomePageState extends State<HomePage> {
   onPageNameTap(int index) {
     Beamer.of(context).update(
       configuration: RouteInformation(
-        location: index == 2
-            ? '/?tab=projects'
-            : index == 1
-                ? '/?tab=about'
-                : '/?tab=home',
+        location: index == 3
+            ? '/?tab=contact'
+            : index == 2
+                ? '/?tab=projects'
+                : index == 1
+                    ? '/?tab=about'
+                    : '/?tab=home',
       ),
       rebuild: false,
     );
@@ -55,10 +67,23 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   const SizedBox(height: 48),
                   buildSearchBar(),
+                  Column(
+                    children: List.generate(widget.menuItems.length, (index) {
+                      return ListTile(
+                        title: Text(widget.menuItems[index]),
+                        onTap: () {
+                          onPageNameTap(index);
+                        },
+                      );
+                    }),
+                  ),
                   ListTile(
-                    leading: const Icon(Icons.person),
-                    title: const Text("Hakkımda"),
-                    onTap: () {},
+                    leading: const Icon(Icons.info),
+                    title: const Text("Lisanslar"),
+                    onTap: () {
+                      Navigator.pop(context);
+                      showAboutDialog(context: context);
+                    },
                   ),
                 ],
               ),
@@ -101,9 +126,11 @@ class _HomePageState extends State<HomePage> {
                     ? buildSearchBar()
                     : IconButton(
                         onPressed: () {
-                          setState(() {
-                            isSearching = true;
-                          });
+                          setState(
+                            () {
+                              isSearching = true;
+                            },
+                          );
                         },
                         icon: const Icon(Icons.search),
                       ),
@@ -115,6 +142,7 @@ class _HomePageState extends State<HomePage> {
           const AnaSayfa(),
           const HakkimdaPage(),
           MyProjectsPage(projects: widget.projects),
+          const ContactWithMe(),
         ],
       ),
     );
