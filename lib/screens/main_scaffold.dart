@@ -1,5 +1,4 @@
 import 'package:blog_web_site/screens/contact.dart';
-import 'package:blog_web_site/screens/hakkimda.dart';
 import 'package:blog_web_site/screens/home_screen.dart';
 import 'package:blog_web_site/screens/projects_screen.dart';
 import 'package:blog_web_site/widgets/responsive_widget.dart';
@@ -17,9 +16,14 @@ class HomePage extends StatefulWidget {
 
   final List<String> menuItems = [
     'Ana Sayfa',
-    'Hakkımda',
     'Projelerim',
     'İletişim',
+  ];
+
+  final List<IconData> menuIcons = [
+    Icons.home,
+    Icons.work,
+    Icons.mail,
   ];
 
   @override
@@ -36,13 +40,11 @@ class _HomePageState extends State<HomePage> {
   onPageNameTap(int index) {
     Beamer.of(context).update(
       configuration: RouteInformation(
-        location: index == 3
+        location: index == 2
             ? '/?tab=contact'
-            : index == 2
+            : index == 1
                 ? '/?tab=projects'
-                : index == 1
-                    ? '/?tab=about'
-                    : '/?tab=home',
+                : '/?tab=home',
       ),
       rebuild: false,
     );
@@ -65,6 +67,7 @@ class _HomePageState extends State<HomePage> {
     final primaryColor = colorScheme.primary;
     final onSurface = colorScheme.onSurface;
     return Scaffold(
+      backgroundColor: colorScheme.background,
       endDrawer: isSmall
           ? Drawer(
               child: ListView(
@@ -89,13 +92,7 @@ class _HomePageState extends State<HomePage> {
                     children: List.generate(widget.menuItems.length, (index) {
                       return ListTile(
                         leading: Icon(
-                          index == 0
-                              ? Icons.home
-                              : index == 1
-                                  ? Icons.person
-                                  : index == 2
-                                      ? Icons.work
-                                      : Icons.contact_mail,
+                          widget.menuIcons[index],
                           color:
                               index == currentIndex ? primaryColor : onSurface,
                         ),
@@ -137,7 +134,7 @@ class _HomePageState extends State<HomePage> {
         actions: ResponsiveWidget.isSmallScreen(context)
             ? null
             : [
-                for (int i = 1; i < widget.menuItems.length; i++)
+                for (int i = 0; i < widget.menuItems.length; i++)
                   //? Sayfa sayısı kadar buton oluşturuyoruz. Bu butonlar seçilen sayfalara gitmemizi sağlıyor.
                   TextButton(
                     style: TextButton.styleFrom(
@@ -192,7 +189,6 @@ class _HomePageState extends State<HomePage> {
         index: currentIndex,
         children: [
           const AnaSayfa(),
-          const HakkimdaPage(),
           MyProjectsPage(projects: widget.projects),
           const ContactWithMe(),
         ],

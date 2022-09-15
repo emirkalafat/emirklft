@@ -26,12 +26,10 @@ final locationBuilder = RoutesLocationBuilder(
               : projects_data.projects;
       final tab = state.queryParameters['tab'];
       final initialIndex = tab == 'contact'
-          ? 3
+          ? 2
           : tab == 'projects'
-              ? 2
-              : tab == 'about'
-                  ? 1
-                  : 0;
+              ? 1
+              : 0;
       return HomePage(
         initialIndex: initialIndex,
         projects: projects.toList(),

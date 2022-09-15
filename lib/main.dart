@@ -3,6 +3,7 @@ import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/color_schemes.dart';
 import 'package:blog_web_site/router/location_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,10 +31,12 @@ class _WebAppState extends State<WebApp> {
   Widget build(BuildContext context) {
     return AdaptiveTheme(
       light: ThemeData(
+        fontFamily: GoogleFonts.ubuntu().fontFamily,
         colorScheme: lightColorScheme,
         useMaterial3: true,
       ),
       dark: ThemeData(
+        fontFamily: GoogleFonts.ubuntu().fontFamily,
         colorScheme: darkColorScheme,
         useMaterial3: true,
       ),
@@ -41,9 +44,8 @@ class _WebAppState extends State<WebApp> {
       builder: (theme, darkTheme) => MaterialApp.router(
         routerDelegate: routerDelegate,
         routeInformationParser: BeamerParser(),
-        backButtonDispatcher: BeamerBackButtonDispatcher(
-          delegate: routerDelegate,
-        ),
+        backButtonDispatcher:
+            BeamerBackButtonDispatcher(delegate: routerDelegate),
         theme: theme,
         darkTheme: darkTheme,
         title: 'Ahmet Emir Kalafat',

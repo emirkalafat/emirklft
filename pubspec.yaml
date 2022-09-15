@@ -33,6 +33,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_widget_from_html_core: ^0.8.5+3
+  google_fonts: ^3.0.1
   http: ^0.13.5
   url_launcher: ^6.1.5
 

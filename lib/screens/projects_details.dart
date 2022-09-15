@@ -39,6 +39,10 @@ class ProjectDetails extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(project['explanation']),
+            ),
+            Padding(
               padding: const EdgeInsets.all(16.0),
               child: Card(
                 color: colorScheme.secondary.withOpacity(0.5),
@@ -58,6 +62,15 @@ class ProjectDetails extends StatelessWidget {
                 image: AssetImage('assets/images/googlePlay.png'),
                 height: 50,
               ),
+            ),
+          ],
+        );
+      case '2':
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(project['explanation']),
             ),
           ],
         );
