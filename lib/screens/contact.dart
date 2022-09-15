@@ -24,6 +24,7 @@ class _ContactWithMeState extends State<ContactWithMe> {
     required String subject,
     required String message,
   }) async {
+    if (!_formKey.currentState!.validate()) return;
     const serviceID = 'service_xup0xjb';
     const templateID = 'template_ltjsda5';
     const userID = 'UZdx0SjUX4IzCjN7M';
@@ -56,8 +57,10 @@ class _ContactWithMeState extends State<ContactWithMe> {
     if (isSent) {
       Utils.showSnackBar("Geri Bildiriminiz Gönderildi.", isError: false);
     }
-    // ignore: use_build_context_synchronously
-    Navigator.of(context).pop();
+    controllerEmailSubject.clear();
+    controllerMessage.clear();
+    controllerUserEmail.clear();
+    controllerUserName.clear();
   }
 
   @override
@@ -136,9 +139,9 @@ class _ContactWithMeState extends State<ContactWithMe> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   // Foreground color
-                  onPrimary: Theme.of(context).colorScheme.onPrimary,
+                  foregroundColor: Theme.of(context).colorScheme.onPrimary,
                   // Background color
-                  primary: Theme.of(context).colorScheme.primary,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                 ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
                 onPressed: () => _sendFeedback(
                   name: controllerUserName.text.trim(),

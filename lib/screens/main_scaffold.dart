@@ -1,14 +1,12 @@
-import 'dart:convert';
-
 import 'package:blog_web_site/screens/contact.dart';
 import 'package:blog_web_site/screens/hakkimda.dart';
 import 'package:blog_web_site/screens/home_screen.dart';
 import 'package:blog_web_site/screens/projects_screen.dart';
 import 'package:blog_web_site/widgets/responsive_widget.dart';
-import 'package:blog_web_site/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
-import 'package:http/http.dart' as http;
+
+import '../widgets/closable_search_bar.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key, required this.initialIndex, required this.projects})
@@ -30,7 +28,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
-  bool isSearching = false;
+
+  bool _isScreenSelected(int index) {
+    return currentIndex == index;
+  }
 
   onPageNameTap(int index) {
     Beamer.of(context).update(
@@ -60,23 +61,59 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final isSmall = ResponsiveWidget.isSmallScreen(context);
+    final colorScheme = Theme.of(context).colorScheme;
+    final primaryColor = colorScheme.primary;
+    final onSurface = colorScheme.onSurface;
     return Scaffold(
       endDrawer: isSmall
           ? Drawer(
               child: ListView(
                 children: [
                   const SizedBox(height: 48),
-                  buildSearchBar(),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      width: 200,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Arama',
+                          filled: true,
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                        ),
+                      ),
+                    ),
+                  ),
                   Column(
                     children: List.generate(widget.menuItems.length, (index) {
                       return ListTile(
-                        title: Text(widget.menuItems[index]),
+                        leading: Icon(
+                          index == 0
+                              ? Icons.home
+                              : index == 1
+                                  ? Icons.person
+                                  : index == 2
+                                      ? Icons.work
+                                      : Icons.contact_mail,
+                          color:
+                              index == currentIndex ? primaryColor : onSurface,
+                        ),
+                        title: Text(
+                          widget.menuItems[index],
+                          style: Theme.of(context).textTheme.button!.copyWith(
+                                color: index == currentIndex
+                                    ? primaryColor
+                                    : onSurface,
+                              ),
+                        ),
                         onTap: () {
                           onPageNameTap(index);
                         },
                       );
                     }),
                   ),
+                  const Divider(),
                   ListTile(
                     leading: const Icon(Icons.info),
                     title: const Text("Lisanslar"),
@@ -100,40 +137,55 @@ class _HomePageState extends State<HomePage> {
         actions: ResponsiveWidget.isSmallScreen(context)
             ? null
             : [
-                TextButton(
-                  onPressed: () {
-                    onPageNameTap(1);
-                  },
-                  child: const Text('Hakkımda'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    onPageNameTap(2);
-                  },
-                  child: const Text('Projelerim'),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text('İletişim'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    showAboutDialog(context: context);
-                  },
-                  child: const Text('Lisanslar'),
-                ),
-                isSearching
-                    ? buildSearchBar()
-                    : IconButton(
-                        onPressed: () {
-                          setState(
-                            () {
-                              isSearching = true;
-                            },
-                          );
-                        },
-                        icon: const Icon(Icons.search),
+                for (int i = 1; i < widget.menuItems.length; i++)
+                  //? Sayfa sayısı kadar buton oluşturuyoruz. Bu butonlar seçilen sayfalara gitmemizi sağlıyor.
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor:
+                          _isScreenSelected(i) ? primaryColor : onSurface,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
                       ),
+                    ),
+                    onPressed: () {
+                      onPageNameTap(i);
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(widget.menuItems[i]),
+                        if (_isScreenSelected(i))
+                          Padding(
+                            padding: const EdgeInsets.all(3),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: primaryColor,
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                              width: 20,
+                              height: 3,
+                            ),
+                          )
+                      ],
+                    ),
+                  ),
+                //!for döngüsünün sonu
+                TextButton(
+                  style: TextButton.styleFrom(
+                    foregroundColor: onSurface,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  onPressed: () {
+                    showAboutDialog(
+                      context: context,
+                      applicationVersion: '0.1',
+                    );
+                  },
+                  child: const Text("Lisanslar"),
+                ),
+                const ClosableSearchBar(),
               ],
       ),
       body: IndexedStack(

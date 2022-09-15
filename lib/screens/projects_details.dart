@@ -34,7 +34,7 @@ class ProjectDetails extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     switch (project['id']) {
       case '1':
-        //?Enfes Tarifler Sayfası
+        //?Enfes Tarifler Proje Sayfası
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -49,8 +49,6 @@ class ProjectDetails extends StatelessWidget {
                 ),
               ),
             ),
-            const Text("falan"),
-            const Text("falan"),
             InkWell(
               onTap: () {
                 _launchUrl(

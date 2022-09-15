@@ -37,7 +37,7 @@ class _WebAppState extends State<WebApp> {
         colorScheme: darkColorScheme,
         useMaterial3: true,
       ),
-      initial: AdaptiveThemeMode.light,
+      initial: AdaptiveThemeMode.dark,
       builder: (theme, darkTheme) => MaterialApp.router(
         routerDelegate: routerDelegate,
         routeInformationParser: BeamerParser(),
