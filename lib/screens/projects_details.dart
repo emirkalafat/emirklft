@@ -55,7 +55,7 @@ class ProjectDetails extends StatelessWidget {
                 ),
               ),
             ),
-            InkWell(
+            GestureDetector(
               onTap: () {
                 _launchUrl(
                     'https://play.google.com/store/apps/details?id=com.garlicman.flutter_tarif_sitesi');
@@ -65,6 +65,13 @@ class ProjectDetails extends StatelessWidget {
                 height: 50,
               ),
             ),
+            InkWell(
+              onTap: _launchUrl(
+                  'https://play.google.com/apps/testing/com.garlicman.flutter_tarif_sitesi'),
+              child: const Text(
+                'Uygulamanın beta sürümüne erişmek için tıklayın.',
+              ),
+            )
           ],
         );
       case '2':
