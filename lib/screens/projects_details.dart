@@ -65,7 +65,7 @@ class ProjectDetails extends StatelessWidget {
                 height: 50,
               ),
             ),
-            InkWell(
+            GestureDetector(
               onTap: _launchUrl(
                   'https://play.google.com/apps/testing/com.garlicman.flutter_tarif_sitesi'),
               child: const Text(
