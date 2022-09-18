@@ -39,7 +39,6 @@ class _HomePageState extends State<HomePage> {
 
   onPageNameTap(int index) {
     Beamer.of(context).update(
-      data: {'title': widget.menuItems[index]},
       configuration: RouteInformation(
         location: index == 2
             ? '/?tab=contact'
@@ -62,6 +61,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final titleQuery = (context.currentBeamLocation.state as BeamState)
+        .queryParameters['title'];
     final screenSize = MediaQuery.of(context).size;
     final isSmall = ResponsiveWidget.isSmallScreen(context);
     final colorScheme = Theme.of(context).colorScheme;

@@ -47,7 +47,7 @@ class ProjectDetails extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Card(
-                color: colorScheme.secondary.withOpacity(0.5),
+                color: colorScheme.primaryContainer,
                 child: const Padding(
                   padding: EdgeInsets.all(16.0),
                   child: Text(
@@ -66,10 +66,15 @@ class ProjectDetails extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: _launchUrl(
-                  'https://play.google.com/apps/testing/com.garlicman.flutter_tarif_sitesi'),
-              child: const Text(
-                'Uygulamanın beta sürümüne erişmek için tıklayın.',
+              onTap: () {
+                _launchUrl(
+                    'https://play.google.com/apps/testing/com.garlicman.flutter_tarif_sitesi');
+              },
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  'Uygulamanın beta sürümüne erişmek için tıklayın.',
+                ),
               ),
             )
           ],
