@@ -39,6 +39,7 @@ class _HomePageState extends State<HomePage> {
 
   onPageNameTap(int index) {
     Beamer.of(context).update(
+      data: {'title': widget.menuItems[index]},
       configuration: RouteInformation(
         location: index == 2
             ? '/?tab=contact'

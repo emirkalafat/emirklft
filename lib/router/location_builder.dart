@@ -30,9 +30,17 @@ final locationBuilder = RoutesLocationBuilder(
           : tab == 'projects'
               ? 1
               : 0;
-      return HomePage(
-        initialIndex: initialIndex,
-        projects: projects.toList(),
+      return BeamPage(
+        //key: ValueKey('home'),
+        title: initialIndex == 0
+            ? 'Ana Sayfa'
+            : initialIndex == 1
+                ? 'Projelerim'
+                : 'İletişim',
+        child: HomePage(
+          initialIndex: initialIndex,
+          projects: projects.toList(),
+        ),
       );
     },
     '/enfestarifler': (context, state, data) => const BeamPage(

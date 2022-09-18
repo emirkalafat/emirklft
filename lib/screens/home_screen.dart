@@ -9,61 +9,78 @@ class AnaSayfa extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentTheme = AdaptiveTheme.of(context);
     final colorScheme = Theme.of(context).colorScheme;
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: colorScheme.background,
       body: Center(
         child: Container(
           constraints: const BoxConstraints(maxWidth: 1500, minWidth: 1200),
-          child: Row(
-            children: [
-              const Expanded(
-                flex: 2,
-                child: MainScreenSideMenu(),
-              ),
-              Expanded(
-                flex: 7,
-                child: Container(
-                  color: colorScheme.background,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text("Hello World!"),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (currentTheme.mode == AdaptiveThemeMode.dark) {
-                              currentTheme
-                                  .setThemeMode(AdaptiveThemeMode.light);
-                            } else {
-                              currentTheme.setThemeMode(AdaptiveThemeMode.dark);
-                            }
-                          },
-                          child: const Text("Temayı Değiştir"),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            context.beamToNamed('/enfestarifler');
-                          },
-                          child:
-                              const Text("Enfes Tarifler Gizlilik Sözleşmesi"),
-                        ),
-                      ),
-                    ],
-                  ),
+          child: screenSize.width < 800
+              ? Column(
+                  children: const [
+                    HomeScreenMainSide(),
+                  ],
+                )
+              : Row(
+                  children: const [
+                    Expanded(
+                      flex: 2,
+                      child: MainScreenSideMenu(),
+                    ),
+                    Expanded(
+                      flex: 7,
+                      child: HomeScreenMainSide(),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
         ),
+      ),
+    );
+  }
+}
+
+class HomeScreenMainSide extends StatelessWidget {
+  const HomeScreenMainSide({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final currentTheme = AdaptiveTheme.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
+    return Container(
+      color: colorScheme.background,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text("Hello World!"),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                if (currentTheme.mode == AdaptiveThemeMode.dark) {
+                  currentTheme.setThemeMode(AdaptiveThemeMode.light);
+                } else {
+                  currentTheme.setThemeMode(AdaptiveThemeMode.dark);
+                }
+              },
+              child: const Text("Temayı Değiştir"),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                context.beamToNamed('/enfestarifler');
+              },
+              child: const Text("Enfes Tarifler Gizlilik Sözleşmesi"),
+            ),
+          ),
+        ],
       ),
     );
   }

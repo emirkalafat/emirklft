@@ -18,7 +18,7 @@ class MyProjectsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: colorScheme.background,
       body: GridView.count(
-        childAspectRatio: 3,
+        childAspectRatio: 2,
         crossAxisCount: (screenSize.width / 300).round(),
         children: projects
             .map(
@@ -37,17 +37,21 @@ class MyProjectsPage extends StatelessWidget {
                         child: Text(
                           project['title'],
                           style: textTheme.headline6,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(project['explanation']),
+                        child: Text(
+                          project['explanation'],
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
-              //subtitle: Text(project['author']),
             )
             .toList(),
       ),
