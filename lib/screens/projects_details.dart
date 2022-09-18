@@ -15,7 +15,9 @@ class ProjectDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
+      backgroundColor: colorScheme.background,
       appBar: AppBar(
         title: Text(title),
       ),
@@ -67,11 +69,36 @@ class ProjectDetails extends StatelessWidget {
         );
       case '2':
         return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(project['explanation']),
             ),
+            GestureDetector(
+              onTap: () {
+                _launchUrl('https://github.com/emirkalafat/emirklft');
+              },
+              child: Container(
+                color: colorScheme.primary.withOpacity(0.5),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Sitenin kaynak kodu için tıklayın.'),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 4.0, right: 4.0),
+                        child: Image.asset(
+                          'assets/images/github.png',
+                          height: 30,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            )
           ],
         );
     }
