@@ -20,9 +20,7 @@ const List<Map<String, dynamic>> versions = [
         'changes': [
           'Uygulama içi reklam sistemi yenilendi.',
         ],
-        'fixed bugs': [
-          '',
-        ],
+        'fixed bugs': [],
       },
       {
         'version': '0.3.0-Release',
@@ -60,9 +58,7 @@ const List<Map<String, dynamic>> versions = [
       {
         'version': '0.2.3-OpenBeta2',
         'date': '2022-08-25',
-        'changes': [
-          '',
-        ],
+        'changes': [],
         'fixed bugs': [
           'Genel hata düzeltmeleri.',
         ],
@@ -170,13 +166,11 @@ const List<Map<String, dynamic>> versions = [
         'changes': [
           'İlk sürüm yayınlandı.',
         ],
-        'fixed bugs': [
-          'Yok',
-        ],
+        'fixed bugs': [],
       },
     ],
   }
-];  
+];
 
 /**TEMPLATE
   {
