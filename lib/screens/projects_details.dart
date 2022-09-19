@@ -1,3 +1,4 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:blog_web_site/data/project_versions.dart'
@@ -60,6 +61,20 @@ class ProjectDetails extends StatelessWidget {
                   child: Image(
                     image: AssetImage('assets/images/googlePlay.png'),
                     height: 75,
+                  ),
+                ),
+              ),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      context.beamToNamed(
+                        '/enfestarifler',
+                        beamBackOnPop: true,
+                      );
+                    },
+                    child: const Text("Enfes Tarifler Gizlilik Sözleşmesi"),
                   ),
                 ),
               ),
