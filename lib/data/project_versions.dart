@@ -1,6 +1,6 @@
 const List<Map<String, dynamic>> versions = [
   {
-    'id': 1,
+    'id': '1',
     'versions': [
       {
         'version': '0.3.2',
