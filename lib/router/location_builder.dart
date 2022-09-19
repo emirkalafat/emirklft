@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../screens/main_scaffold.dart';
 import '../screens/projects_details.dart';
-import 'package:blog_web_site/projects.dart' as projects_data;
+import 'package:blog_web_site/data/projects.dart' as projects_data;
 
 final locationBuilder = RoutesLocationBuilder(
   routes: {
