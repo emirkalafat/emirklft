@@ -25,7 +25,7 @@ const List<Map<String, dynamic>> versions = [
         ],
       },
       {
-        'version': '0.3.0-Relase',
+        'version': '0.3.0-Release',
         'date': '2022-08-29',
         'changes': [
           'Kullanıcı bilgileri düzenleme ekranına profil fotoğrafı ekleme özelliği getirildi.',
