@@ -11,21 +11,26 @@ class MainScreenSideMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final screenSize = MediaQuery.of(context).size;
-    return Container(
-      color: colorScheme.secondaryContainer,
-      child: Column(
-        //mainAxisSize: MainAxisSize.max,
-        children: [
-          AspectRatio(
-            aspectRatio: 1.20,
-            child: SideMenuAvatarAndName(
-                colorScheme: colorScheme, screenSize: screenSize),
-          ),
-          const SingleChildScrollView(
-            primary: true,
-            child: SideMenuSkills(),
-          ),
-        ],
+    return SingleChildScrollView(
+      child: Container(
+        constraints: BoxConstraints(
+          //maxHeight: screenSize.height,
+          minHeight: screenSize.height,
+        ),
+        color: colorScheme.secondaryContainer,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            AspectRatio(
+              aspectRatio: 1.20,
+              child: SideMenuAvatarAndName(
+                  colorScheme: colorScheme, screenSize: screenSize),
+            ),
+            const SingleChildScrollView(
+              child: SideMenuSkills(),
+            ),
+          ],
+        ),
       ),
     );
   }

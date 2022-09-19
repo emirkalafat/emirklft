@@ -18,6 +18,8 @@ class WebApp extends StatefulWidget {
 }
 
 class _WebAppState extends State<WebApp> {
+  static final messengerKey = GlobalKey<ScaffoldMessengerState>();
+
   @override
   void initState() {
     super.initState();
@@ -42,6 +44,7 @@ class _WebAppState extends State<WebApp> {
       ),
       initial: AdaptiveThemeMode.dark,
       builder: (theme, darkTheme) => MaterialApp.router(
+        scaffoldMessengerKey: messengerKey,
         routerDelegate: routerDelegate,
         routeInformationParser: BeamerParser(),
         backButtonDispatcher:

@@ -59,7 +59,7 @@ class ProjectDetails extends StatelessWidget {
                 child: const Center(
                   child: Image(
                     image: AssetImage('assets/images/googlePlay.png'),
-                    height: 50,
+                    height: 75,
                   ),
                 ),
               ),
@@ -84,7 +84,8 @@ class ProjectDetails extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Uygulama Sürüm Notları',
-                    style: textTheme.displayMedium,
+                    style: textTheme.displayMedium!
+                        .copyWith(color: colorScheme.onBackground),
                   ),
                 ),
               ),
@@ -154,7 +155,7 @@ class AppVersions extends StatelessWidget {
         ),
         child: ListView.separated(
             shrinkWrap: true,
-            //primary: true,
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               final indexedVersion = app['versions'][index];
               var versionAndDate = <Widget>[
@@ -195,7 +196,10 @@ class AppVersions extends StatelessWidget {
                       const Padding(
                         padding:
                             EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
-                        child: Text('Yapılan Değişikler'),
+                        child: Text(
+                          'Yapılan Değişikler',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                       ListView.builder(
                         padding: const EdgeInsets.all(8),
@@ -209,7 +213,8 @@ class AppVersions extends StatelessWidget {
                       const Padding(
                         padding:
                             EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
-                        child: Text('Düzeltilen Hatalar'),
+                        child: Text('Düzeltilen Hatalar',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
                       ),
                       ListView.builder(
                         padding: const EdgeInsets.all(8),

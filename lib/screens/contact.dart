@@ -1,7 +1,10 @@
 import 'dart:convert';
 
+import 'package:blog_web_site/screens/home_screen.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../widgets/utils.dart';
 
@@ -35,7 +38,7 @@ class _ContactWithMeState extends State<ContactWithMe> {
       await http.post(
         url,
         headers: {
-          'origin': 'http://localhost',
+          'origin': 'http://emirklftweb.firebaseapp.com',
           'Content-Type': 'application/json',
         },
         body: json.encode({
@@ -55,7 +58,11 @@ class _ContactWithMeState extends State<ContactWithMe> {
       Utils.showSnackBar(e.toString());
     }
     if (isSent) {
-      Utils.showSnackBar("Geri Bildiriminiz Gönderildi.", isError: false);
+      showTopSnackBar(
+        context,
+        MyCustomTopBar(message: 'Mailiniz Gönderildi.'),
+      );
+      //Utils.showSnackBar("Mailiniz Gönderildi.", isError: false);
     }
     controllerEmailSubject.clear();
     controllerMessage.clear();
@@ -65,97 +72,100 @@ class _ContactWithMeState extends State<ContactWithMe> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        constraints: const BoxConstraints(maxWidth: 750),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "Bana Ulaşın",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline5!
-                      .copyWith(color: Theme.of(context).colorScheme.onSurface),
+    return SingleChildScrollView(
+      child: Center(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 750),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Bana Ulaşın",
+                    style: Theme.of(context).textTheme.headline5!.copyWith(
+                        color: Theme.of(context).colorScheme.onSurface),
+                  ),
                 ),
-              ),
-              Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) => value == null || value.isEmpty
-                            ? 'Boş Bırakmayınız!'
-                            : null,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          label: Text("İsminiz"),
-                        ),
-                        controller: controllerUserName),
-                    const SizedBox(height: 12),
-                    TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) => value == null || value.isEmpty
-                            ? 'Boş Bırakmayınız!'
-                            : null,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          label: Text("Mail Adresiniz"),
-                        ),
-                        controller: controllerUserEmail),
-                    const SizedBox(height: 12),
-                    TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) => value == null || value.isEmpty
-                            ? 'Boş Bırakmayınız!'
-                            : null,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          label: Text("Mailin Konusu"),
-                        ),
-                        controller: controllerEmailSubject),
-                    const SizedBox(height: 12),
-                    TextFormField(
-                        maxLines: 5,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) => value == null || value.isEmpty
-                            ? 'Boş Bırakmayınız!'
-                            : null,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          label: Text("Mesajınız"),
-                        ),
-                        controller: controllerMessage),
-                    const SizedBox(height: 12),
-                  ],
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) => value == null || value.isEmpty
+                              ? 'Boş Bırakmayınız!'
+                              : null,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            label: Text("İsminiz"),
+                          ),
+                          controller: controllerUserName),
+                      const SizedBox(height: 12),
+                      TextFormField(
+                          autocorrect: false,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) => value == null || value.isEmpty
+                              ? 'Boş Bırakmayınız!'
+                              : !EmailValidator.validate(value)
+                                  ? 'Geçerli bir mail adresi girin!'
+                                  : null,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            label: Text("Mail Adresiniz"),
+                          ),
+                          controller: controllerUserEmail),
+                      const SizedBox(height: 12),
+                      TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) => value == null || value.isEmpty
+                              ? 'Boş Bırakmayınız!'
+                              : null,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            label: Text("Mailin Konusu"),
+                          ),
+                          controller: controllerEmailSubject),
+                      const SizedBox(height: 12),
+                      TextFormField(
+                          maxLines: 5,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) => value == null || value.isEmpty
+                              ? 'Boş Bırakmayınız!'
+                              : null,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            label: Text("Mesajınız"),
+                          ),
+                          controller: controllerMessage),
+                      const SizedBox(height: 12),
+                    ],
+                  ),
                 ),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  // Foreground color
-                  foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                  // Background color
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
-                onPressed: () => _sendFeedback(
-                  name: controllerUserName.text.trim(),
-                  email: controllerUserEmail.text.trim(),
-                  subject: controllerEmailSubject.text.trim(),
-                  message: controllerMessage.text.trim(),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    // Foreground color
+                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                    // Background color
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                  ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
+                  onPressed: () => _sendFeedback(
+                    name: controllerUserName.text.trim(),
+                    email: controllerUserEmail.text.trim(),
+                    subject: controllerEmailSubject.text.trim(),
+                    message: controllerMessage.text.trim(),
+                  ),
+                  child: const Text("Maili Gönderin"),
                 ),
-                child: const Text("Maili Gönderin"),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom),
-              ),
-            ],
+                Padding(
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom),
+                ),
+              ],
+            ),
           ),
         ),
       ),

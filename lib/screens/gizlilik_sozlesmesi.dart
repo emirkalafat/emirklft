@@ -8,6 +8,8 @@ class EnfesTariflerGizlilikSozlesmesi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:
+          Theme.of(context).colorScheme.background.withOpacity(0.93),
       appBar: AppBar(
         title: const Text("Enfes Tarifler Gizlilik Bildirimi"),
       ),
