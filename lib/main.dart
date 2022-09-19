@@ -42,7 +42,7 @@ class _WebAppState extends State<WebApp> {
         colorScheme: darkColorScheme,
         useMaterial3: true,
       ),
-      initial: AdaptiveThemeMode.dark,
+      initial: AdaptiveThemeMode.system,
       builder: (theme, darkTheme) => MaterialApp.router(
         scaffoldMessengerKey: messengerKey,
         routerDelegate: routerDelegate,
