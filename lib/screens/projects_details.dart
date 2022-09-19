@@ -88,7 +88,10 @@ class ProjectDetails extends StatelessWidget {
                   ),
                 ),
               ),
-              AppVersions(app: project_versions_data.versions[0]),
+              AppVersions(
+                  app: project_versions_data.versions[
+                      project_versions_data.versions.indexWhere(
+                          (element) => element['id'] == project['id'])]),
             ],
           ),
         );
