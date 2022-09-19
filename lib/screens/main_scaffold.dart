@@ -1,9 +1,12 @@
+import 'dart:html';
+
 import 'package:blog_web_site/screens/contact.dart';
 import 'package:blog_web_site/screens/home_screen.dart';
 import 'package:blog_web_site/screens/projects_screen.dart';
 import 'package:blog_web_site/widgets/responsive_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
+import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 
 import '../widgets/closable_search_bar.dart';
 
@@ -51,6 +54,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       currentIndex = index;
     });
+    Navigator.of(context).maybePop();
   }
 
   @override
@@ -125,10 +129,30 @@ class _HomePageState extends State<HomePage> {
               ),
             )
           : null,
-      appBar: AppBar(
+      appBar: NewGradientAppBar(
+        gradient: isSmall
+            ? RadialGradient(
+                radius: 4,
+                colors: [
+                  colorScheme.onPrimary,
+                  colorScheme.onTertiary,
+                ],
+              )
+            : LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [
+                  colorScheme.onPrimary,
+                  colorScheme.onPrimary,
+                  colorScheme.onTertiary,
+                  colorScheme.onTertiary,
+                  colorScheme.onTertiary,
+                ],
+              ),
         centerTitle: ResponsiveWidget.isSmallScreen(context),
         title: InkWell(
-          child: const Text("Ahmet Emir Kalafat"),
+          child: Text("Ahmet Emir Kalafat",
+              style: TextStyle(color: colorScheme.onPrimaryContainer)),
           onTap: () {
             onPageNameTap(0);
           },
@@ -188,6 +212,7 @@ class _HomePageState extends State<HomePage> {
               ],
       ),
       body: IndexedStack(
+        alignment: AlignmentDirectional.center,
         index: currentIndex,
         children: [
           const AnaSayfa(),

@@ -30,11 +30,14 @@ dependencies:
   adaptive_theme: ^3.1.0
   beamer: ^1.5.3
   cupertino_icons: ^1.0.2
+  email_validator: ^2.1.17
   flutter:
     sdk: flutter
   flutter_widget_from_html_core: ^0.8.5+3
   google_fonts: ^3.0.1
   http: ^0.13.5
+  new_gradient_app_bar: ^0.2.0
+  top_snackbar_flutter: ^2.1.1
   url_launcher: ^6.1.5
 
 # dev
