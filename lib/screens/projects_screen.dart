@@ -25,7 +25,7 @@ class MyProjectsPage extends StatelessWidget {
           crossAxisCount: crossAxisCount,
           children: projects
               .map(
-                (project) => GestureDetector(
+                (project) => InkWell(
                   onTap: () => context.beamToNamed(
                     '/projects/${project['id']}',
                     data: {'title': titleQuery},
