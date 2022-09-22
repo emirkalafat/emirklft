@@ -13,6 +13,7 @@ class AnimatedCircularIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         AspectRatio(
           aspectRatio: 1,

@@ -32,10 +32,10 @@ class AnaSayfa extends StatelessWidget {
                 minWidth: 1200,
                 maxHeight: screenSize.height - 56),
             child: screenSize.width < 800
-                ? HomeScreenMainSide()
+                ? const HomeScreenMainSide()
                 : Row(
-                    children: [
-                      const Expanded(
+                    children: const [
+                      Expanded(
                         flex: 2,
                         child: MainScreenSideMenu(),
                       ),
@@ -119,39 +119,36 @@ class _HomeScreenMainSideState extends State<HomeScreenMainSide> {
           ),
           Container(
             constraints: const BoxConstraints(maxHeight: 45),
-            child: Expanded(
-              flex: 1,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                //prototypeItem: CircularProgressIndicator(),
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              //prototypeItem: CircularProgressIndicator(),
 
-                //NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onHover: (value) {
-                      setState(() {
-                        color[index] =
-                            value ? Colors.blue : colorScheme.onBackground;
-                      });
-                    },
-                    onTap: () {
-                      Utils.startUrl(links.values.elementAt(index));
-                    },
-                    // ignore: avoid_unnecessary_containers
-                    child: Container(
-                      //color: Colors.black,
-                      child: Text(
-                        links.keys.elementAt(index),
-                        style: TextStyle(
-                            color: color[index] ?? colorScheme.onBackground),
-                      ),
+              //NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: InkWell(
+                  onHover: (value) {
+                    setState(() {
+                      color[index] =
+                          value ? Colors.blue : colorScheme.onBackground;
+                    });
+                  },
+                  onTap: () {
+                    Utils.startUrl(links.values.elementAt(index));
+                  },
+                  // ignore: avoid_unnecessary_containers
+                  child: Container(
+                    //color: Colors.black,
+                    child: Text(
+                      links.keys.elementAt(index),
+                      style: TextStyle(
+                          color: color[index] ?? colorScheme.onBackground),
                     ),
                   ),
                 ),
-                itemCount: links.length,
               ),
+              itemCount: links.length,
             ),
           ),
         ],

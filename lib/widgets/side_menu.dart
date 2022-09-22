@@ -63,7 +63,7 @@ class SideMenuSkills extends StatelessWidget {
           ),
         ),
         Container(
-            constraints: BoxConstraints(maxHeight: 300),
+            constraints: const BoxConstraints(maxHeight: 300),
             child: const MySkills()),
         //Expanded(child: Container()),
       ],

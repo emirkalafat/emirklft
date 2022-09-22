@@ -1,6 +1,5 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:blog_web_site/data/project_versions.dart'
     as project_versions_data;
 
@@ -81,7 +80,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
               ),
               Center(
                 child: Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: InkWell(
                     onTap: () {
                       Utils.startUrl(
@@ -140,8 +139,8 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           'Sitenin kaynak kodu için tıklayın.',
                         ),
