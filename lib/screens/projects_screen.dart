@@ -1,7 +1,8 @@
 import 'package:beamer/beamer.dart';
+import 'package:blog_web_site/data/projects.dart';
 import 'package:flutter/material.dart';
 
-class MyProjectsPage extends StatelessWidget {
+class MyProjectsPage extends StatefulWidget {
   const MyProjectsPage({
     Key? key,
     required this.projects,
@@ -9,30 +10,45 @@ class MyProjectsPage extends StatelessWidget {
   final List<Map<String, dynamic>> projects;
 
   @override
+  State<MyProjectsPage> createState() => _MyProjectsPageState();
+}
+
+class _MyProjectsPageState extends State<MyProjectsPage> {
+  List<Color?> color = List.generate(projects.length, (index) => null);
+
+  @override
   Widget build(BuildContext context) {
     final titleQuery = (context.currentBeamLocation.state as BeamState)
         .queryParameters['title'];
-    final screenSize = MediaQuery.of(context).size;
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-    final crossAxisCount = (screenSize.width / 300).round();
-    return Scaffold(
-      backgroundColor: colorScheme.background,
-      body: Center(
+    final backgroundC = colorScheme.background;
+    return Center(
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 600),
+        color: backgroundC,
         child: GridView.count(
           shrinkWrap: true,
           childAspectRatio: 2,
-          crossAxisCount: crossAxisCount,
-          children: projects
+          crossAxisCount: 2,
+          children: widget.projects
               .map(
-                (project) => GestureDetector(
+                (project) => InkWell(
+                  onHover: (value) {
+                    setState(() {
+                      color[widget.projects.indexOf(project)] = value
+                          ? colorScheme.tertiaryContainer.withOpacity(0.5)
+                          : colorScheme.tertiaryContainer;
+                    });
+                  },
                   onTap: () => context.beamToNamed(
                     '/projects/${project['id']}',
                     data: {'title': titleQuery},
                   ),
                   child: Card(
                     shadowColor: colorScheme.shadow,
-                    color: colorScheme.tertiaryContainer,
+                    color: color[widget.projects.indexOf(project)] ??
+                        colorScheme.tertiaryContainer,
                     child: Column(
                       children: [
                         Padding(

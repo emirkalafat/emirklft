@@ -14,14 +14,19 @@ class EnfesTariflerGizlilikSozlesmesi extends StatelessWidget {
         title: const Text("Enfes Tarifler Gizlilik Bildirimi"),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: HtmlWidget(
-            HTMLPages.gizlilik,
-            onErrorBuilder: (context, element, error) =>
-                Text('$element error: $error'),
-            onLoadingBuilder: (context, element, loadingProgress) =>
-                const Center(child: CircularProgressIndicator()),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 1800),
+              child: HtmlWidget(
+                HTMLPages.gizlilik,
+                onErrorBuilder: (context, element, error) =>
+                    Text('$element error: $error'),
+                onLoadingBuilder: (context, element, loadingProgress) =>
+                    const Center(child: CircularProgressIndicator()),
+              ),
+            ),
           ),
         ),
       ),

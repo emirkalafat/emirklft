@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:blog_web_site/screens/contact.dart';
 import 'package:blog_web_site/screens/home_screen.dart';
 import 'package:blog_web_site/screens/projects_screen.dart';
@@ -65,9 +63,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final titleQuery = (context.currentBeamLocation.state as BeamState)
-        .queryParameters['title'];
-    final screenSize = MediaQuery.of(context).size;
+    //final titleQuery = (context.currentBeamLocation.state as BeamState)
+    //    .queryParameters['title'];
+    //final screenSize = MediaQuery.of(context).size;
     final isSmall = ResponsiveWidget.isSmallScreen(context);
     final colorScheme = Theme.of(context).colorScheme;
     final primaryColor = colorScheme.primary;
@@ -212,7 +210,7 @@ class _HomePageState extends State<HomePage> {
               ],
       ),
       body: IndexedStack(
-        alignment: AlignmentDirectional.center,
+        //alignment: AlignmentDirectional.center,
         index: currentIndex,
         children: [
           const AnaSayfa(),

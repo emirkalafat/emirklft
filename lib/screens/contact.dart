@@ -60,7 +60,7 @@ class _ContactWithMeState extends State<ContactWithMe> {
     if (isSent) {
       showTopSnackBar(
         context,
-        MyCustomTopBar(message: 'Mailiniz Gönderildi.'),
+        const MyCustomTopBar(message: 'Mailiniz Gönderildi.'),
       );
       //Utils.showSnackBar("Mailiniz Gönderildi.", isError: false);
     }

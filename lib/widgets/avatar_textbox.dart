@@ -20,9 +20,9 @@ class AvatarAndTextBox extends StatelessWidget {
               'assets/images/avatarKare.png',
               width: 100,
             ),
-            Spacer(),
+            const Spacer(),
             GlassContent(screenSize: screenSize),
-            Spacer(flex: 3),
+            const Spacer(flex: 3),
           ],
         ));
   }

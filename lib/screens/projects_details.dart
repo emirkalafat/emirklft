@@ -1,30 +1,30 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:blog_web_site/data/project_versions.dart'
     as project_versions_data;
 
-class ProjectDetails extends StatelessWidget {
+import '../widgets/utils.dart';
+
+class ProjectDetails extends StatefulWidget {
   const ProjectDetails({super.key, required this.project, required this.title});
   final Map<String, dynamic> project;
   final String title;
 
-  _launchUrl(String url) async {
-    final uri = Uri.parse(url);
-    if (!await launchUrl(uri)) {
-      throw 'Could not launch $uri';
-    }
-  }
+  @override
+  State<ProjectDetails> createState() => _ProjectDetailsState();
+}
 
+class _ProjectDetailsState extends State<ProjectDetails> {
+  Color? hoverColor;
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       backgroundColor: colorScheme.background,
       appBar: AppBar(
-        title: Text(title),
+        title: Text(widget.title),
       ),
-      body: buildBodyWidgets(context, project),
+      body: buildBodyWidgets(context, widget.project),
     );
   }
 
@@ -52,9 +52,9 @@ class ProjectDetails extends StatelessWidget {
                       "Bu proje Flutter'ı anlamak ve kendimi geliştirmek için odaklandığım ilk projedir. Kendi yemek tariflerinizi paylaşabildiğiniz ve başkalarının paylaştığı yemek tariflerini inceleyebildiğiniz bir mobil uygulama."),
                 ),
               ),
-              GestureDetector(
+              InkWell(
                 onTap: () {
-                  _launchUrl(
+                  Utils.startUrl(
                       'https://play.google.com/store/apps/details?id=com.garlicman.flutter_tarif_sitesi');
                 },
                 child: const Center(
@@ -79,15 +79,23 @@ class ProjectDetails extends StatelessWidget {
                 ),
               ),
               Center(
-                child: GestureDetector(
-                  onTap: () {
-                    _launchUrl(
-                        'https://play.google.com/apps/testing/com.garlicman.flutter_tarif_sitesi');
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.all(16.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: InkWell(
+                    onTap: () {
+                      Utils.startUrl(
+                          'https://play.google.com/apps/testing/com.garlicman.flutter_tarif_sitesi');
+                    },
+                    onHover: (value) {
+                      setState(() {
+                        hoverColor =
+                            value ? Colors.blue : colorScheme.onBackground;
+                      });
+                    },
                     child: Text(
                       'Uygulamanın beta sürümüne erişmek için tıklayın.',
+                      style: TextStyle(
+                          color: hoverColor ?? colorScheme.onBackground),
                     ),
                   ),
                 ),
@@ -119,9 +127,10 @@ class ProjectDetails extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(project['explanation']),
             ),
-            GestureDetector(
+            InkWell(
+              hoverColor: Colors.blue,
               onTap: () {
-                _launchUrl('https://github.com/emirkalafat/emirklft');
+                Utils.startUrl('https://github.com/emirkalafat/emirklft');
               },
               child: Container(
                 color: colorScheme.primary.withOpacity(0.5),
@@ -130,7 +139,12 @@ class ProjectDetails extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Sitenin kaynak kodu için tıklayın.'),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Sitenin kaynak kodu için tıklayın.',
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 4.0, right: 4.0),
                         child: Image.asset(
