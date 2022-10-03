@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'info_text.dart';
-import 'my_skills.dart';
 
 class MainScreenSideMenu extends StatelessWidget {
   const MainScreenSideMenu({
@@ -62,10 +61,6 @@ class SideMenuSkills extends StatelessWidget {
             child: Text("Yeteneklerim"),
           ),
         ),
-        Container(
-            constraints: const BoxConstraints(maxHeight: 300),
-            child: const MySkills()),
-        //Expanded(child: Container()),
       ],
     );
   }
