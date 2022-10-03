@@ -201,7 +201,7 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () {
                     showAboutDialog(
                       context: context,
-                      applicationVersion: '0.1',
+                      applicationVersion: '1.0.1',
                     );
                   },
                   child: const Text("Lisanslar"),

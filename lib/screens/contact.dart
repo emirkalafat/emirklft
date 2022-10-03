@@ -1,11 +1,12 @@
 import 'dart:convert';
-
-import 'package:blog_web_site/screens/home_screen.dart';
+import 'package:blog_web_site/widgets/default_widgets.dart';
+import 'package:blog_web_site/widgets/home/external_links_widget.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
+import '../widgets/custom_notification.dart';
 import '../widgets/utils.dart';
 
 class ContactWithMe extends StatefulWidget {
@@ -58,113 +59,153 @@ class _ContactWithMeState extends State<ContactWithMe> {
       Utils.showSnackBar(e.toString());
     }
     if (isSent) {
+      // ignore: use_build_context_synchronously
       showTopSnackBar(
         context,
-        const MyCustomTopBar(message: 'Mailiniz Gönderildi.'),
+        const CustomNotification(message: 'Mailiniz Gönderildi.'),
       );
-      //Utils.showSnackBar("Mailiniz Gönderildi.", isError: false);
     }
     controllerEmailSubject.clear();
     controllerMessage.clear();
     controllerUserEmail.clear();
     controllerUserName.clear();
+    //clear işlemlerinden sonra _formkey kutuları boş bırakmayın uyarısını göstermemesi için reset işlemi yapıyoruz.
+    _formKey.currentState!.reset();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Center(
+    final screenSize = MediaQuery.of(context).size;
+    return Center(
+      child: SizedBox(
+        height: screenSize.height - 56,
         child: Container(
-          constraints: const BoxConstraints(maxWidth: 750),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Bana Ulaşın",
-                    style: Theme.of(context).textTheme.headline5!.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface),
+          constraints: buildDefaultConstraints(
+            maxWidth: 700,
+            minHeight: screenSize.height - 56,
+            maxHeight: screenSize.height - 56,
+          ),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  //Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Bana Ulaşın",
+                      style: Theme.of(context).textTheme.headline5!.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface),
+                    ),
                   ),
-                ),
-                Form(
-                  key: _formKey,
-                  child: Column(
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) => value == null || value.isEmpty
+                                ? 'Boş Bırakmayınız!'
+                                : null,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              label: Text("İsminiz"),
+                            ),
+                            controller: controllerUserName),
+                        const SizedBox(height: 12),
+                        TextFormField(
+                            autocorrect: false,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) => value == null || value.isEmpty
+                                ? 'Boş Bırakmayınız!'
+                                : !EmailValidator.validate(value)
+                                    ? 'Geçerli bir mail adresi girin!'
+                                    : null,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              label: Text("Mail Adresiniz"),
+                            ),
+                            controller: controllerUserEmail),
+                        const SizedBox(height: 12),
+                        TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) => value == null || value.isEmpty
+                                ? 'Boş Bırakmayınız!'
+                                : null,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              label: Text("Mailin Konusu"),
+                            ),
+                            controller: controllerEmailSubject),
+                        const SizedBox(height: 12),
+                        TextFormField(
+                            maxLines: 5,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) => value == null || value.isEmpty
+                                ? 'Boş Bırakmayınız!'
+                                : null,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              label: Text("Mesajınız"),
+                            ),
+                            controller: controllerMessage),
+                        const SizedBox(height: 12),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextFormField(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) => value == null || value.isEmpty
-                              ? 'Boş Bırakmayınız!'
-                              : null,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            label: Text("İsminiz"),
-                          ),
-                          controller: controllerUserName),
-                      const SizedBox(height: 12),
-                      TextFormField(
-                          autocorrect: false,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) => value == null || value.isEmpty
-                              ? 'Boş Bırakmayınız!'
-                              : !EmailValidator.validate(value)
-                                  ? 'Geçerli bir mail adresi girin!'
-                                  : null,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            label: Text("Mail Adresiniz"),
-                          ),
-                          controller: controllerUserEmail),
-                      const SizedBox(height: 12),
-                      TextFormField(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) => value == null || value.isEmpty
-                              ? 'Boş Bırakmayınız!'
-                              : null,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            label: Text("Mailin Konusu"),
-                          ),
-                          controller: controllerEmailSubject),
-                      const SizedBox(height: 12),
-                      TextFormField(
-                          maxLines: 5,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) => value == null || value.isEmpty
-                              ? 'Boş Bırakmayınız!'
-                              : null,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            label: Text("Mesajınız"),
-                          ),
-                          controller: controllerMessage),
-                      const SizedBox(height: 12),
+                      OutlinedButton(
+                        onPressed: () {
+                          controllerEmailSubject.clear();
+                          controllerMessage.clear();
+                          controllerUserEmail.clear();
+                          controllerUserName.clear();
+                          _formKey.currentState!.reset();
+                        },
+                        child: const Text("Formu Temizle"),
+                      ),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          // Foreground color
+                          foregroundColor:
+                              Theme.of(context).colorScheme.onPrimary,
+                          // Background color
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                        ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
+                        onPressed: () => _sendFeedback(
+                          name: controllerUserName.text.trim(),
+                          email: controllerUserEmail.text.trim(),
+                          subject: controllerEmailSubject.text.trim(),
+                          message: controllerMessage.text.trim(),
+                        ),
+                        child: const Text(
+                          "Maili Gönderin",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ],
                   ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    // Foreground color
-                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                    // Background color
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                  ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
-                  onPressed: () => _sendFeedback(
-                    name: controllerUserName.text.trim(),
-                    email: controllerUserEmail.text.trim(),
-                    subject: controllerEmailSubject.text.trim(),
-                    message: controllerMessage.text.trim(),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Divider(),
                   ),
-                  child: const Text("Maili Gönderin"),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom),
-                ),
-              ],
+                  const MyLinksSection(),
+                ],
+              ),
             ),
           ),
         ),
