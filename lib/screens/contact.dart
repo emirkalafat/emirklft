@@ -36,6 +36,11 @@ class _ContactWithMeState extends State<ContactWithMe> {
     final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
     bool isSent = false;
     try {
+      showDialog(
+        context: context,
+        builder: (context) => const Center(child: CircularProgressIndicator()),
+        barrierDismissible: false,
+      );
       await http.post(
         url,
         headers: {
@@ -55,6 +60,8 @@ class _ContactWithMeState extends State<ContactWithMe> {
         }),
       );
       isSent = true;
+      // ignore: use_build_context_synchronously
+      Navigator.maybePop(context);
     } on Exception catch (e) {
       Utils.showSnackBar(e.toString());
     }
