@@ -1,30 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_firestore_platform_interface/cloud_firestore_platform_interface.dart';
-import 'package:flutter/material.dart';
 
 class BlogPost {
   String title;
   String content;
-  String author;
-  Timestamp? date;
-  String category;
+  Timestamp date;
+  String? category;
   String id;
   BlogPost({
     required this.title,
     required this.content,
-    this.author = 'Ahmet Emir Kalafat',
-    this.date,
+    required this.date,
     required this.category,
     this.id = '',
   });
 
-  static Future<QuerySnapshot<Map<String, dynamic>>> readBlogPost() {
-    return FirebaseFirestore.instance.collection('blogPosts').get();
+  static Future<List<BlogPost>> readBlogPost() {
+    return FirebaseFirestore.instance
+        .collection('blogPosts')
+        .orderBy('title')
+        .get()
+        .then((event) =>
+            event.docs.map((e) => BlogPost.fromJson(e.data())).toList());
+
+    //.then((value) => value.docs.map((e) => BlogPost.fromJson(e.data())).toList());
   }
 
   static BlogPost fromJson(Map<String, dynamic> json) => BlogPost(
-        category: '',
-        content: '',
-        title: '',
+        category: json['category'] ?? 'Havadan Sudan',
+        content: json['content'],
+        title: json['title'],
+        date: json['date'],
       );
 }
