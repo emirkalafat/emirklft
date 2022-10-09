@@ -26,17 +26,21 @@ final locationBuilder = RoutesLocationBuilder(
               : projects_data.projects;
       final tab = state.queryParameters['tab'];
       final initialIndex = tab == 'contact'
-          ? 2
+          ? 3
           : tab == 'projects'
-              ? 1
-              : 0;
+              ? 2
+              : tab == 'blog'
+                  ? 1
+                  : 0;
       return BeamPage(
         //key: ValueKey('home'),
         title: initialIndex == 0
             ? 'Ana Sayfa'
             : initialIndex == 1
-                ? 'Projelerim'
-                : 'İletişim',
+                ? 'Blog'
+                : initialIndex == 2
+                    ? 'Projelerim'
+                    : 'İletişim',
         child: HomePage(
           initialIndex: initialIndex,
           projects: projects.toList(),

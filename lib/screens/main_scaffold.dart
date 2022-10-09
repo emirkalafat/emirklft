@@ -7,6 +7,7 @@ import 'package:beamer/beamer.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 
 import '../widgets/closable_search_bar.dart';
+import 'blog.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key, required this.initialIndex, required this.projects})
@@ -17,12 +18,14 @@ class HomePage extends StatefulWidget {
 
   final List<String> menuItems = [
     'Ana Sayfa',
+    'Blog',
     'Projelerim',
     'İletişim',
   ];
 
   final List<IconData> menuIcons = [
     Icons.home,
+    Icons.article,
     Icons.work,
     Icons.mail,
   ];
@@ -41,11 +44,13 @@ class _HomePageState extends State<HomePage> {
   onPageNameTap(int index) {
     Beamer.of(context).update(
       configuration: RouteInformation(
-        location: index == 2
+        location: index == 3
             ? '/?tab=contact'
-            : index == 1
+            : index == 2
                 ? '/?tab=projects'
-                : '/?tab=home',
+                : index == 1
+                    ? '/?tab=blog'
+                    : '/?tab=home',
       ),
       rebuild: false,
     );
@@ -214,6 +219,7 @@ class _HomePageState extends State<HomePage> {
         index: currentIndex,
         children: [
           const AnaSayfa(),
+          const MyBlog(),
           MyProjectsPage(projects: widget.projects),
           const ContactWithMe(),
         ],
