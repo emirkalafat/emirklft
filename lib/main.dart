@@ -2,11 +2,23 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/color_schemes.dart';
 import 'package:blog_web_site/router/location_builder.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+        apiKey: "AIzaSyAZGyMZW6ozuvYdRXc6hS0kdvCHUCYqmyc",
+        authDomain: "emirklftweb.firebaseapp.com",
+        projectId: "emirklftweb",
+        storageBucket: "emirklftweb.appspot.com",
+        messagingSenderId: "765811960780",
+        appId: "1:765811960780:web:9b1bb4279c315bedab0b69",
+        measurementId: "G-YPP105Q358"),
+  );
   runApp(const WebApp());
 }
 
