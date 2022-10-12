@@ -26,6 +26,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
     final currentTheme = AdaptiveTheme.of(context);
 
     return Scaffold(
+
       floatingActionButton: AnimatedSwitcher(
         duration: const Duration(milliseconds: 300), //scroll.offset == 0,
         child: showButton
