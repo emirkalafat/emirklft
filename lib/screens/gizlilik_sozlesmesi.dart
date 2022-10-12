@@ -8,18 +8,25 @@ class EnfesTariflerGizlilikSozlesmesi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:
+          Theme.of(context).colorScheme.background.withOpacity(0.93),
       appBar: AppBar(
-        title: const Text("Enfes Tarifler Gizlilik Sözleşmesi"),
+        title: const Text("Enfes Tarifler Gizlilik Bildirimi"),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: HtmlWidget(
-            HTMLPages.gizlilik,
-            onErrorBuilder: (context, element, error) =>
-                Text('$element error: $error'),
-            onLoadingBuilder: (context, element, loadingProgress) =>
-                const Center(child: CircularProgressIndicator()),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 1800),
+              child: HtmlWidget(
+                HTMLPages.gizlilik,
+                onErrorBuilder: (context, element, error) =>
+                    Text('$element error: $error'),
+                onLoadingBuilder: (context, element, loadingProgress) =>
+                    const Center(child: CircularProgressIndicator()),
+              ),
+            ),
           ),
         ),
       ),

@@ -47,3 +47,4 @@ app.*.map.json
 
 # kişisel ignore klasörlerim
 /yedek/**
+test/main.dart
