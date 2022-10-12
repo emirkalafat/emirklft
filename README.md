@@ -1,3 +1,3 @@
 # Flutter Web Site
 
-<https://emirklftweb.firebesaapp.com>
+<https://emirklftweb.web.app>
