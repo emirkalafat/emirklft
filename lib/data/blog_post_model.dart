@@ -17,7 +17,7 @@ class BlogPost {
   static Future<List<BlogPost>> readBlogPost() {
     return FirebaseFirestore.instance
         .collection('blogPosts')
-        .orderBy('title')
+        .orderBy('date', descending: true)
         .get()
         .then((event) =>
             event.docs.map((e) => BlogPost.fromJson(e.data())).toList());

@@ -44,7 +44,7 @@ class _ContactWithMeState extends State<ContactWithMe> {
       await http.post(
         url,
         headers: {
-          'origin': 'http://emirklftweb.firebaseapp.com',
+          'origin': 'http://emirklftweb.web.app',
           'Content-Type': 'application/json',
         },
         body: json.encode({

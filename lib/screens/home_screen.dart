@@ -1,7 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/home/about_widget.dart';
 import '../widgets/home/external_links_widget.dart';
 import '../widgets/home/home_funcs_widget.dart';
 import '../widgets/home/my_skills_widget.dart';
@@ -26,7 +25,6 @@ class _AnaSayfaState extends State<AnaSayfa> {
     final currentTheme = AdaptiveTheme.of(context);
 
     return Scaffold(
-
       floatingActionButton: AnimatedSwitcher(
         duration: const Duration(milliseconds: 300), //scroll.offset == 0,
         child: showButton

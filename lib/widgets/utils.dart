@@ -24,4 +24,14 @@ class Utils {
       throw 'Could not launch $uri';
     }
   }
+
+  static List<String> daysTR = [
+    'Pazartesi',
+    'Salı',
+    'Çarşamba',
+    'Perşembe',
+    'Cuma',
+    'Cumartesi',
+    'Pazar'
+  ];
 }
