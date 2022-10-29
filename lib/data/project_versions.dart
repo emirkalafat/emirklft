@@ -3,6 +3,16 @@ const List<Map<String, dynamic>> versions = [
     'id': '1',
     'versions': [
       {
+        'version': '0.4.0-OpenTest1',
+        'date': '2022-10-29',
+        'changes': [
+          'Yemek tarifi yükleme ekranı yenilendi.',
+          'Artık malzeme eklerken malzeme adı, miktarı ve ölçü birimini girmeniz gereklili.',
+          'Ayrıca yemeğin hazırlanış adımlarını süreleriyle beraber ekleme özelliği eklendi.\nUygulama bütün adımların sürelerini toplayıp hazırlama süresini hesaplayacak.',
+        ],
+        'fixed bugs': [],
+      },
+      {
         'version': '0.3.2',
         'date': '2022-08-31',
         'changes': [
