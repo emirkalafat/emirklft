@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:blog_web_site/widgets/default_widgets.dart';
-import 'package:blog_web_site/widgets/home/external_links_widget.dart';
+import 'package:blog_web_site/screens/home/external_links_section.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;

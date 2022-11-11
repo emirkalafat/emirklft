@@ -3,6 +3,31 @@ const List<Map<String, dynamic>> versions = [
     'id': '1',
     'versions': [
       {
+        'version': '0.4.3',
+        'date': '2022-11-07',
+        'changes': [],
+        'fixed bugs': [
+          'Daha fazla hata düzeltmeleri xd.',
+        ],
+      },
+      {
+        'version': '0.4.2',
+        'date': '2022-11-01',
+        'changes': [],
+        'fixed bugs': [
+          'Genel hata düzeltmeleri.',
+        ],
+      },
+      {
+        'version': '0.4.1-Release',
+        'date': '2022-10-31',
+        'changes': [
+          'Arama ekranında yemek tariflerini malzeme listesine göre sıralama özelliği getirildi.',
+          'Giriş ve hesap oluşturma ekranlarına yeniden tasarlandı.',
+        ],
+        'fixed bugs': [],
+      },
+      {
         'version': '0.4.0-OpenTest1',
         'date': '2022-10-29',
         'changes': [

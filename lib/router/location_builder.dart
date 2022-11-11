@@ -3,7 +3,6 @@ import 'package:blog_web_site/screens/gizlilik_sozlesmesi.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../screens/app_ads_txt.dart';
 import '../screens/main_scaffold.dart';
 import '../screens/projects_details.dart';
 import 'package:blog_web_site/data/projects.dart' as projects_data;
@@ -78,10 +77,10 @@ final locationBuilder = RoutesLocationBuilder(
         },
       );
     },
-    '/app-ads.txt': (context, state, data) => const BeamPage(
-          key: ValueKey('app-ads.txt'),
-          title: 'App Add',
-          child: AppAdsTxt(),
-        ),
+    //'/app-ads.txt': (context, state, data) => const BeamPage(
+    //      key: ValueKey('app-ads.txt'),
+    //      title: 'App Add',
+    //      child: AppAdsTxt(),
+    //    ),
   },
 );

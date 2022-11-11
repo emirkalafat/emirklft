@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../data/blog_post_model.dart';
 import 'utils.dart';
@@ -18,7 +19,7 @@ class BlogPostWidget extends StatefulWidget {
 }
 
 class _BlogPostWidgetState extends State<BlogPostWidget> {
-  GlobalKey _textKey = GlobalKey();
+  final GlobalKey _textKey = GlobalKey();
 
   bool isExpanded = false;
   double maxHeight = 150;
@@ -27,7 +28,9 @@ class _BlogPostWidgetState extends State<BlogPostWidget> {
   @override
   void setState(VoidCallback fn) {
     hey = _textKey.currentContext?.size?.height ?? double.infinity;
-    print("state updated hey: $hey");
+    if (kDebugMode) {
+      print("state updated hey: $hey");
+    }
     super.setState(fn);
   }
 

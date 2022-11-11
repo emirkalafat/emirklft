@@ -4,6 +4,8 @@ BoxConstraints buildDefaultConstraints({
   double maxWidth = double.infinity,
   double maxHeight = double.infinity,
   double minWidth = 0.0,
+
+  //minHeight and minWidth is 0.0 by default
   double minHeight = 0.0,
 }) {
   return BoxConstraints(

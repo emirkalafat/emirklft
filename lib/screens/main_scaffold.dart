@@ -1,12 +1,11 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:blog_web_site/screens/contact.dart';
-import 'package:blog_web_site/screens/home_screen.dart';
+import 'package:blog_web_site/screens/home/home_screen.dart';
 import 'package:blog_web_site/screens/projects_screen.dart';
-import 'package:blog_web_site/widgets/responsive_widget.dart';
+
 import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
-
-import '../widgets/closable_search_bar.dart';
 import 'blog.dart';
 
 class HomePage extends StatefulWidget {
@@ -71,10 +70,11 @@ class _HomePageState extends State<HomePage> {
     //final titleQuery = (context.currentBeamLocation.state as BeamState)
     //    .queryParameters['title'];
     //final screenSize = MediaQuery.of(context).size;
-    final isSmall = ResponsiveWidget.isSmallScreen(context);
+    final isSmall = MediaQuery.of(context).size.width < 800;
     final colorScheme = Theme.of(context).colorScheme;
     final primaryColor = colorScheme.primary;
     final onSurface = colorScheme.onSurface;
+    final isCurrentThemeDark = AdaptiveTheme.of(context).mode.isDark;
     return Scaffold(
       backgroundColor: colorScheme.background,
       endDrawer: isSmall
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                   colorScheme.onTertiary,
                 ],
               ),
-        centerTitle: ResponsiveWidget.isSmallScreen(context),
+        centerTitle: isSmall,
         title: InkWell(
           child: Text("Ahmet Emir Kalafat",
               style: TextStyle(color: colorScheme.onPrimaryContainer)),
@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
             onPageNameTap(0);
           },
         ),
-        actions: ResponsiveWidget.isSmallScreen(context)
+        actions: isSmall
             ? null
             : [
                 for (int i = 0; i < widget.menuItems.length; i++)
@@ -211,7 +211,17 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: const Text("Lisanslar"),
                 ),
-                const ClosableSearchBar(),
+                IconButton(
+                    onPressed: () {
+                      AdaptiveTheme.of(context).setThemeMode(!isCurrentThemeDark
+                          ? AdaptiveThemeMode.dark
+                          : AdaptiveThemeMode.light);
+                    },
+                    icon: Icon(
+                      !isCurrentThemeDark ? Icons.dark_mode : Icons.light_mode,
+                      color: colorScheme.onSurface,
+                    )),
+                //!const ClosableSearchBar(),
               ],
       ),
       body: IndexedStack(
