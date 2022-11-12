@@ -21,10 +21,14 @@ class EnfesTariflerGizlilikSozlesmesi extends StatelessWidget {
               constraints: const BoxConstraints(maxWidth: 1800),
               child: HtmlWidget(
                 HTMLPages.gizlilik,
+                enableCaching: true,
                 onErrorBuilder: (context, element, error) =>
                     Text('$element error: $error'),
                 onLoadingBuilder: (context, element, loadingProgress) =>
-                    const Center(child: CircularProgressIndicator()),
+                    const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                //renderMode: RenderMode.sliverList,
               ),
             ),
           ),
