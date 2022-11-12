@@ -41,7 +41,7 @@ class TimelineSection extends StatelessWidget {
           TimelineWidget(
             year: '2022',
             event:
-                'İlk büyük ölçekli uygulamamı Play Store\'da yayınladım. Projelerim sekmesinde paylaştım. "Enfes Yemek Tarifleri" adıyla bulabilirsiniz.',
+                'İlk büyük ölçekli uygulamamı Play Store\'da yayınladım. Projelerim sekmesinde paylaştım. "Enfes Tarifler" adıyla bulabilirsiniz.',
           ),
         ],
       ),
