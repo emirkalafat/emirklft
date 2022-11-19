@@ -204,7 +204,20 @@ const List<Map<String, dynamic>> versions = [
         'fixed bugs': [],
       },
     ],
-  }
+  },
+  {
+    'id': '2',
+    'versions': [
+      {
+        'version': '1.0.0-Release',
+        'date': '2022-11-18',
+        'changes': [
+          'İlk sürüm yayınlandı.',
+        ],
+        'fixed bugs': [],
+      },
+    ]
+  },
 ];
 
 /**TEMPLATE

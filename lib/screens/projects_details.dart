@@ -121,6 +121,69 @@ class _ProjectDetailsState extends State<ProjectDetails> {
           ),
         );
       case '2':
+        //?MultiKronometre Proje Sayfası
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(project['explanation']),
+                ),
+              ),
+              const Center(
+                child: Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                      "Bu proje 10 taneye kadar kronometre tanımlayabildiğiniz bir mobil uygulama."),
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  Utils.startUrl('abount:blank');
+                },
+                child: const Center(
+                  child: Image(
+                    image: AssetImage('assets/images/googlePlay.png'),
+                    height: 75,
+                  ),
+                ),
+              ),
+              //Center(
+              //  child: Padding(
+              //    padding: const EdgeInsets.all(8.0),
+              //    child: ElevatedButton(
+              //      onPressed: () {
+              //        context.beamToNamed(
+              //          '/enfestarifler',
+              //          beamBackOnPop: true,
+              //        );
+              //      },
+              //      child: const Text("Enfes Tarifler Gizlilik Sözleşmesi"),
+              //    ),
+              //  ),
+              //),
+              const SizedBox(height: 50),
+              const Divider(),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Uygulama Sürüm Notları',
+                    style: textTheme.displayMedium!
+                        .copyWith(color: colorScheme.onBackground),
+                  ),
+                ),
+              ),
+              AppVersions(
+                  app: project_versions_data.versions[
+                      project_versions_data.versions.indexWhere(
+                          (element) => element['id'] == project['id'])]),
+            ],
+          ),
+        );
+      case '3':
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

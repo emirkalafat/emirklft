@@ -7,9 +7,14 @@ const List<Map<String, dynamic>> projects = [
   },
   {
     'id': '2',
+    'title': 'MultiKronometre',
+    'explanation': 'Flutter ile geliştirdiğim bir kronometre uygulaması.',
+    'url': '',
+  },
+  {
+    'id': '3',
     'title': 'Emir Kalafat Web Sitesi',
     'explanation': 'Şu anda bulunduğunuz sitenin kendisi :)',
     'url': '',
   },
-  //{}
 ];
