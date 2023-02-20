@@ -11,7 +11,7 @@ class EnfesTariflerGizlilikSozlesmesi extends StatelessWidget {
       backgroundColor:
           Theme.of(context).colorScheme.background.withOpacity(0.93),
       appBar: AppBar(
-        title: const Text("Enfes Tarifler Gizlilik Bildirimi"),
+        title: const Text("Yemek Deposu Gizlilik Bildirimi"),
       ),
       body: Center(
         child: Container(

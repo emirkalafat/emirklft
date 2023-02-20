@@ -28,7 +28,7 @@ class AboutMeSection extends StatelessWidget {
                   ),
                 ),
                 SelectableText(
-                  'Merhaba, Ben Ahmet Emir Kalafat.\n 20 yaşındayım. Fatih Sultan Mehmet Vakıf Üniversitesi\'nde Elektrik-Elektronik Mühendisliği bölümünde okuyorum.\nPython, Java, Dart-Flutter, C ve C# dillerini biliyorum. İlk kodumu 12 yaşımda Python ile yazdım. Basit bir hesap makinesiydi.\nAktif olarak Flutter Mobil ve Web uygulamaları yazıyorum. En son yazdığım uygulamamı Play Store\'da "Enfes Tarfiler" adıyla bulabilirsiniz.',
+                  'Merhaba, Ben Ahmet Emir Kalafat.\n 20 yaşındayım. Fatih Sultan Mehmet Vakıf Üniversitesi\'nde Elektrik-Elektronik Mühendisliği bölümünde okuyorum.\nPython, Java, Dart-Flutter, C ve C# dillerini biliyorum. İlk kodumu 12 yaşımda Python ile yazdım. Basit bir hesap makinesiydi.\nAktif olarak Flutter Mobil ve Web uygulamaları yazıyorum. En son yazdığım uygulamamı Play Store\'da "Yemek Deposu" adıyla bulabilirsiniz.',
                   //"Hi, I’m Ahmet Emir Kalafat.\nI’m 20 years old.\nI’m studying Elekctic-Electroincs Engineering at Fatih Sultan Mehmet University.\nI have experience with Java, Dart-Flutter, Python, C and C#.\nI started writing code with Python at 12 years old.\nI have experience with Flutter Android and Web app development.\nI have a mobil app called Enfes Yemek Tarifleri.",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16),

@@ -1,7 +1,7 @@
 const List<Map<String, dynamic>> projects = [
   {
     'id': '1',
-    'title': 'Enfes Tarifler',
+    'title': 'Yemek Deposu',
     'explanation': 'Google Play\'de paylaştığım ilk uygulamam.',
     'url': '',
   },

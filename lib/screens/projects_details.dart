@@ -35,7 +35,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
     switch (project['id']) {
       case '1':
-        //?Enfes Tarifler Proje Sayfası
+        //?Yemek Deposu Proje Sayfası
         return SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +75,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                         beamBackOnPop: true,
                       );
                     },
-                    child: const Text("Enfes Tarifler Gizlilik Sözleşmesi"),
+                    child: const Text("Yemek Deposu Gizlilik Sözleşmesi"),
                   ),
                 ),
               ),
@@ -162,7 +162,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
               //          beamBackOnPop: true,
               //        );
               //      },
-              //      child: const Text("Enfes Tarifler Gizlilik Sözleşmesi"),
+              //      child: const Text("Yemek Deposu Gizlilik Sözleşmesi"),
               //    ),
               //  ),
               //),

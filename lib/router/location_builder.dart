@@ -1,10 +1,9 @@
 import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/screens/gizlilik_sozlesmesi.dart';
+import 'package:blog_web_site/screens/main_scaffold.dart';
+import 'package:blog_web_site/screens/projects_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../screens/main_scaffold.dart';
-import '../screens/projects_details.dart';
 import 'package:blog_web_site/data/projects.dart' as projects_data;
 
 final locationBuilder = RoutesLocationBuilder(
@@ -43,9 +42,9 @@ final locationBuilder = RoutesLocationBuilder(
         ),
       );
     },
-    '/enfestarifler': (context, state, data) => const BeamPage(
+    '/yemekdeposu': (context, state, data) => const BeamPage(
           key: ValueKey('enfestarifler'),
-          title: 'Enfes Tarifler Gizlilik Sözleşmesi',
+          title: 'Yemek Deposu Gizlilik Sözleşmesi',
           child: EnfesTariflerGizlilikSozlesmesi(),
         ),
     '/projects/:projectId': (context, state, data) {

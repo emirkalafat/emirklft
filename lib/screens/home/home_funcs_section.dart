@@ -54,7 +54,7 @@ class HomeScreenFunctionsSection extends StatelessWidget {
               onPressed: () {
                 context.beamToNamed('/enfestarifler');
               },
-              child: const Text("Enfes Tarifler Gizlilik Sözleşmesi"),
+              child: const Text("Yemek Deposu Gizlilik Sözleşmesi"),
             ),
           ),
         ],
