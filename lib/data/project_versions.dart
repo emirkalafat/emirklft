@@ -6,7 +6,7 @@ const List<Map<String, dynamic>> versions = [
         'version': '0.5.0',
         'date': '2023-02-20',
         'changes': [
-          'GENEL DEĞİŞİKLİKLER',
+          'GENEL DEĞİŞİKLİKLER ',
           'Ana sayfa kartarının boyutu 2 kademe olacak şekilde ayarlandı.',
           'Detaylı Tarif Ekranı yenilendi:',
           '> Beğenme butonu belirgin hale getirildi.',
