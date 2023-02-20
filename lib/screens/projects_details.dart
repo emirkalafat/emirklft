@@ -141,6 +141,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
               ),
               InkWell(
                 onTap: () {
+                  //!link eklenecek
                   Utils.startUrl('abount:blank');
                 },
                 child: const Center(
@@ -150,6 +151,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                   ),
                 ),
               ),
+              //!gizlilik sözleşmesi eklenecek
               //Center(
               //  child: Padding(
               //    padding: const EdgeInsets.all(8.0),

@@ -1,11 +1,10 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:blog_web_site/screens/contact.dart';
 import 'package:blog_web_site/screens/home/home_screen.dart';
 import 'package:blog_web_site/screens/projects_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
-import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
+
 import 'blog.dart';
 
 class HomePage extends StatefulWidget {
@@ -74,7 +73,7 @@ class _HomePageState extends State<HomePage> {
     final colorScheme = Theme.of(context).colorScheme;
     final primaryColor = colorScheme.primary;
     final onSurface = colorScheme.onSurface;
-    final isCurrentThemeDark = AdaptiveTheme.of(context).mode.isDark;
+    //final isCurrentThemeDark = AdaptiveTheme.of(context).mode.isDark;
     return Scaffold(
       backgroundColor: colorScheme.background,
       endDrawer: isSmall
@@ -107,11 +106,12 @@ class _HomePageState extends State<HomePage> {
                         ),
                         title: Text(
                           widget.menuItems[index],
-                          style: Theme.of(context).textTheme.button!.copyWith(
-                                color: index == currentIndex
-                                    ? primaryColor
-                                    : onSurface,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.labelLarge!.copyWith(
+                                    color: index == currentIndex
+                                        ? primaryColor
+                                        : onSurface,
+                                  ),
                         ),
                         onTap: () {
                           onPageNameTap(index);
@@ -132,26 +132,8 @@ class _HomePageState extends State<HomePage> {
               ),
             )
           : null,
-      appBar: NewGradientAppBar(
-        gradient: isSmall
-            ? RadialGradient(
-                radius: 4,
-                colors: [
-                  colorScheme.onPrimary,
-                  colorScheme.onTertiary,
-                ],
-              )
-            : LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [
-                  colorScheme.onPrimary,
-                  colorScheme.onPrimary,
-                  colorScheme.onTertiary,
-                  colorScheme.onTertiary,
-                  colorScheme.onTertiary,
-                ],
-              ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
         centerTitle: isSmall,
         title: InkWell(
           child: Text("Ahmet Emir Kalafat",
@@ -211,16 +193,16 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: const Text("Lisanslar"),
                 ),
-                IconButton(
-                    onPressed: () {
-                      AdaptiveTheme.of(context).setThemeMode(!isCurrentThemeDark
-                          ? AdaptiveThemeMode.dark
-                          : AdaptiveThemeMode.light);
-                    },
-                    icon: Icon(
-                      !isCurrentThemeDark ? Icons.dark_mode : Icons.light_mode,
-                      color: colorScheme.onSurface,
-                    )),
+                //IconButton(
+                //    onPressed: () {
+                //      AdaptiveTheme.of(context).setThemeMode(!isCurrentThemeDark
+                //          ? AdaptiveThemeMode.dark
+                //          : AdaptiveThemeMode.light);
+                //    },
+                //    icon: Icon(
+                //      !isCurrentThemeDark ? Icons.dark_mode : Icons.light_mode,
+                //      color: colorScheme.onSurface,
+                //    )),
                 //!const ClosableSearchBar(),
               ],
       ),

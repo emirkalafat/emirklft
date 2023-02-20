@@ -1,4 +1,3 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/color_schemes.dart';
 import 'package:blog_web_site/firebase_options.dart';
@@ -36,28 +35,18 @@ class _WebAppState extends State<WebApp> {
 
   @override
   Widget build(BuildContext context) {
-    return AdaptiveTheme(
-      light: ThemeData(
+    return MaterialApp.router(
+      scaffoldMessengerKey: messengerKey,
+      routerDelegate: routerDelegate,
+      routeInformationParser: BeamerParser(),
+      backButtonDispatcher:
+          BeamerBackButtonDispatcher(delegate: routerDelegate),
+      theme: ThemeData(
         fontFamily: GoogleFonts.ubuntu().fontFamily,
         colorScheme: lightColorScheme,
         useMaterial3: true,
       ),
-      dark: ThemeData(
-        fontFamily: GoogleFonts.ubuntu().fontFamily,
-        colorScheme: darkColorScheme,
-        useMaterial3: true,
-      ),
-      initial: AdaptiveThemeMode.light,
-      builder: (theme, darkTheme) => MaterialApp.router(
-        scaffoldMessengerKey: messengerKey,
-        routerDelegate: routerDelegate,
-        routeInformationParser: BeamerParser(),
-        backButtonDispatcher:
-            BeamerBackButtonDispatcher(delegate: routerDelegate),
-        theme: theme,
-        darkTheme: darkTheme,
-        title: 'Ahmet Emir Kalafat',
-      ),
+      title: 'Ahmet Emir Kalafat',
     );
   }
 }

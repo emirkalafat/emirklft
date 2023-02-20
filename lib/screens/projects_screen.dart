@@ -55,7 +55,7 @@ class _MyProjectsPageState extends State<MyProjectsPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             project['title'],
-                            style: textTheme.headline6,
+                            style: textTheme.titleLarge,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),

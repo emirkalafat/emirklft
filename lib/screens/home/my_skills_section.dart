@@ -14,11 +14,11 @@ class MySkillsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    
     final screenSize = MediaQuery.of(context).size;
     return Container(
       constraints: buildDefaultConstraints(),
-      color: colorScheme.background,
+      //color: colorScheme.background,
       child: Center(
         child: Padding(
           padding:

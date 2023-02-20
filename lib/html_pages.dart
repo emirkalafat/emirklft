@@ -1,5 +1,5 @@
 class HTMLPages {
-  static const gizlilik = """
+  static const gizlilikEnfesTarifler = """
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,4 +100,16 @@ Bu Bildirimde yapılan değişikliklerin herhangi birine bağlı kalmayı kabul 
 </body>
 </html>
 """;
+
+  static const String gizlilikMultiKronometre = """
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gizlilik Politikası</title>
+</head>
+<body>
+<h1>Gizlilik Politikası</h1>
+<p>MultiKronometre uygulaması, kullanıcı</p></h1></body>""";
 }

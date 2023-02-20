@@ -13,11 +13,6 @@ final locationBuilder = RoutesLocationBuilder(
       final titleQuery = state.queryParameters['title'] ??
           (data is Map ? (data['title'] ?? '') : '');
       final genreQuery = state.queryParameters['genre'] ?? '';
-      final pageTitle = titleQuery != ''
-          ? "Books with name '$titleQuery'"
-          : genreQuery != ''
-              ? "Books with genre '$genreQuery'"
-              : 'Bütün Projelerim';
       final projects = titleQuery != ''
           ? projects_data.projects.where((project) =>
               project['title'].toLowerCase().contains(titleQuery.toLowerCase()))
@@ -77,10 +72,5 @@ final locationBuilder = RoutesLocationBuilder(
         },
       );
     },
-    //'/app-ads.txt': (context, state, data) => const BeamPage(
-    //      key: ValueKey('app-ads.txt'),
-    //      title: 'App Add',
-    //      child: AppAdsTxt(),
-    //    ),
   },
 );

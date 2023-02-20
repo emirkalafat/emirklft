@@ -20,7 +20,7 @@ class EnfesTariflerGizlilikSozlesmesi extends StatelessWidget {
           child: CustomScrollView(
             slivers: [
               HtmlWidget(
-                HTMLPages.gizlilik,
+                HTMLPages.gizlilikEnfesTarifler,
                 //customWidgetBuilder: (element) {},
                 enableCaching: true,
                 onErrorBuilder: (context, element, error) =>

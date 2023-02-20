@@ -1,4 +1,3 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -13,14 +12,11 @@ class HomeScreenFunctionsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
     final screenSize = MediaQuery.of(context).size;
-    final currentTheme = AdaptiveTheme.of(context);
 
     return Container(
       constraints: buildDefaultConstraints(
           minWidth: screenSize.width, maxHeight: 150, minHeight: 150),
-      color: colorScheme.background,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -29,19 +25,19 @@ class HomeScreenFunctionsSection extends StatelessWidget {
           //  padding: EdgeInsets.all(8.0),
           //  child: Text("Hello World!"),
           //),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {
-                if (currentTheme.mode != AdaptiveThemeMode.light) {
-                  currentTheme.setThemeMode(AdaptiveThemeMode.light);
-                } else {
-                  currentTheme.setThemeMode(AdaptiveThemeMode.dark);
-                }
-              },
-              child: const Text("Temayı Değiştir"),
-            ),
-          ),
+          //Padding(
+          //  padding: const EdgeInsets.all(8.0),
+          //  child: ElevatedButton(
+          //    onPressed: () {
+          //      if (currentTheme.mode != AdaptiveThemeMode.light) {
+          //        currentTheme.setThemeMode(AdaptiveThemeMode.light);
+          //      } else {
+          //        currentTheme.setThemeMode(AdaptiveThemeMode.dark);
+          //      }
+          //    },
+          //    child: const Text("Temayı Değiştir"),
+          //  ),
+          //),
           ElevatedButton(
               onPressed: () {
                 showTopSnackBar(

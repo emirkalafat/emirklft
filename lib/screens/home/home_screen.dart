@@ -20,7 +20,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    
     return Scaffold(
       floatingActionButton: AnimatedSwitcher(
         duration: const Duration(milliseconds: 300), //scroll.offset == 0,
@@ -36,7 +36,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
                 child: const Icon(Icons.arrow_upward))
             : null,
       ),
-      backgroundColor: colorScheme.background,
+      backgroundColor: Colors.transparent,
       body: NotificationListener(
         onNotification: (notification) {
           if (notification is ScrollEndNotification) {

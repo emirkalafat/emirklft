@@ -3,6 +3,32 @@ const List<Map<String, dynamic>> versions = [
     'id': '1',
     'versions': [
       {
+        'version': '0.5.0',
+        'date': '2023-02-20',
+        'changes': [
+          'GENEL DEĞİŞİKLİKLER',
+          'Ana sayfa kartarının boyutu 2 kademe olacak şekilde ayarlandı.',
+          'Detaylı Tarif Ekranı yenilendi:',
+          '> Beğenme butonu belirgin hale getirildi.',
+          '> Bazı fontlar yeniden düzenlendi',
+          '> Tarifi paylaşan kişi için tarifi silme butonu eklendi',
+          '> Malzeme aşamaları sekmesinde zaman göztergesi düzenlendi',
+          '> Değerlendirmeler kısmında kompleks sıralama ayarları eklendi',
+          '> Tarif detay sayfası yatay ekranlarda da kullanılabilecek düzene getirildi',
+          'Kullanıcının takipçileri bilgisini gösteren ekranlar eklendi',
+          'Beğeniler ekranı kullanıcının profil ekranına taşındı',
+          'Uygulama ayarları ekranı yenilendi.',
+          'Profil ekranında tarif ekleme butonu yeri değiştirildi',
+          'WEB SÜRÜMÜ İÇİN DEĞİŞİKLİKLER',
+          'Bu düzenleme özellikle uygulamanın sayfa düzenlerinin geniş ekranlar için yeniden tasarlanmasını kapsıyor.',
+        ],
+        'fixed bugs': [
+          'Web sürümü için google girişi çalışır durumda. Android sürümü için hataları gidermeye devam ettiğimden şimdilik mobilde sadece mail ile giriş yapılabiliyor. Mail kısmına google bilgilerinizi girerseniz google girişi gerçekleştirebilirsiniz.',
+          'Yemek incelemeleri silme ve onaylama özellikleri yenilendi.',
+          'Uygulamanın teması değiştirildi.',
+        ],
+      },
+      {
         'version': '0.4.3',
         'date': '2022-11-07',
         'changes': [],
@@ -219,17 +245,3 @@ const List<Map<String, dynamic>> versions = [
     ]
   },
 ];
-
-/**TEMPLATE
-  {
-      'version': '',
-      'date': '',
-      'changes': [
-        '',
-      ],
-      'fixed bugs': [
-        '',
-      ],
-    },
-
- */

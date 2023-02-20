@@ -105,8 +105,11 @@ class _ContactWithMeState extends State<ContactWithMe> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       "Bana Ulaşın",
-                      style: Theme.of(context).textTheme.headline5!.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall!
+                          .copyWith(
+                              color: Theme.of(context).colorScheme.onSurface),
                     ),
                   ),
                   Form(
