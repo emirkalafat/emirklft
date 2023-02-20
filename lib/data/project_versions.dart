@@ -23,7 +23,7 @@ const List<Map<String, dynamic>> versions = [
           'Bu düzenleme özellikle uygulamanın sayfa düzenlerinin geniş ekranlar için yeniden tasarlanmasını kapsıyor.',
         ],
         'fixed bugs': [
-          'Web sürümü için google girişi çalışır durumda. Android sürümü için hataları gidermeye devam ettiğimden şimdilik mobilde sadece mail ile giriş yapılabiliyor. Mail kısmına google bilgilerinizi girerseniz google girişi gerçekleştirebilirsiniz.',
+          'Google ile giriş düzeltildi',
           'Yemek incelemeleri silme ve onaylama özellikleri yenilendi.',
           'Uygulamanın teması değiştirildi.',
         ],
