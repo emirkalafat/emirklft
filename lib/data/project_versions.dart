@@ -3,6 +3,28 @@ const List<Map<String, dynamic>> versions = [
     'id': '1',
     'versions': [
       {
+        'version': '0.5.2',
+        'date': '2023-02-24',
+        'changes': [
+          'Misafir hesabını mail ile kaydetme özelliği eklendi.',
+        ],
+        'fixed bugs': [
+          'Giriş ekranında misafir hesabı tercihinin belirttiği uyarının gösterilmemesi hatası giderildi.',
+          'Profil ekranından geri dönerken ekranı bozan hata giderildi.',
+          'Tarif detayı sayfasında yorum kısmındaki kaydırma hatası giderildi.',
+        ]
+      },
+      {
+        'version': '0.5.1',
+        'date': '2023-02-21',
+        'changes': [
+          '',
+        ],
+        'fixed bugs': [
+          'Hata düzeltmeleri ve performans geliştirmeleri.',
+        ]
+      },
+      {
         'version': '0.5.0',
         'date': '2023-02-20',
         'changes': [

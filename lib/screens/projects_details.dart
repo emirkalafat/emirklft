@@ -65,13 +65,32 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                   ),
                 ),
               ),
+              InkWell(
+                onTap: () {
+                  Utils.startUrl('https://trello.com/b/QcikUWjc/yemek-deposu');
+                },
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Image(
+                        image: AssetImage('assets/images/trello.png'),
+                        height: 40,
+                      ),
+                      SizedBox(width: 16),
+                      Text(
+                          'Uygulamanın Detaylı Geliştirme Süreci Takibi İçin Tıklayın'),
+                    ],
+                  ),
+                ),
+              ),
               Center(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     onPressed: () {
                       context.beamToNamed(
-                        '/enfestarifler',
+                        '/yemekdeposu',
                         beamBackOnPop: true,
                       );
                     },
