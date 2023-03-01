@@ -1,10 +1,10 @@
+import 'package:blog_web_site/screens/home/footer/home_funcs_section.dart';
+import 'package:blog_web_site/screens/home/footer/landing_footer.dart';
+import 'package:blog_web_site/screens/home/header/landing_header.dart';
+import 'package:blog_web_site/screens/home/info/about_me_section.dart';
+import 'package:blog_web_site/screens/home/info/timeline_section.dart';
+
 import 'package:flutter/material.dart';
-import 'about_me_section.dart';
-import 'external_links_section.dart';
-import 'home_funcs_section.dart';
-import 'my_skills_section.dart';
-import 'timeline_section.dart';
-import 'welcome_section.dart';
 
 class AnaSayfa extends StatefulWidget {
   const AnaSayfa({super.key});
@@ -20,7 +20,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
 
   @override
   Widget build(BuildContext context) {
-    
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       floatingActionButton: AnimatedSwitcher(
         duration: const Duration(milliseconds: 300), //scroll.offset == 0,
@@ -36,7 +36,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
                 child: const Icon(Icons.arrow_upward))
             : null,
       ),
-      backgroundColor: Colors.transparent,
+      backgroundColor: colorScheme.background,
       body: NotificationListener(
         onNotification: (notification) {
           if (notification is ScrollEndNotification) {
@@ -48,19 +48,24 @@ class _AnaSayfaState extends State<AnaSayfa> {
           }
           return true;
         },
-        child: SingleChildScrollView(
+        child: Scrollbar(
           controller: scroll,
-          child: Center(
+          child: SingleChildScrollView(
+            controller: scroll,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                WelcomeSection(scroll: scroll),
+                LandingHeader(
+                  scroll: scroll,
+                ),
+                const SizedBox(height: 56),
                 const AboutMeSection(),
                 const SizedBox(height: 20),
                 const TimelineSection(),
-                MySkillsSection(verticalScroll: verticalScroll),
                 const HomeScreenFunctionsSection(),
-                const MyLinksSection(),
+                const SizedBox(height: 60.0),
+                // 2 Buttons at bottom of landing: flutter.dev, github.com.
+                const LandingFooter(),
+                const SizedBox(height: 60.0),
               ],
             ),
           ),
