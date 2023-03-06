@@ -5,6 +5,7 @@ import 'package:blog_web_site/services/firestore/changelogs/changelogs_controlle
 import 'package:blog_web_site/services/firestore/versions/versions_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProjectDetails extends ConsumerWidget {
   final String projectID;
@@ -63,7 +64,7 @@ class ProjectDetails extends ConsumerWidget {
                                         },
                                         child: Row(
                                           children: const [
-                                            Icon(Icons.link),
+                                            Icon(FontAwesomeIcons.googlePlay),
                                             SizedBox(width: 8),
                                             Text(
                                                 'Google Play\'den indirmek için tıklayın'),
@@ -79,13 +80,32 @@ class ProjectDetails extends ConsumerWidget {
                                       },
                                       child: Row(
                                         children: const [
-                                          Icon(Icons.link),
+                                          Icon(FontAwesomeIcons.apple),
                                           SizedBox(width: 8),
                                           Text(
                                               'App Store\'den indirmek için tıklayın'),
                                         ],
                                       )),
                                 ),
+                                if (info.additionalLinks != null)
+                                  ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: info.additionalLinks!.length,
+                                    itemBuilder: (context, index) {
+                                      final link = info.additionalLinks!.values
+                                          .elementAt(index);
+                                      return Center(
+                                        child: TextButton.icon(
+                                            onPressed: () {
+                                              Utils.startUrl(link);
+                                            },
+                                            icon: const Icon(Icons.link),
+                                            label: Text(info
+                                                .additionalLinks!.keys
+                                                .elementAt(index))),
+                                      );
+                                    },
+                                  ),
                                 const SizedBox(height: 32),
                                 const Padding(
                                   padding:

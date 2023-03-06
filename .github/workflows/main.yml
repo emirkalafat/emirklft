@@ -1,6 +1,6 @@
 name: Build and Release APK
-on: 
-  push: 
+on:
+  push:
     branches: [main]
 jobs:
     hosting:
