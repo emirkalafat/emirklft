@@ -1,5 +1,6 @@
 import 'package:blog_web_site/services/firebase_storage/storage_repository.dart';
 import 'package:blog_web_site/core/utils.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final blogPostsFuture = FutureProvider((ref) async {
@@ -20,7 +21,7 @@ class StorageController extends StateNotifier<bool> {
   })  : _storageRepository = storageRepository,
         super(false);
 
-  Future<List<String>> get blogPosts async {
+  Future<Map<String, FullMetadata>> get blogPosts async {
     final res = await _storageRepository.blogPosts;
     return res.fold(
       (l) => Utils.showSnackBar(l.message),

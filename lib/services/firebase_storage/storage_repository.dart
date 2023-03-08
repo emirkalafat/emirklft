@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:blog_web_site/services/providers.dart';
 import 'package:blog_web_site/core/typedefs/failure.dart';
@@ -39,19 +40,21 @@ class StorageRepository {
     }
   }
 
-  FutureEither<List<String>> get blogPosts async {
-    List<String> dataList = [];
+  FutureEither<Map<String, FullMetadata>> get blogPosts async {
+    Map<String, FullMetadata> dataList = {};
     try {
       final storageRef = _firebaseStorage.ref();
       final list = await storageRef.child('blog').child('posts').list();
       for (var item in list.items) {
+        final FullMetadata metadata = await item.getMetadata();
         final data = await item.getData();
         final String s = String.fromCharCodes(data!)
             .replaceAll('ð', 'ğ')
             .replaceAll('þ', 'ş')
-            .replaceAll('ý', 'ı');
+            .replaceAll('ý', 'ı')
+            .replaceAll('Ý', 'İ');
 
-        dataList.add(s);
+        dataList.addAll({s: metadata});
       }
       return right(dataList);
     } catch (e) {
