@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  scrollable_positioned_list: ^0.3.5
   intl: ^0.18.0
   shared_preferences: ^2.0.18
   dynamic_color: ^1.6.2
