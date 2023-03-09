@@ -9,12 +9,14 @@ class SocialMediaButton extends StatelessWidget {
   final IconData iconData;
   final double size;
   final int index;
+  final int delayDuration;
 
   const SocialMediaButton({
     required this.url,
     required this.iconData,
     required this.index,
     this.size = 30.0,
+    this.delayDuration = 1500,
     super.key,
   });
 
@@ -22,7 +24,8 @@ class SocialMediaButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return DelayedWidget(
-      delayDuration: Duration(milliseconds: 1500 + ((index + 1) * 125)),
+      delayDuration:
+          Duration(milliseconds: delayDuration + ((index + 1) * 125)),
       from: DelayFrom.bottom,
       child: AnimatedOpacityWhenHovered(
         child: IconButton(

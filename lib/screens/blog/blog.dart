@@ -1,4 +1,5 @@
 import 'package:blog_web_site/core/utils.dart';
+import 'package:blog_web_site/widgets/delayed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -50,51 +51,56 @@ class _MyBlogState extends ConsumerState<MyBlog> {
                       final metadata = data.values.elementAt(index);
                       final updateDate = metadata.updated;
 
-                      return FutureBuilder(
-                        builder: (context, snapshot) {
-                          return Stack(children: [
-                            Card(
-                              child: Markdown(
-                                styleSheet: MarkdownStyleSheet(
-                                  h1: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium,
-                                  blockquote: TextStyle(
-                                      color: colorScheme.onPrimaryContainer),
-                                  blockquoteDecoration: BoxDecoration(
-                                    color: colorScheme.primaryContainer,
-                                    borderRadius: BorderRadius.circular(2.0),
+                      return DelayedWidget(
+                        delayDuration:
+                            Duration(milliseconds: (index + 1) * 125),
+                        from: DelayFrom.left,
+                        child: FutureBuilder(
+                          builder: (context, snapshot) {
+                            return Stack(children: [
+                              Card(
+                                child: Markdown(
+                                  styleSheet: MarkdownStyleSheet(
+                                    h1: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium,
+                                    blockquote: TextStyle(
+                                        color: colorScheme.onPrimaryContainer),
+                                    blockquoteDecoration: BoxDecoration(
+                                      color: colorScheme.primaryContainer,
+                                      borderRadius: BorderRadius.circular(2.0),
+                                    ),
                                   ),
+                                  onTapLink: (text, href, title) {
+                                    href != null ? Utils.startUrl(href) : null;
+                                  },
+                                  selectable: true,
+                                  data: text,
+                                  shrinkWrap: true,
                                 ),
-                                onTapLink: (text, href, title) {
-                                  href != null ? Utils.startUrl(href) : null;
-                                },
-                                selectable: true,
-                                data: text,
-                                shrinkWrap: true,
                               ),
-                            ),
-                            Positioned(
-                                top: 20,
-                                right: 18,
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                  ),
-                                  color: index == 0
-                                      ? colorScheme.secondaryContainer
-                                      : colorScheme.primaryContainer,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(formatedTime),
-                                  ),
-                                )),
-                          ]);
-                        },
-                        future: initializeDateFormatting('tr-TR', '').then(
-                          (_) => formatedTime =
-                              DateFormat('EEEE, MMM d, yyyy', 'tr-TR')
-                                  .format(updateDate!),
+                              Positioned(
+                                  top: 20,
+                                  right: 18,
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(6.0),
+                                    ),
+                                    color: index == 0
+                                        ? colorScheme.secondaryContainer
+                                        : colorScheme.primaryContainer,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(formatedTime),
+                                    ),
+                                  )),
+                            ]);
+                          },
+                          future: initializeDateFormatting('tr-TR', '').then(
+                            (_) => formatedTime =
+                                DateFormat('EEEE, MMM d, yyyy', 'tr-TR')
+                                    .format(updateDate!),
+                          ),
                         ),
                       );
                     },
@@ -123,20 +129,25 @@ class _MyBlogState extends ConsumerState<MyBlog> {
                               .split('\n')
                               .first
                               .substring(2);
-                          return GestureDetector(
-                            onTap: () {
-                              itemScrollController.scrollTo(
-                                index: index,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.easeOut,
-                              );
-                            },
-                            child: Card(
-                                color: colorScheme.tertiaryContainer,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(blogPostTitle),
-                                )),
+                          return DelayedWidget(
+                            delayDuration:
+                                Duration(milliseconds: (index + 1) * 125),
+                            from: DelayFrom.right,
+                            child: GestureDetector(
+                              onTap: () {
+                                itemScrollController.scrollTo(
+                                  index: index,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.easeOut,
+                                );
+                              },
+                              child: Card(
+                                  color: colorScheme.tertiaryContainer,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(blogPostTitle),
+                                  )),
+                            ),
                           );
                         },
                         itemCount: data.length,

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:blog_web_site/screens/home/header/social%20media%20buttons/social_media_buttons.dart';
+import 'package:blog_web_site/widgets/delayed_widget.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -97,111 +98,145 @@ class _ContactWithMeState extends State<ContactWithMe> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Bana Ulaşın",
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface),
+                DelayedWidget(
+                  delayDuration: const Duration(milliseconds: 100),
+                  from: DelayFrom.top,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Bana Ulaşın",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall!
+                          .copyWith(
+                              color: Theme.of(context).colorScheme.onSurface),
+                    ),
                   ),
                 ),
                 Form(
                   key: _formKey,
                   child: Column(
                     children: [
-                      TextFormField(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) => value == null || value.isEmpty
-                              ? 'Boş Bırakmayınız!'
-                              : null,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            label: Text("İsminiz"),
-                          ),
-                          controller: controllerUserName),
+                      DelayedWidget(
+                        delayDuration: const Duration(milliseconds: 500),
+                        from: DelayFrom.left,
+                        child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) => value == null || value.isEmpty
+                                ? 'Boş Bırakmayınız!'
+                                : null,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              label: Text("İsminiz"),
+                            ),
+                            controller: controllerUserName),
+                      ),
                       const SizedBox(height: 12),
-                      TextFormField(
-                          autocorrect: false,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) => value == null || value.isEmpty
-                              ? 'Boş Bırakmayınız!'
-                              : !EmailValidator.validate(value)
-                                  ? 'Geçerli bir mail adresi girin!'
-                                  : null,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            label: Text("Mail Adresiniz"),
-                          ),
-                          controller: controllerUserEmail),
+                      DelayedWidget(
+                        delayDuration: const Duration(milliseconds: 800),
+                        from: DelayFrom.left,
+                        child: TextFormField(
+                            autocorrect: false,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) => value == null || value.isEmpty
+                                ? 'Boş Bırakmayınız!'
+                                : !EmailValidator.validate(value)
+                                    ? 'Geçerli bir mail adresi girin!'
+                                    : null,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              label: Text("Mail Adresiniz"),
+                            ),
+                            controller: controllerUserEmail),
+                      ),
                       const SizedBox(height: 12),
-                      TextFormField(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) => value == null || value.isEmpty
-                              ? 'Boş Bırakmayınız!'
-                              : null,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            label: Text("Mailin Konusu"),
-                          ),
-                          controller: controllerEmailSubject),
+                      DelayedWidget(
+                        delayDuration: const Duration(milliseconds: 1200),
+                        from: DelayFrom.left,
+                        child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) => value == null || value.isEmpty
+                                ? 'Boş Bırakmayınız!'
+                                : null,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              label: Text("Mailin Konusu"),
+                            ),
+                            controller: controllerEmailSubject),
+                      ),
                       const SizedBox(height: 12),
-                      TextFormField(
-                          maxLines: 5,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) => value == null || value.isEmpty
-                              ? 'Boş Bırakmayınız!'
-                              : null,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            label: Text("Mesajınız"),
-                          ),
-                          controller: controllerMessage),
+                      DelayedWidget(
+                        delayDuration: const Duration(milliseconds: 1500),
+                        from: DelayFrom.left,
+                        child: TextFormField(
+                            maxLines: 5,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) => value == null || value.isEmpty
+                                ? 'Boş Bırakmayınız!'
+                                : null,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              label: Text("Mesajınız"),
+                            ),
+                            controller: controllerMessage),
+                      ),
                       const SizedBox(height: 12),
                     ],
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    OutlinedButton(
-                      onPressed: () {
-                        controllerEmailSubject.clear();
-                        controllerMessage.clear();
-                        controllerUserEmail.clear();
-                        controllerUserName.clear();
-                        _formKey.currentState!.reset();
-                      },
-                      child: const Text("Formu Temizle"),
-                    ),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        // Foreground color
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onPrimary,
-                        // Background color
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                      ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
-                      onPressed: () => _sendFeedback(
-                        name: controllerUserName.text.trim(),
-                        email: controllerUserEmail.text.trim(),
-                        subject: controllerEmailSubject.text.trim(),
-                        message: controllerMessage.text.trim(),
+                DelayedWidget(
+                  delayDuration: const Duration(milliseconds: 1800),
+                  from: DelayFrom.left,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      OutlinedButton(
+                        onPressed: () {
+                          controllerEmailSubject.clear();
+                          controllerMessage.clear();
+                          controllerUserEmail.clear();
+                          controllerUserName.clear();
+                          _formKey.currentState!.reset();
+                        },
+                        child: const Text("Formu Temizle"),
                       ),
-                      child: const Text(
-                        "Maili Gönderin",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      const SizedBox(
+                        width: 12,
                       ),
-                    ),
-                  ],
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          // Foreground color
+                          foregroundColor:
+                              Theme.of(context).colorScheme.onPrimary,
+                          // Background color
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                        ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
+                        onPressed: () => _sendFeedback(
+                          name: controllerUserName.text.trim(),
+                          email: controllerUserEmail.text.trim(),
+                          subject: controllerEmailSubject.text.trim(),
+                          message: controllerMessage.text.trim(),
+                        ),
+                        child: const Text(
+                          "Maili Gönderin",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 32.0),
                   child: Divider(),
                 ),
-                const SocialMediaButtons(),
+                const SocialMediaButtons(
+                  delayDuration: 2100,
+                ),
               ],
             ),
           ),
