@@ -27,7 +27,6 @@ class _WebAppState extends ConsumerState<WebApp> {
 
   final routerDelegate = BeamerDelegate(
     initialPath: '/',
-    removeDuplicateHistory: false,
     locationBuilder: locationBuilder,
   );
 

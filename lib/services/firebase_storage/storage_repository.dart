@@ -42,6 +42,7 @@ class StorageRepository {
 
   FutureEither<Map<String, FullMetadata>> get blogPosts async {
     Map<String, FullMetadata> dataList = {};
+    Map<String, FullMetadata> reversed = {};
     try {
       final storageRef = _firebaseStorage.ref();
       final list = await storageRef.child('blog').child('posts').list();
@@ -55,8 +56,9 @@ class StorageRepository {
             .replaceAll('Ý', 'İ');
 
         dataList.addAll({s: metadata});
+        reversed = Map.fromEntries(dataList.entries.toList().reversed);
       }
-      return right(dataList);
+      return right(reversed);
     } catch (e) {
       return left(Failure(e.toString()));
     }
