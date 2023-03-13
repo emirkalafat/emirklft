@@ -40,8 +40,6 @@ class _AnaSayfaState extends State<AnaSayfa> {
       body: NotificationListener(
         onNotification: (notification) {
           if (notification is ScrollEndNotification) {
-            // ignore: avoid_print
-            print(scroll.position.pixels);
             setState(() {
               showButton = scroll.position.pixels > 100;
             });
