@@ -20,12 +20,12 @@ final locationBuilder = RoutesLocationBuilder(
       return BeamPage(
         key: ValueKey('home-$tab'),
         title: initialIndex == 0
-            ? 'Ana Sayfa'
+            ? 'Ahmet Emir Kalafat'
             : initialIndex == 1
-                ? 'Blog'
+                ? 'AEK - Blog'
                 : initialIndex == 2
-                    ? 'Projelerim'
-                    : 'İletişim',
+                    ? 'AEK - Projelerim'
+                    : 'AEK - İletişim',
         child: HomePage(
           initialIndex: initialIndex,
         ),
