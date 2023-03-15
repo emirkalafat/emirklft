@@ -66,9 +66,9 @@ class _ContactWithMeState extends State<ContactWithMe> {
       Utils.showSnackBar(e.toString());
     }
     if (isSent) {
-      // ignore: use_build_context_synchronously
       showTopSnackBar(
-        context,
+        // ignore: use_build_context_synchronously
+        Overlay.of(context),
         const CustomNotification(message: 'Mailiniz Gönderildi.'),
       );
     }

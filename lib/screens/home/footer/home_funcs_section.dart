@@ -1,4 +1,3 @@
-
 import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/core/utils.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +22,7 @@ class HomeScreenFunctionsSection extends StatelessWidget {
           ElevatedButton(
               onPressed: () {
                 showTopSnackBar(
-                  context,
+                  Overlay.of(context),
                   const CustomNotification(
                     message: 'Bildirim Testi',
                   ),

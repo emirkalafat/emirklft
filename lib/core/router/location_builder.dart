@@ -44,7 +44,7 @@ final locationBuilder = RoutesLocationBuilder(
       return BeamPage(
         key: ValueKey('pid-$pid'),
         child: ProjectDetails(projectID: pid),
-        title: 'Projeler - $pid',
+        title: 'Proje - $pid',
       );
     }
   },
