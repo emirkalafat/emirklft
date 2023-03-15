@@ -33,6 +33,7 @@ migrate_working_dir/
 /build/
 
 # Web related
+/web/firebaseConfig.js
 
 # Symbolication related
 app.*.symbols
@@ -46,6 +47,6 @@ app.*.map.json
 /android/app/release
 
 # kişisel ignore klasörlerim
-/yedek/**
 test/main.dart
 /posts/
+
