@@ -1,11 +1,11 @@
 {
-    "name": "blog_web_site",
-    "short_name": "blog_web_site",
+    "name": "Ahmet Emir Kalafat",
+    "short_name": "Ahmet Emir Kalafat",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "AEK Blog",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

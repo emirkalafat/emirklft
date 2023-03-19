@@ -55,7 +55,8 @@ dependencies:
   cloud_firestore_web: ^3.3.4
   firebase_storage: ^11.0.15
   firebase_storage_web: ^3.3.24
-
+  firebase_analytics: ^10.1.6
+  firebase_analytics_web: ^0.5.1+14
 # dev
 dev_dependencies:
   flutter_lints: ^2.0.0

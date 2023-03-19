@@ -30,6 +30,20 @@ abstract class AppConstants {
 
   static const aboutMeText =
       'Merhaba, Ben Ahmet Emir Kalafat.\n21 yaşındayım. Fatih Sultan Mehmet Vakıf Üniversitesi\'nde Elektrik-Elektronik Mühendisliği bölümünde okuyorum. Python, Java, Dart-Flutter, C ve C# dillerini biliyorum. İlk kodumu 12 yaşımda Python ile yazdım. Basit bir hesap makinesiydi. Aktif olarak Flutter Mobil ve Web uygulamaları yazıyorum. En son yazdığım uygulamamı Play Store\'da "Yemek Deposu" adıyla bulabilirsiniz.';
+
+  static const Map<String, String> timeline = {
+    '2023':
+        'Erasmus eğitimim için Litvanya\'ya gittim. Buradaki terübelerimi bu sitede blog bölümünde paylaşıyorum.',
+    '2022': 'İlk büyük ölçekli uygulamamı Play Store\'da yayınladım.',
+    '2021':
+        'Flutter ile bir çok uygulama geliştirdim. Bu uygulamayı da Flutter ile yazıyorum.',
+    '2020':
+        'Fatih Sultan Mehmet Vakıf Üniversitesi\'nde lisans eğitimime başladım. Flutter ile ilk uygulamamı yazdım. Bu uygulamayı da Flutter ile yazıyorum.',
+    '2016':
+        'Şehremini Anadolu Lisesi\'nde eğitime başladım.\nVisual Basic ile ilk uygulamamı yazdım. TicTacToe oyunuydu. Visual Basic\'i çok sevemedim.',
+    '2013':
+        'İlk uygulamamı Python ile yazdım. Basit bir hesap makinesi uygulamasıydı.',
+  };
 }
 
 enum ColorSeed {
@@ -47,3 +61,39 @@ enum ColorSeed {
   final String label;
   final Color color;
 }
+
+const _colorGradientDark = [
+  Color.fromARGB(255, 18, 18, 20),
+  Color.fromARGB(255, 25, 25, 27),
+  Color.fromARGB(255, 18, 18, 20),
+];
+
+const _colorGradientLight = [
+  Color(0xFFEBEBF4),
+  Color(0xFFF4F4F4),
+  Color(0xFFEBEBF4),
+];
+
+const shimmerGradientLight = LinearGradient(
+  colors: _colorGradientLight,
+  stops: [
+    0.1,
+    0.3,
+    0.4,
+  ],
+  begin: Alignment(-1.0, -0.3),
+  end: Alignment(1.0, 0.3),
+  tileMode: TileMode.clamp,
+);
+
+const shimmerGradientDark = LinearGradient(
+  colors: _colorGradientDark,
+  stops: [
+    0.1,
+    0.3,
+    0.4,
+  ],
+  begin: Alignment(-1.0, -0.3),
+  end: Alignment(1.0, 0.3),
+  tileMode: TileMode.clamp,
+);

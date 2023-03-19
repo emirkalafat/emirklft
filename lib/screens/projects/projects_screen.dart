@@ -1,8 +1,8 @@
-import 'package:blog_web_site/screens/projects/showcase_app_item.dart';
-import 'package:blog_web_site/services/firestore/changelogs/changelogs_controller.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:blog_web_site/screens/projects/showcase_app_item.dart';
+import 'package:blog_web_site/services/firestore/changelogs/changelogs_controller.dart';
 
 class MyProjectsPage extends ConsumerStatefulWidget {
   const MyProjectsPage({
@@ -16,7 +16,6 @@ class MyProjectsPage extends ConsumerStatefulWidget {
 class _MyProjectsPageState extends ConsumerState<MyProjectsPage> {
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
     final backgroundC = colorScheme.background;
     return Center(
@@ -31,13 +30,13 @@ class _MyProjectsPageState extends ConsumerState<MyProjectsPage> {
                       spacing: 16.0,
                       runSpacing: 16.0,
                       children: data.map((e) {
-                        final availableWidth = constraints.maxWidth;
+                        //final availableWidth = constraints.maxWidth;
 
-                        final rowItemCount = kIsWeb ? 3 : 2;
+                        //final rowItemCount = kIsWeb ? 3 : 2;
 
-                        final itemWidth =
-                            (availableWidth - ((rowItemCount - 1) * 16.0)) /
-                                rowItemCount;
+                        //final itemWidth =
+                        //    (availableWidth - ((rowItemCount - 1) * 16.0)) /
+                        //        rowItemCount;
 
                         return SizedBox(
                           width: 250,

@@ -1,6 +1,8 @@
 import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/models/changelog_model.dart';
 import 'package:blog_web_site/widgets/animated_image_overlay.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:blog_web_site/widgets/external_link_button.dart';
@@ -34,6 +36,12 @@ class ShowcaseAppItem extends StatelessWidget {
             child: GestureDetector(
               // When overlay tapped, open full screen interactive image viewer.
               onTap: () {
+                FirebaseAnalytics.instance.logEvent(
+                  name: 'showcase_app_item_tapped',
+                  parameters: <String, dynamic>{
+                    'app_name': app.name,
+                  },
+                );
                 return Beamer.of(context).beamToNamed('/projects/${app.id}');
               },
               child: AnimatedImageOverlay(app.name),

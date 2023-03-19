@@ -1,14 +1,14 @@
 import 'package:beamer/beamer.dart';
-import 'package:blog_web_site/core/theme.dart';
-import 'package:blog_web_site/widgets/animated_opacity_when_hovered.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:blog_web_site/core/theme.dart';
 import 'package:blog_web_site/screens/blog/blog.dart';
 import 'package:blog_web_site/screens/contact_with_me/contact.dart';
 import 'package:blog_web_site/screens/home/home_screen.dart';
 import 'package:blog_web_site/screens/projects/projects_screen.dart';
 import 'package:blog_web_site/services/firebase_storage/storage_controller.dart';
+import 'package:blog_web_site/widgets/animated_opacity_when_hovered.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   HomePage({Key? key, required this.initialIndex}) : super(key: key);
@@ -78,7 +78,8 @@ class _HomePageState extends ConsumerState<HomePage> {
     //final titleQuery = (context.currentBeamLocation.state as BeamState)
     //    .queryParameters['title'];
     //final screenSize = MediaQuery.of(context).size;
-    final isSmall = MediaQuery.of(context).size.width < 800;
+    final Size size = MediaQuery.of(context).size;
+    final isSmall = size.width < 800;
     final colorScheme = Theme.of(context).colorScheme;
     final primaryColor = colorScheme.primary;
     final onSurface = colorScheme.onSurface;
@@ -226,8 +227,11 @@ class _HomePageState extends ConsumerState<HomePage> {
         child: FloatingActionButton(
           onPressed: currentIndex == 1
               ? () {
-                  print('yenilendi');
-                  return ref.invalidate(blogPostsFuture);
+                  setState(() {
+                    print('before refresh');
+                    ref.invalidate(blogPostsFuture);
+                  });
+                  print('after refresh and setState');
                 }
               : null,
           child: const Icon(Icons.refresh),
