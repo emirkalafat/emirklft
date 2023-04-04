@@ -13,14 +13,41 @@ class VersionsRepository {
   VersionsRepository({required FirebaseFirestore firestore})
       : _firestore = firestore;
 
-  Stream<List<Version>> getAppVersions(String id) {
-    return _firestore
+  Stream<List<Version>> getAppVersions(
+      String storageID, bool showBetaVersions) {
+    if (showBetaVersions) {
+      return _firestore
+          .collection('showcase_apps')
+          .doc(storageID)
+          .collection('versions')
+          .orderBy('date', descending: true)
+          .snapshots()
+          .map((snapshot) {
+        return snapshot.docs.map((doc) => Version.fromMap(doc.data())).toList();
+      });
+    } else {
+      return _firestore
+          .collection('showcase_apps')
+          .doc(storageID)
+          .collection('versions')
+          .where('isBeta', isEqualTo: false)
+          .orderBy('date', descending: true)
+          .snapshots()
+          .map((snapshot) {
+        return snapshot.docs.map((doc) => Version.fromMap(doc.data())).toList();
+      });
+    }
+  }
+
+  Future<List<Version>> getFutureAppVersion(
+      String storageID, bool showBetaVersions) async {
+    return await _firestore
         .collection('showcase_apps')
-        .doc(id)
+        .doc(storageID)
         .collection('versions')
         .orderBy('date', descending: true)
-        .snapshots()
-        .map((snapshot) {
+        .get()
+        .then((snapshot) {
       return snapshot.docs.map((doc) => Version.fromMap(doc.data())).toList();
     });
   }

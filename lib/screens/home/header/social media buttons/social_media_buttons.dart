@@ -37,24 +37,31 @@ class SocialMediaButtons extends StatelessWidget {
             url: AppConstants.eMail,
             iconData: Icons.alternate_email_rounded,
           ),
+          //CV Butonu
+          SocialMediaButton(
+            delayDuration: delayDuration,
+            url: AppConstants.publicCVurl,
+            iconData: FontAwesomeIcons.paperclip,
+            index: 2,
+          ),
           //Linkedin Butonu
           SocialMediaButton(
             delayDuration: delayDuration,
-            index: 2,
+            index: 3,
             url: AppConstants.linkedInProfileURL,
             iconData: FontAwesomeIcons.linkedin,
           ),
           //Instagram Butonu
           SocialMediaButton(
             delayDuration: delayDuration,
-            index: 3,
+            index: 4,
             url: AppConstants.instagramProfileURL,
             iconData: FontAwesomeIcons.instagram,
           ),
           //Youtube Butonu
           SocialMediaButton(
             delayDuration: delayDuration,
-            index: 4,
+            index: 5,
             url: AppConstants.youtubeProfileURL,
             iconData: FontAwesomeIcons.youtube,
           ),

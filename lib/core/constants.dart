@@ -27,6 +27,8 @@ abstract class AppConstants {
   static const eMail = 'mailto:emirklft@outlook.com';
   static const flutterWebSiteURL = 'https://flutter.dev';
   static const openSourceRepoURL = 'https://github.com/emirkalafat/emirklft';
+  static const publicCVurl =
+      "https://docs.google.com/document/d/1YRE8eCepquyiYQR0dgThBx3gFZak302e/edit?usp=sharing&ouid=102026540238976098790&rtpof=true&sd=true";
 
   static const aboutMeText =
       'Merhaba, Ben Ahmet Emir Kalafat.\n21 yaşındayım. Fatih Sultan Mehmet Vakıf Üniversitesi\'nde Elektrik-Elektronik Mühendisliği bölümünde okuyorum. Python, Java, Dart-Flutter, C ve C# dillerini biliyorum. İlk kodumu 12 yaşımda Python ile yazdım. Basit bir hesap makinesiydi. Aktif olarak Flutter Mobil ve Web uygulamaları yazıyorum. En son yazdığım uygulamamı Play Store\'da "Yemek Deposu" adıyla bulabilirsiniz.';

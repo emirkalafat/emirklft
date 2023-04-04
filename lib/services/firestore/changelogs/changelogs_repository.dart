@@ -14,12 +14,9 @@ class ChangelogsRepository {
       : _firestore = firestore;
 
   Stream<List<Changelog>> getChangelogByID(String id) {
-    return showcaseCollection
-        .where('id', isEqualTo: id)
-        .snapshots()
-        .map((snapshot) {
-      return snapshot.docs.map((doc) => Changelog.fromMap(doc.data())).toList();
-    });
+    return showcaseCollection.where('id', isEqualTo: id).snapshots().map(
+        (snapshot) =>
+            snapshot.docs.map((doc) => Changelog.fromMap(doc.data())).toList());
   }
 
   Stream<List<Changelog>> get changelogAll =>
