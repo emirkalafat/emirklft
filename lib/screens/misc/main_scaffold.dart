@@ -130,7 +130,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                       value: isDark,
                       onChanged: (value) => toggleTheme(),
                     ),
-                    title: Text(isDark ? 'Karanlık Tema' : 'Aydınlık Tema'),
+                    title: const Text('Karanlık Tema'),
                   ),
                   const Divider(),
                   ListTile(
