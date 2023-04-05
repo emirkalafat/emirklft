@@ -63,7 +63,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     setState(() {
       currentIndex = index;
     });
-    //Navigator.of(context).maybePop();
+    Navigator.of(context).maybePop();
   }
 
   void toggleTheme() {
