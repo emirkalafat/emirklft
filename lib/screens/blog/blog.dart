@@ -166,7 +166,7 @@ class _MyBlogState extends ConsumerState<MyBlog> {
   }
 }
 
-class BlogCardListView extends StatelessWidget {
+class BlogCardListView extends StatefulWidget {
   const BlogCardListView({
     Key? key,
     required this.data,
@@ -181,59 +181,97 @@ class BlogCardListView extends StatelessWidget {
   final ColorScheme colorScheme;
 
   @override
+  State<BlogCardListView> createState() => _BlogCardListViewState();
+}
+
+class _BlogCardListViewState extends State<BlogCardListView> {
+  late List<bool> isOpenList;
+
+  @override
+  void initState() {
+    super.initState();
+    isOpenList = List.filled(widget.data.length, true);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ScrollablePositionedList.builder(
       //physics: const AlwaysScrollableScrollPhysics(),
       padding: const EdgeInsets.only(bottom: 250),
       //shrinkWrap: less600,
-      itemScrollController: itemScrollController,
-      itemPositionsListener: itemPositionsListener,
-      itemCount: data.length,
+      itemScrollController: widget.itemScrollController,
+      itemPositionsListener: widget.itemPositionsListener,
+      itemCount: widget.data.length,
       itemBuilder: (context, index) {
-        final text = data.keys.elementAt(index);
-        final metadata = data.values.elementAt(index);
+        final text = widget.data.keys.elementAt(index);
+        final metadata = widget.data.values.elementAt(index);
         final updateDate = metadata.timeCreated;
-
+        bool isOpen = isOpenList[index];
         return DelayedWidget(
             delayDuration: Duration(milliseconds: (index + 1) * 125),
             from: DelayFrom.left,
-            child: Stack(children: [
-              Card(
-                child: Markdown(
-                  styleSheet: MarkdownStyleSheet(
-                    h1: Theme.of(context).textTheme.headlineMedium,
-                    blockquote:
-                        TextStyle(color: colorScheme.onPrimaryContainer),
-                    blockquoteDecoration: BoxDecoration(
-                      color: colorScheme.primaryContainer,
-                      borderRadius: BorderRadius.circular(2.0),
+            child: Stack(
+              children: [
+                Card(
+                  child: Markdown(
+                    styleSheet: MarkdownStyleSheet(
+                      h1: Theme.of(context).textTheme.headlineMedium,
+                      blockquote: TextStyle(
+                          color: widget.colorScheme.onPrimaryContainer),
+                      blockquoteDecoration: BoxDecoration(
+                        color: widget.colorScheme.primaryContainer,
+                        borderRadius: BorderRadius.circular(2.0),
+                      ),
+                    ),
+                    onTapLink: (text, href, title) {
+                      href != null ? Utils.startUrl(href) : null;
+                    },
+                    selectable: true,
+                    data: text,
+                    shrinkWrap: true,
+                  ),
+                ),
+                AnimatedPositioned(
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeIn,
+                  top: 18,
+                  right: isOpen ? 18 : 0,
+                  child: SizedBox(
+                    width: isOpen ? null : 50,
+                    child: GestureDetector(
+                      onTap: () => setState(() {
+                        isOpenList[index] = !isOpenList[index];
+                      }),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: isOpen
+                              ? BorderRadius.circular(6.0)
+                              : const BorderRadius.only(
+                                  topRight: Radius.circular(0),
+                                  bottomRight: Radius.circular(0),
+                                  topLeft: Radius.circular(6),
+                                  bottomLeft: Radius.circular(6),
+                                ),
+                        ),
+                        color: index == 0
+                            ? widget.colorScheme.primaryContainer
+                            : widget.colorScheme.secondaryContainer,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: isOpen
+                              ? Text(DateFormat('EEEE, MMM d, yyyy', 'tr-TR')
+                                  .format(updateDate!))
+                              : const Icon(
+                                  Icons.arrow_back_ios_new,
+                                  size: 18,
+                                ),
+                        ),
+                      ),
                     ),
                   ),
-                  onTapLink: (text, href, title) {
-                    href != null ? Utils.startUrl(href) : null;
-                  },
-                  selectable: true,
-                  data: text,
-                  shrinkWrap: true,
                 ),
-              ),
-              Positioned(
-                  top: 20,
-                  right: 18,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6.0),
-                    ),
-                    color: index == 0
-                        ? colorScheme.primaryContainer
-                        : colorScheme.secondaryContainer,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(DateFormat('EEEE, MMM d, yyyy', 'tr-TR')
-                          .format(updateDate!)),
-                    ),
-                  )),
-            ]));
+              ],
+            ));
       },
     );
   }
