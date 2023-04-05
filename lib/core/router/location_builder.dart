@@ -36,7 +36,7 @@ final locationBuilder = RoutesLocationBuilder(
     '/yemekdeposu': (context, state, data) => const BeamPage(
           key: ValueKey('yemekdeposu'),
           title: 'Yemek Deposu Gizlilik Sözleşmesi',
-          child: EnfesTariflerGizlilikSozlesmesi(),
+          child: YemekDeposuGizlilikSozlesmesi(),
         ),
     '/projects/:pid': (context, state, data) {
       final pid = state.pathParameters['pid'] as String;

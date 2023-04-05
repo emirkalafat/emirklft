@@ -1,4 +1,5 @@
 import 'package:beamer/beamer.dart';
+import 'package:blog_web_site/screens/projects/project_details_info_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,18 +9,32 @@ import 'package:blog_web_site/screens/projects/app_versions_card.dart';
 import 'package:blog_web_site/services/firestore/changelogs/changelogs_controller.dart';
 import 'package:blog_web_site/services/firestore/versions/versions_controller.dart';
 
-class ProjectDetails extends ConsumerWidget {
+class ProjectDetails extends ConsumerStatefulWidget {
   final String projectID;
   const ProjectDetails({
-    Key? key,
+    super.key,
     required this.projectID,
-  }) : super(key: key);
+  });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _ProjectDetailsState();
+}
+
+class _ProjectDetailsState extends ConsumerState<ProjectDetails> {
+  late bool showBetaVersions;
+
+  @override
+  void initState() {
+    super.initState();
+    showBetaVersions = false;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final ScrollController controller = ScrollController();
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final TextTheme textStyle = Theme.of(context).textTheme;
+
     return Scaffold(
         backgroundColor: colorScheme.background,
         appBar: AppBar(
@@ -27,10 +42,14 @@ class ProjectDetails extends ConsumerWidget {
             leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Beamer.of(context).beamBack();
+            if (Beamer.of(context).canBeamBack) {
+              Beamer.of(context).beamBack();
+            } else {
+              Beamer.of(context).beamToNamed('/?tab=projects');
+            }
           },
         )),
-        body: ref.watch(changelogProvider(projectID)).when(
+        body: ref.watch(changelogProvider(widget.projectID)).when(
               data: (data) {
                 return data.isEmpty
                     ? const Center(
@@ -39,6 +58,11 @@ class ProjectDetails extends ConsumerWidget {
                     : Center(
                         child: Builder(builder: (context) {
                           final info = data.first;
+                          //final ProjectDetailsInfoModel search =
+                          //    ProjectDetailsInfoModel(
+                          //  storageID: info.storageID,
+                          //  showBetaVersions: showBetaVersions,
+                          //);
                           return SingleChildScrollView(
                             controller: controller,
                             child: Column(
@@ -113,11 +137,37 @@ class ProjectDetails extends ConsumerWidget {
                                       EdgeInsets.symmetric(horizontal: 8.0),
                                   child: SizedBox(width: 800, child: Divider()),
                                 ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: ConstrainedBox(
+                                    constraints:
+                                        const BoxConstraints(maxWidth: 800),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        const Text('Beta sürümlerini göster'),
+                                        Switch(
+                                          value: showBetaVersions,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              showBetaVersions = value;
+                                            });
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                                 Container(
                                   constraints:
                                       const BoxConstraints(maxWidth: 800),
                                   child: ref
-                                      .watch(versionsProvider(info.storageID))
+                                      .watch(versionsProvider(
+                                          ProjectDetailsInfoModel(
+                                        storageID: info.storageID,
+                                        showBetaVersions: showBetaVersions,
+                                      )))
                                       .when(
                                         data: (versions) {
                                           return ListView.builder(
@@ -127,6 +177,9 @@ class ProjectDetails extends ConsumerWidget {
                                             shrinkWrap: true,
                                             itemBuilder: (context, index) {
                                               final version = versions[index];
+                                              if ((version.version == '')) {
+                                                return const SizedBox.shrink();
+                                              }
                                               return AppVersionCard(
                                                 version: version,
                                                 latest: index == 0,
@@ -134,12 +187,12 @@ class ProjectDetails extends ConsumerWidget {
                                             },
                                           );
                                         },
-                                        error: (error, stackTrace) => Center(
-                                          child: Text(error.toString()),
-                                        ),
-                                        loading: () => const Center(
-                                          child: CircularProgressIndicator(),
-                                        ),
+                                        error: (error, stackTrace) {
+                                          print(error.toString());
+                                          return CenterErrorText(
+                                              error.toString());
+                                        },
+                                        loading: () => const CenterLoading(),
                                       ),
                                 ),
                               ],

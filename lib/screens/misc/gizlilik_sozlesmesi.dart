@@ -2,8 +2,8 @@ import 'package:blog_web_site/html_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 
-class EnfesTariflerGizlilikSozlesmesi extends StatelessWidget {
-  const EnfesTariflerGizlilikSozlesmesi({super.key});
+class YemekDeposuGizlilikSozlesmesi extends StatelessWidget {
+  const YemekDeposuGizlilikSozlesmesi({super.key});
 
   @override
   Widget build(BuildContext context) {

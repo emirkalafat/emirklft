@@ -27,14 +27,14 @@ class AppVersionCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
                   version.version,
                   style: textTheme.headlineLarge,
                 ),
-                if (latest) ...[
-                  const Spacer(),
+                const Spacer(),
+                if (latest)
                   Card(
                     color: colorScheme.primaryContainer,
                     margin: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -43,7 +43,15 @@ class AppVersionCard extends StatelessWidget {
                       child: Text('En Yeni Sürüm'),
                     ),
                   ),
-                ],
+                if (version.isBeta)
+                  Card(
+                    color: colorScheme.primaryContainer,
+                    margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('Beta'),
+                    ),
+                  ),
                 Text(version.date),
               ],
             ),

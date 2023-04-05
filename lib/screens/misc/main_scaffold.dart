@@ -10,6 +10,13 @@ import 'package:blog_web_site/screens/projects/projects_screen.dart';
 import 'package:blog_web_site/services/firebase_storage/storage_controller.dart';
 import 'package:blog_web_site/widgets/animated_opacity_when_hovered.dart';
 
+const _screensToDisplay = [
+  AnaSayfa(),
+  MyBlog(),
+  MyProjectsPage(),
+  ContactWithMe(),
+];
+
 class HomePage extends ConsumerStatefulWidget {
   HomePage({Key? key, required this.initialIndex}) : super(key: key);
 
@@ -51,12 +58,12 @@ class _HomePageState extends ConsumerState<HomePage> {
                     ? '/?tab=blog'
                     : '/?tab=home',
       ),
-      //rebuild: false,
+      rebuild: false,
     );
     setState(() {
       currentIndex = index;
     });
-    Navigator.of(context).maybePop();
+    //Navigator.of(context).maybePop();
   }
 
   void toggleTheme() {
@@ -212,26 +219,15 @@ class _HomePageState extends ConsumerState<HomePage> {
                 ),
               ],
       ),
-      body: IndexedStack(
-        //alignment: AlignmentDirectional.center,
-        index: currentIndex,
-        children: const [
-          AnaSayfa(),
-          MyBlog(),
-          MyProjectsPage(),
-          ContactWithMe(),
-        ],
-      ),
+      body: _screensToDisplay.elementAt(currentIndex),
       floatingActionButton: Visibility(
         visible: currentIndex == 1,
         child: FloatingActionButton(
           onPressed: currentIndex == 1
               ? () {
                   setState(() {
-                    print('before refresh');
                     ref.invalidate(blogPostsFuture);
                   });
-                  print('after refresh and setState');
                 }
               : null,
           child: const Icon(Icons.refresh),
