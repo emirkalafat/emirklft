@@ -28,9 +28,15 @@ class _WebAppState extends ConsumerState<WebApp> {
   static final messengerKey = GlobalKey<ScaffoldMessengerState>();
 
   final routerDelegate = BeamerDelegate(
-    initialPath: '/',
-    locationBuilder: locationBuilder,
-  );
+      initialPath: '/',
+      locationBuilder: locationBuilder,
+      guards: [
+        BeamGuard(
+          pathPatterns: ['/projects'],
+          check: (context, location) => false,
+          beamToNamed: (origin, target) => '/?tab=projects',
+        ),
+      ]);
 
   @override
   Widget build(BuildContext context) {
