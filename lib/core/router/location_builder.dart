@@ -17,6 +17,7 @@ final locationBuilder = RoutesLocationBuilder(
               : tab == 'blog'
                   ? 1
                   : 0;
+
       return BeamPage(
         key: ValueKey('home-$tab'),
         title: initialIndex == 0
@@ -31,8 +32,6 @@ final locationBuilder = RoutesLocationBuilder(
         ),
       );
     },
-    //'/projects': (context, state, data) =>
-    //    Beamer.of(context).beamToNamed('/?tab=projects'),
     '/yemekdeposu': (context, state, data) => const BeamPage(
           key: ValueKey('yemekdeposu'),
           title: 'Yemek Deposu Gizlilik Sözleşmesi',
