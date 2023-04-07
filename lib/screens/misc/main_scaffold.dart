@@ -43,9 +43,7 @@ class HomePage extends ConsumerStatefulWidget {
 class _HomePageState extends ConsumerState<HomePage> {
   int currentIndex = 0;
 
-  bool _isScreenSelected(int index) {
-    return currentIndex == index;
-  }
+  bool _isScreenSelected(int index) => currentIndex == index;
 
   onPageNameTap(int index) {
     Beamer.of(context).update(
@@ -66,13 +64,10 @@ class _HomePageState extends ConsumerState<HomePage> {
     Navigator.of(context).maybePop();
   }
 
-  void toggleTheme() {
-    ref.read(themeNotifierProvider.notifier).toggleTheme();
-  }
+  void toggleTheme() => ref.read(themeNotifierProvider.notifier).toggleTheme();
 
-  bool get isDark {
-    return ref.watch(themeNotifierProvider.notifier).theme == ThemeMode.dark;
-  }
+  bool get isDark =>
+      ref.watch(themeNotifierProvider.notifier).theme == ThemeMode.dark;
 
   @override
   void initState() {
@@ -82,15 +77,12 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    //final titleQuery = (context.currentBeamLocation.state as BeamState)
-    //    .queryParameters['title'];
-    //final screenSize = MediaQuery.of(context).size;
     final Size size = MediaQuery.of(context).size;
     final isSmall = size.width < 800;
     final colorScheme = Theme.of(context).colorScheme;
     final primaryColor = colorScheme.primary;
     final onSurface = colorScheme.onSurface;
-    //final isCurrentThemeDark = AdaptiveTheme.of(context).mode.isDark;
+
     return Scaffold(
       backgroundColor: colorScheme.background,
       endDrawer: isSmall
@@ -115,9 +107,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                         : onSurface,
                                   ),
                         ),
-                        onTap: () {
-                          onPageNameTap(index);
-                        },
+                        onTap: () => onPageNameTap(index),
                       );
                     }),
                   ),
@@ -154,9 +144,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         title: AnimatedOpacityWhenHovered(
           child: GestureDetector(
             child: const Text("Ahmet Emir Kalafat"),
-            onTap: () {
-              onPageNameTap(0);
-            },
+            onTap: () => onPageNameTap(0),
           ),
         ),
         actions: isSmall
@@ -172,9 +160,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    onPressed: () {
-                      onPageNameTap(i);
-                    },
+                    onPressed: () => onPageNameTap(i),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -202,12 +188,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  onPressed: () {
-                    showAboutDialog(
-                      context: context,
-                      applicationVersion: '2.0.0',
-                    );
-                  },
+                  onPressed: () => showAboutDialog(
+                    context: context,
+                    applicationVersion: '2.0.0',
+                  ),
                   child: const Text("Lisanslar"),
                 ),
                 IconButton(
@@ -224,11 +208,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         visible: currentIndex == 1,
         child: FloatingActionButton(
           onPressed: currentIndex == 1
-              ? () {
-                  setState(() {
-                    ref.invalidate(blogPostsFuture);
-                  });
-                }
+              ? () => setState(() => ref.invalidate(blogPostsFuture))
               : null,
           child: const Icon(Icons.refresh),
         ),

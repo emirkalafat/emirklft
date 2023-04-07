@@ -21,7 +21,6 @@ class YemekDeposuGizlilikSozlesmesi extends StatelessWidget {
             slivers: [
               HtmlWidget(
                 HTMLPages.gizlilikEnfesTarifler,
-                //customWidgetBuilder: (element) {},
                 enableCaching: true,
                 onErrorBuilder: (context, element, error) =>
                     Center(child: Text('$element error: $error')),
