@@ -2,7 +2,6 @@ import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/models/changelog_model.dart';
 import 'package:blog_web_site/widgets/animated_image_overlay.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:blog_web_site/widgets/external_link_button.dart';
@@ -27,7 +26,7 @@ class ShowcaseAppItem extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          _buildChild(),
+          _buildChild(context),
           Positioned(
             top: 0.0,
             // bottom: 192.0,
@@ -52,7 +51,7 @@ class ShowcaseAppItem extends StatelessWidget {
     );
   }
 
-  Widget _buildChild() {
+  Widget _buildChild(BuildContext context) {
     return Container(
       color: const Color.fromRGBO(54, 56, 72, 1.0),
       child: Column(
@@ -65,13 +64,13 @@ class ShowcaseAppItem extends StatelessWidget {
               isNetworkImage: true,
             ),
           ),
-          _buildBottom(),
+          _buildBottom(context),
         ],
       ),
     );
   }
 
-  Widget _buildBottom() {
+  Widget _buildBottom(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(24.0).copyWith(bottom: 8.0),
       child: Column(
@@ -81,7 +80,8 @@ class ShowcaseAppItem extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildAppName(),
+              //App Title
+              Text(app.name, style: Theme.of(context).textTheme.titleLarge),
               const Divider(
                 thickness: 1.5,
                 height: 32.0,
@@ -111,18 +111,6 @@ class ShowcaseAppItem extends StatelessWidget {
               label: 'GitHub',
             ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildAppName() {
-    return Text(
-      app.name,
-      style: const TextStyle(
-        fontSize: 18.0,
-        fontWeight: FontWeight.w500,
-        color: Colors.white,
-        letterSpacing: 1.4,
       ),
     );
   }

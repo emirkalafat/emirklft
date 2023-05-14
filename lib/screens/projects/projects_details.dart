@@ -63,6 +63,24 @@ class _ProjectDetailsState extends ConsumerState<ProjectDetails> {
                           //  storageID: info.storageID,
                           //  showBetaVersions: showBetaVersions,
                           //);
+                          bool? isRecentBeta = ref
+                              .watch(versionsProvider(ProjectDetailsInfoModel(
+                                storageID: info.storageID,
+                                showBetaVersions: true,
+                              )))
+                              .when(
+                                data: (versionsList) {
+                                  if (versionsList.first.isBeta) {
+                                    return true;
+                                  } else {
+                                    return false;
+                                  }
+                                },
+                                loading: () => null,
+                                error: (error, stack) {
+                                  return null;
+                                },
+                              );
                           return SingleChildScrollView(
                             controller: controller,
                             child: Column(
@@ -81,21 +99,14 @@ class _ProjectDetailsState extends ConsumerState<ProjectDetails> {
                                 ),
                                 Visibility(
                                   visible: info.googlePlayLink != null,
-                                  child: SizedBox(
-                                    width: 290,
-                                    child: TextButton(
-                                        onPressed: () {
-                                          Utils.startUrl(info.googlePlayLink!);
-                                        },
-                                        child: Row(
-                                          children: const [
-                                            Icon(FontAwesomeIcons.googlePlay),
-                                            SizedBox(width: 8),
-                                            Text(
-                                                'Google Play\'den indirmek için tıklayın'),
-                                          ],
-                                        )),
-                                  ),
+                                  child: TextButton.icon(
+                                      icon: const Icon(
+                                          FontAwesomeIcons.googlePlay),
+                                      onPressed: () {
+                                        Utils.startUrl(info.googlePlayLink!);
+                                      },
+                                      label: const Text(
+                                          'Google Play\'den indirmek için tıklayın')),
                                 ),
                                 Visibility(
                                   visible: info.appStoreLink != null,
@@ -103,8 +114,8 @@ class _ProjectDetailsState extends ConsumerState<ProjectDetails> {
                                       onPressed: () {
                                         Utils.startUrl(info.appStoreLink!);
                                       },
-                                      child: Row(
-                                        children: const [
+                                      child: const Row(
+                                        children: [
                                           Icon(FontAwesomeIcons.apple),
                                           SizedBox(width: 8),
                                           Text(
@@ -146,6 +157,14 @@ class _ProjectDetailsState extends ConsumerState<ProjectDetails> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
+                                        if (isRecentBeta != null &&
+                                            isRecentBeta &&
+                                            !showBetaVersions) ...[
+                                          const SizedBox(width: 8),
+                                          const Text(
+                                              'Yeni Beta Sürümler Mevcut'),
+                                          const Spacer(),
+                                        ],
                                         const Text('Beta sürümlerini göster'),
                                         Switch(
                                           value: showBetaVersions,
