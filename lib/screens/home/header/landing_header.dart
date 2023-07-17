@@ -13,21 +13,23 @@ class LandingHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipPath(
-      clipper: DiagonalPathClipper(),
-      child: Stack(
-        fit: StackFit.loose,
-        children: [
-          //Ekran kaydırılırken hareket edebilen arkaplan resmi
-          AnimatedBackgroundImage(scroll),
-
-          //Arkaplan resminin üzerindeki bilgiler
-          const Align(
-            alignment: Alignment.center,
-            child: AnimatedHeaderItems(),
-          ),
-        ],
-      ),
+    return const Align(
+      alignment: Alignment.center,
+      child: AnimatedHeaderItems(),
     );
+    /*
+    Stack(
+      fit: StackFit.loose,
+      children: [
+        //Ekran kaydırılırken hareket edebilen arkaplan resmi
+        //AnimatedBackgroundImage(scroll),
+
+        //Arkaplan resminin üzerindeki bilgiler
+        const Align(
+          alignment: Alignment.center,
+          child: AnimatedHeaderItems(),
+        ),
+      ],
+    );*/
   }
 }

@@ -1,22 +1,31 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:blog_web_site/core/theme.dart';
 import 'package:blog_web_site/screens/home/footer/home_funcs_section.dart';
 import 'package:blog_web_site/screens/home/footer/landing_footer.dart';
 import 'package:blog_web_site/screens/home/header/landing_header.dart';
 import 'package:blog_web_site/screens/home/info/about_me_section.dart';
 import 'package:blog_web_site/screens/home/info/timeline_section.dart';
+import 'package:blog_web_site/screens/home/sider/left_side_section.dart';
+import 'package:blog_web_site/screens/home/sider/right_side_section.dart';
 
-import 'package:flutter/material.dart';
-
-class AnaSayfa extends StatefulWidget {
+class AnaSayfa extends ConsumerStatefulWidget {
   const AnaSayfa({super.key});
 
   @override
-  State<AnaSayfa> createState() => _AnaSayfaState();
+  ConsumerState<AnaSayfa> createState() => _AnaSayfaState();
 }
 
-class _AnaSayfaState extends State<AnaSayfa> {
+class _AnaSayfaState extends ConsumerState<AnaSayfa> {
+  final double sideSpacing = 180;
+
   ScrollController scroll = ScrollController();
   ScrollController verticalScroll = ScrollController();
   bool showButton = false;
+
+  bool get isDark =>
+      ref.watch(themeNotifierProvider.notifier).theme == ThemeMode.dark;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +45,9 @@ class _AnaSayfaState extends State<AnaSayfa> {
                 child: const Icon(Icons.arrow_upward))
             : null,
       ),
-      backgroundColor: colorScheme.background,
+      backgroundColor:
+          isDark ? const Color(0xFF0D1C36) : colorScheme.background,
+      //backgroundColor: const Color(0xFF0D1C36),
       body: NotificationListener(
         onNotification: (notification) {
           if (notification is ScrollEndNotification) {
@@ -50,20 +61,31 @@ class _AnaSayfaState extends State<AnaSayfa> {
           controller: scroll,
           child: SingleChildScrollView(
             controller: scroll,
-            child: Column(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                LandingHeader(
-                  scroll: scroll,
+                //TODO: Bu boşluklar belli bir ekran boyutundan sonra görünmez yapılacak
+                LeftSideSection(sideSpacing: sideSpacing),
+                Expanded(
+                  child: Column(
+                    children: [
+                      LandingHeader(
+                        scroll: scroll,
+                      ),
+                      //const SizedBox(height: 56),
+                      const AboutMeSection(),
+                      const SizedBox(height: 20),
+                      const TimelineSection(),
+                      const HomeScreenFunctionsSection(),
+                      const SizedBox(height: 60.0),
+                      // 2 Buttons at bottom of landing: flutter.dev, github.com.
+                      const LandingFooter(),
+                      const SizedBox(height: 60.0),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 56),
-                const AboutMeSection(),
-                const SizedBox(height: 20),
-                const TimelineSection(),
-                const HomeScreenFunctionsSection(),
-                const SizedBox(height: 60.0),
-                // 2 Buttons at bottom of landing: flutter.dev, github.com.
-                const LandingFooter(),
-                const SizedBox(height: 60.0),
+                RightSideSection(sideSpacing: sideSpacing),
               ],
             ),
           ),

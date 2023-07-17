@@ -17,6 +17,7 @@ class TimelineWidget extends StatelessWidget {
       width: 350,
       height: 220,
       child: Card(
+        color: colorScheme.tertiaryContainer,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(

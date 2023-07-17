@@ -32,7 +32,7 @@ class _AnimatedBackgroundImageState extends State<AnimatedBackgroundImage> {
 
   @override
   Widget build(BuildContext context) {
-    const height = 540.0;
+    const height = 540.0 - 60.0;
     return SizedBox(
       height: height,
       width: double.maxFinite,

@@ -190,7 +190,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ),
                   onPressed: () => showAboutDialog(
                     context: context,
-                    applicationVersion: '2.0.0',
+                    applicationVersion: 'v3.0.0',
                   ),
                   child: const Text("Lisanslar"),
                 ),

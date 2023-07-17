@@ -16,7 +16,7 @@ abstract class AppConstants {
 
   static const landingTitle = 'Ahmet Emir Kalafat';
   static const landingMotto =
-      'Flutter Mobil ve Web Uygulama Geliştirici - Elektrik-Elektronik Mühendisi - Bilgisayar Mühendisi';
+      'Flutter Mobil ve Web Uygulama Geliştirici\nElektrik-Elektronik Mühendisi - Bilgisayar Mühendisi';
 
   static const webSiteURL = 'emirklftweb.web.app';
   static const gitHubProfileURL = 'https://github.com/emirkalafat';

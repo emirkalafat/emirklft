@@ -1,4 +1,5 @@
 import 'package:blog_web_site/core/constants.dart';
+import 'package:blog_web_site/widgets/delayed_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../widgets/timeline_widget.dart';
@@ -14,9 +15,13 @@ class TimelineSection extends StatelessWidget {
       child: Wrap(
           children: List.generate(
               timeline.length,
-              (index) => TimelineWidget(
-                    event: timeline.values.elementAt(index),
-                    year: timeline.keys.elementAt(index),
+              (index) => DelayedWidget(
+                    from: DelayFrom.top,
+                    delayDuration: Duration(milliseconds: 2000 + (200 * index)),
+                    child: TimelineWidget(
+                      event: timeline.values.elementAt(index),
+                      year: timeline.keys.elementAt(index),
+                    ),
                   ))),
     );
   }

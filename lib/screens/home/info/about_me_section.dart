@@ -14,8 +14,8 @@ class AboutMeSection extends StatelessWidget {
       from: DelayFrom.top,
       delayDuration: const Duration(milliseconds: 1800),
       child: Card(
-        margin: const EdgeInsets.symmetric(horizontal: 32),
-        color: colorScheme.secondaryContainer,
+        //margin: const EdgeInsets.symmetric(horizontal: 32),
+        color: colorScheme.primaryContainer,
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
