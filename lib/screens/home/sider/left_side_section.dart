@@ -21,13 +21,13 @@ class LeftSideSection extends StatelessWidget {
         children: [
           SizedBox(height: 16),
           DelayedWidget(
-            delayDuration: Duration(seconds: 4),
+            delayDuration: Duration(seconds: 3),
             from: DelayFrom.left,
             child: WeatherSideCard(),
           ),
           SizedBox(height: 16),
           DelayedWidget(
-            delayDuration: Duration(seconds: 5),
+            delayDuration: Duration(seconds: 4),
             from: DelayFrom.left,
             child: CurrencySideCard(),
           ),

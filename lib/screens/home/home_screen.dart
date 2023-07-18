@@ -66,7 +66,8 @@ class _AnaSayfaState extends ConsumerState<AnaSayfa> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //TODO: Bu boşluklar belli bir ekran boyutundan sonra görünmez yapılacak
-                LeftSideSection(sideSpacing: sideSpacing),
+                if (MediaQuery.of(context).size.width > 725)
+                  LeftSideSection(sideSpacing: sideSpacing),
                 Expanded(
                   child: Column(
                     children: [
@@ -85,7 +86,8 @@ class _AnaSayfaState extends ConsumerState<AnaSayfa> {
                     ],
                   ),
                 ),
-                RightSideSection(sideSpacing: sideSpacing),
+                if (MediaQuery.of(context).size.width > 725)
+                  RightSideSection(sideSpacing: sideSpacing),
               ],
             ),
           ),
