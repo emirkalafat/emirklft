@@ -1,6 +1,4 @@
-import 'package:blog_web_site/core/utils.dart';
 import 'package:blog_web_site/screens/home/header/animated_header_items.dart';
-import 'package:blog_web_site/screens/home/header/animated_background_image.dart';
 import 'package:flutter/material.dart';
 
 class LandingHeader extends StatelessWidget {
