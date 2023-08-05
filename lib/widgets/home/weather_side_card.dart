@@ -7,9 +7,11 @@ import 'package:blog_web_site/core/string_extensions.dart';
 
 class WeatherSideCard extends StatefulWidget {
   final double width;
+  final double height;
   const WeatherSideCard({
     Key? key,
     this.width = 180,
+    this.height = 380,
   }) : super(key: key);
 
   @override
@@ -44,6 +46,7 @@ class _WeatherSideCardState extends State<WeatherSideCard> {
     final bodySmall = Theme.of(context).textTheme.bodySmall;
     return SizedBox(
       width: widget.width,
+      height: widget.height,
       child: Card(
         color: Theme.of(context).colorScheme.secondaryContainer,
         margin: const EdgeInsets.all(8),
