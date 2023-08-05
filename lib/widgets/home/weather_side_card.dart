@@ -6,7 +6,11 @@ import 'package:weather/weather.dart';
 import 'package:blog_web_site/core/string_extensions.dart';
 
 class WeatherSideCard extends StatefulWidget {
-  const WeatherSideCard({super.key});
+  final double width;
+  const WeatherSideCard({
+    Key? key,
+    this.width = 180,
+  }) : super(key: key);
 
   @override
   State<WeatherSideCard> createState() => _WeatherSideCardState();
@@ -38,78 +42,84 @@ class _WeatherSideCardState extends State<WeatherSideCard> {
   @override
   Widget build(BuildContext context) {
     final bodySmall = Theme.of(context).textTheme.bodySmall;
-    return Card(
-      color: Theme.of(context).colorScheme.secondaryContainer,
-      margin: const EdgeInsets.all(8),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 48),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (w == null) ...[
-              const Icon(Icons.location_disabled),
-              const SizedBox(height: 8),
-              const Text(
-                'Konum Bilgisi Alınamadı',
-                textAlign: TextAlign.center,
-              ),
-              ElevatedButton(
-                  onPressed: () async {
-                    await Geolocator.requestPermission();
-                    getLocation();
-                    setState(() {});
-                  },
-                  child: const Text('Tekrar Dene')),
+    return SizedBox(
+      width: widget.width,
+      child: Card(
+        color: Theme.of(context).colorScheme.secondaryContainer,
+        margin: const EdgeInsets.all(8),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 48),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (w == null) ...[
+                const Icon(Icons.location_disabled),
+                const SizedBox(height: 8),
+                const Text(
+                  'Konum Bilgisi Alınamadı',
+                  textAlign: TextAlign.center,
+                ),
+                ElevatedButton(
+                    onPressed: () async {
+                      await Geolocator.requestPermission();
+                      getLocation();
+                      setState(() {});
+                    },
+                    child: const Text('Tekrar Dene')),
+              ],
+              if (w != null) ...[
+                Image.network(
+                    'https://openweathermap.org/img/wn/${w?.weatherIcon ?? '01d'}@2x.png'),
+                const SizedBox(height: 8),
+                RichText(
+                  text: TextSpan(
+                      style: Theme.of(context).textTheme.headlineMedium,
+                      text: w != null
+                          ? isCelcius
+                              ? '${w?.temperature!.celsius!.round()} '
+                              : '${w?.temperature!.fahrenheit!.round()} '
+                          : '',
+                      children: [
+                        TextSpan(
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium!
+                                .copyWith(decoration: TextDecoration.underline),
+                            text: isCelcius ? '°C' : '°F',
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                setState(() {
+                                  isCelcius = !isCelcius;
+                                });
+                              })
+                      ]),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  w!.weatherDescription!.toTitleCase(),
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                const SizedBox(height: 8),
+                Text('Konum: ${w?.areaName ?? ''} ${w?.country ?? ''}'),
+                const SizedBox(height: 8),
+                Text(
+                  'Nem Oranı: ${w?.humidity ?? ''}',
+                  style: bodySmall,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Rüzgar Hızı: ${w?.windSpeed ?? ''} m/s',
+                  style: bodySmall,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Rüzgar Açısı: ${w?.windDegree ?? ''}',
+                  style: bodySmall,
+                ),
+              ]
             ],
-            if (w != null) ...[
-              Image.network(
-                  'https://openweathermap.org/img/wn/${w?.weatherIcon ?? '01d'}@2x.png'),
-              const SizedBox(height: 8),
-              RichText(
-                text: TextSpan(
-                    style: Theme.of(context).textTheme.headlineMedium,
-                    text: w != null
-                        ? isCelcius
-                            ? '${w?.temperature!.celsius!.round()} '
-                            : '${w?.temperature!.fahrenheit!.round()} '
-                        : '',
-                    children: [
-                      TextSpan(
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium!
-                              .copyWith(decoration: TextDecoration.underline),
-                          text: isCelcius ? '°C' : '°F',
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              setState(() {
-                                isCelcius = !isCelcius;
-                              });
-                            })
-                    ]),
-              ),
-              const SizedBox(height: 8),
-              Text('Hava Koşulu: ${w!.weatherDescription!.toTitleCase()}'),
-              const SizedBox(height: 8),
-              Text('Konum: ${w?.areaName ?? ''} ${w?.country ?? ''}'),
-              const SizedBox(height: 8),
-              Text(
-                'Nem Oranı: ${w?.humidity ?? ''}',
-                style: bodySmall,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Rüzgar Hızı: ${w?.windSpeed ?? ''} m/s',
-                style: bodySmall,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Rüzgar Açısı: ${w?.windDegree ?? ''}',
-                style: bodySmall,
-              ),
-            ]
-          ],
+          ),
         ),
       ),
     );

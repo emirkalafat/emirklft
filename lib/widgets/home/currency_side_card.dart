@@ -5,7 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class CurrencySideCard extends StatefulWidget {
-  const CurrencySideCard({super.key});
+  final double width;
+  const CurrencySideCard({
+    Key? key,
+    this.width = 180,
+  }) : super(key: key);
 
   @override
   State<CurrencySideCard> createState() => _CurrencySideCardState();
@@ -53,27 +57,29 @@ class _CurrencySideCardState extends State<CurrencySideCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Theme.of(context).colorScheme.secondaryContainer,
-      margin: const EdgeInsets.all(8.0),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: Text(
-                'Döviz Çevirici',
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineMedium!
-                    .copyWith(fontSize: 20),
+    return SizedBox(
+      width: widget.width,
+      child: Card(
+        color: Theme.of(context).colorScheme.secondaryContainer,
+        margin: const EdgeInsets.all(8.0),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: Text(
+                  'Döviz Çevirici',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .copyWith(fontSize: 24),
+                ),
               ),
-            ),
-            SizedBox(
-              //width: 118,
-              child: TextField(
+              TextField(
                 textAlign: TextAlign.center,
                 controller: _controller,
                 keyboardType: TextInputType.number,
@@ -84,93 +90,62 @@ class _CurrencySideCardState extends State<CurrencySideCard> {
                   border: UnderlineInputBorder(),
                 ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextButton(
-                    onPressed: () {
-                      showCurrencyPicker(
-                        context: context,
-                        onSelect: (Currency currency) {
-                          setState(() {
-                            _fromCurrency = currency.code;
-                          });
-                        },
-                      );
-                    },
-                    child: Text(_fromCurrency)),
-                TextButton(
-                    onPressed: () {
-                      showCurrencyPicker(
-                        context: context,
-                        onSelect: (Currency currency) {
-                          setState(() {
-                            _toCurrency = currency.code;
-                          });
-                        },
-                      );
-                    },
-                    child: Text(_toCurrency)),
-              ],
-            ),
-            /*
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                DropdownButton(
-                  value: _fromCurrency,
-                  onChanged: (value) {
-                    setState(() {
-                      _fromCurrency = value.toString();
-                    });
-                  },
-                  items: _currencies.map((e) {
-                    return DropdownMenuItem(
-                      value: e,
-                      child: Text(e),
-                    );
-                  }).toList(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                      onPressed: () {
+                        showCurrencyPicker(
+                          context: context,
+                          onSelect: (Currency currency) {
+                            setState(() {
+                              _fromCurrency = currency.code;
+                            });
+                          },
+                        );
+                      },
+                      child: Text(_fromCurrency)),
+                  const Icon(Icons.arrow_forward),
+                  TextButton(
+                      onPressed: () {
+                        showCurrencyPicker(
+                          context: context,
+                          onSelect: (Currency currency) {
+                            setState(() {
+                              _toCurrency = currency.code;
+                            });
+                          },
+                        );
+                      },
+                      child: Text(_toCurrency)),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Align(
+                alignment: Alignment.center,
+                child: ElevatedButton(
+                  onPressed: _convertCurrency,
+                  child: const Text('Çevir'),
                 ),
-                DropdownButton<String>(
-                  value: _toCurrency,
-                  items: _currencies.map((currency) {
-                    return DropdownMenuItem(
-                      value: currency,
-                      child: Text(currency),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _toCurrency = value!;
-                    });
-                  },
-                ),
-              ],
-            ),
-            */
-            const SizedBox(height: 8),
-            (_result != '')
-                ? Align(
-                    alignment: Alignment.topCenter,
-                    child: Text(
-                      _result,
-                      style: const TextStyle(fontSize: 20),
+              ),
+              const SizedBox(height: 8),
+              (_result != '')
+                  ? Align(
+                      alignment: Alignment.topCenter,
+                      child: Text(
+                        _result,
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    )
+                  : const Align(
+                      alignment: Alignment.topCenter,
+                      child: Text(
+                        "Sonuç",
+                        style: TextStyle(fontSize: 20),
+                      ),
                     ),
-                  )
-                : const Align(
-                    alignment: Alignment.topCenter,
-                    child: Text(
-                      "Sonuç",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-            const SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: _convertCurrency,
-              child: const Text('Çevir'),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
