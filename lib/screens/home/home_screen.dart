@@ -1,3 +1,4 @@
+import 'package:blog_web_site/widgets/delayed_widget.dart';
 import 'package:blog_web_site/widgets/home/currency_side_card.dart';
 import 'package:blog_web_site/widgets/home/weather_side_card.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class AnaSayfa extends ConsumerStatefulWidget {
 }
 
 class _AnaSayfaState extends ConsumerState<AnaSayfa> {
-  final double sideSpacing = 180;
+  final double sideSpacing = 200;
 
   ScrollController scroll = ScrollController();
   ScrollController verticalScroll = ScrollController();
@@ -80,13 +81,17 @@ class _AnaSayfaState extends ConsumerState<AnaSayfa> {
                       const AboutMeSection(),
                       const SizedBox(height: 20),
                       if (MediaQuery.of(context).size.width <= 725)
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            WeatherSideCard(width: 200),
-                            CurrencySideCard(width: 200),
-                          ],
+                        const DelayedWidget(
+                          from: DelayFrom.top,
+                          delayDuration: Duration(milliseconds: 2000),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              WeatherSideCard(width: 200),
+                              CurrencySideCard(width: 200),
+                            ],
+                          ),
                         ),
 
                       const TimelineSection(),

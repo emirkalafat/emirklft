@@ -123,16 +123,19 @@ class _HomePageState extends ConsumerState<HomePage> {
                     title: const Text('Karanlık Tema'),
                   ),
                   const Divider(),
-                  ListTile(
-                    leading: Icon(
-                      Icons.info,
-                      color: colorScheme.onBackground,
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.info,
+                        color: colorScheme.onBackground,
+                      ),
+                      title: const Text("Lisanslar"),
+                      onTap: () {
+                        Navigator.pop(context);
+                        showAboutDialog(context: context);
+                      },
                     ),
-                    title: const Text("Lisanslar"),
-                    onTap: () {
-                      Navigator.pop(context);
-                      showAboutDialog(context: context);
-                    },
                   ),
                 ],
               ),

@@ -6,9 +6,11 @@ import 'package:http/http.dart' as http;
 
 class CurrencySideCard extends StatefulWidget {
   final double width;
+  final double height;
   const CurrencySideCard({
     Key? key,
-    this.width = 180,
+    this.width = 200,
+    this.height = 380,
   }) : super(key: key);
 
   @override
@@ -59,6 +61,7 @@ class _CurrencySideCardState extends State<CurrencySideCard> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: widget.width,
+      height: widget.height,
       child: Card(
         color: Theme.of(context).colorScheme.secondaryContainer,
         margin: const EdgeInsets.all(8.0),
@@ -66,7 +69,7 @@ class _CurrencySideCardState extends State<CurrencySideCard> {
           padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
+            //mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Align(
