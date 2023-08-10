@@ -19,7 +19,7 @@ class WeatherSideCard extends StatefulWidget {
 }
 
 class _WeatherSideCardState extends State<WeatherSideCard> {
-  bool isCelcius = true;
+  bool isMetric = true;
 
   Position? konum;
   late WeatherFactory wf;
@@ -79,7 +79,7 @@ class _WeatherSideCardState extends State<WeatherSideCard> {
                   text: TextSpan(
                       style: Theme.of(context).textTheme.headlineMedium,
                       text: w != null
-                          ? isCelcius
+                          ? isMetric
                               ? '${w?.temperature!.celsius!.round()} '
                               : '${w?.temperature!.fahrenheit!.round()} '
                           : '',
@@ -89,11 +89,11 @@ class _WeatherSideCardState extends State<WeatherSideCard> {
                                 .textTheme
                                 .headlineMedium!
                                 .copyWith(decoration: TextDecoration.underline),
-                            text: isCelcius ? '°C' : '°F',
+                            text: isMetric ? '°C' : '°F',
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 setState(() {
-                                  isCelcius = !isCelcius;
+                                  isMetric = !isMetric;
                                 });
                               })
                       ]),
@@ -112,7 +112,7 @@ class _WeatherSideCardState extends State<WeatherSideCard> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Rüzgar Hızı: ${w?.windSpeed ?? ''} m/s',
+                  "Rüzgar Hızı: ${isMetric ? "${w?.windSpeed} m/s" : "${((w?.windSpeed ?? 0.0) * 2.2369).toStringAsFixed(2)} mph"}",
                   style: bodySmall,
                 ),
                 const SizedBox(height: 8),
