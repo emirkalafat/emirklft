@@ -31,7 +31,7 @@ dependencies:
   #döviz çevirici
   currency_picker: ^2.0.15
   #hava durumu
-  geolocator: ^9.0.2
+  geolocator: ^10.0.0
   weather: ^3.1.0
   ####
   http: ^1.1.0
@@ -39,7 +39,7 @@ dependencies:
   intl: ^0.18.0
   shared_preferences: ^2.0.18
   dynamic_color: ^1.6.2
-  fpdart: ^0.6.0
+  fpdart: ^1.1.0
   flutter_riverpod: ^2.3.2
   flutter_markdown: ^0.6.14
   font_awesome_flutter: ^10.5.0
