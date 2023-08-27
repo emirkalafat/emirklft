@@ -1,5 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/screens/projects/project_details_info_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -207,7 +208,9 @@ class _ProjectDetailsState extends ConsumerState<ProjectDetails> {
                                           );
                                         },
                                         error: (error, stackTrace) {
-                                          print(error.toString());
+                                          if (kDebugMode) {
+                                            print(error.toString());
+                                          }
                                           return CenterErrorText(
                                               error.toString());
                                         },

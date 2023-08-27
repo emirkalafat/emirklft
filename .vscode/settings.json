@@ -31,5 +31,6 @@
     "peacock.color": "#215732",
     "githubPullRequests.ignoredPullRequestBranches": [
         "main"
-    ]
+    ],
+    "explorerExclude.backup": {}
 }
