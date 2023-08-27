@@ -28,7 +28,7 @@ class _WebAppState extends ConsumerState<WebApp> {
   static final messengerKey = GlobalKey<ScaffoldMessengerState>();
 
   final routerDelegate = BeamerDelegate(
-      initialPath: '/',
+      initialPath: '/linktree',
       locationBuilder: locationBuilder,
       guards: [
         BeamGuard(

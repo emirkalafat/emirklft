@@ -1,4 +1,5 @@
 import 'package:beamer/beamer.dart';
+import 'package:blog_web_site/screens/link_tree/link_tree.dart';
 import 'package:blog_web_site/screens/misc/gizlilik_sozlesmesi.dart';
 import 'package:blog_web_site/screens/misc/main_scaffold.dart';
 import 'package:blog_web_site/screens/projects/projects_details.dart';
@@ -30,6 +31,12 @@ final locationBuilder = RoutesLocationBuilder(
         child: HomePage(
           initialIndex: initialIndex,
         ),
+      );
+    },
+    '/linktree': (context, state, data) {
+      return const BeamPage(
+        child: LinkTreeScreen(),
+        title: 'LinkTree',
       );
     },
     '/yemekdeposu': (context, state, data) => const BeamPage(
