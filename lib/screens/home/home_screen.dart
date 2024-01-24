@@ -104,7 +104,7 @@ class _AnaSayfaState extends ConsumerState<AnaSayfa> {
                   ),
                 ),
                 if (MediaQuery.of(context).size.width > 725)
-                  RightSideSection(sideSpacing: 12),
+                  const RightSideSection(sideSpacing: 12),
               ],
             ),
           ),

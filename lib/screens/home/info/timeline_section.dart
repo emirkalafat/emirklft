@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../widgets/timeline_widget.dart';
 
 class TimelineSection extends StatelessWidget {
-  const TimelineSection({Key? key}) : super(key: key);
+  const TimelineSection({super.key});
 
   @override
   Widget build(BuildContext context) {

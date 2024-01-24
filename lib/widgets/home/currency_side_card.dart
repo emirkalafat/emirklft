@@ -8,10 +8,10 @@ class CurrencySideCard extends StatefulWidget {
   final double width;
   final double height;
   const CurrencySideCard({
-    Key? key,
+    super.key,
     this.width = 200,
     this.height = 380,
-  }) : super(key: key);
+  });
 
   @override
   State<CurrencySideCard> createState() => _CurrencySideCardState();

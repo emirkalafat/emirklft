@@ -5,11 +5,11 @@ class AnimatedCircularIndicator extends StatelessWidget {
   final String title;
   final Widget image;
   const AnimatedCircularIndicator({
-    Key? key,
+    super.key,
     required this.title,
     required this.percentage,
     required this.image,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 class LeftSideSection extends StatelessWidget {
   final double sideSpacing;
   const LeftSideSection({
-    Key? key,
+    super.key,
     required this.sideSpacing,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

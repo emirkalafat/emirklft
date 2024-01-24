@@ -5,10 +5,10 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class BlogTitlesWidget extends StatelessWidget {
   const BlogTitlesWidget({
-    Key? key,
+    super.key,
     required this.itemScrollController,
     required this.data,
-  }) : super(key: key);
+  });
 
   final ItemScrollController itemScrollController;
   final Map<String, FullMetadata> data;

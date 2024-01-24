@@ -168,12 +168,12 @@ class _MyBlogState extends ConsumerState<MyBlog> {
 
 class BlogCardListView extends StatefulWidget {
   const BlogCardListView({
-    Key? key,
+    super.key,
     required this.data,
     required this.itemScrollController,
     required this.itemPositionsListener,
     required this.colorScheme,
-  }) : super(key: key);
+  });
 
   final Map<String, FullMetadata> data;
   final ItemScrollController itemScrollController;

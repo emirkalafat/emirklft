@@ -3,7 +3,7 @@ import 'package:blog_web_site/widgets/delayed_widget.dart';
 import 'package:flutter/material.dart';
 
 class AboutMeSection extends StatelessWidget {
-  const AboutMeSection({Key? key}) : super(key: key);
+  const AboutMeSection({super.key});
 
   @override
   Widget build(BuildContext context) {
