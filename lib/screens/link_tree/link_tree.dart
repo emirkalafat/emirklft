@@ -57,63 +57,67 @@ class _LinkTreeScreenState extends ConsumerState<LinkTreeScreen> {
           centerTitle: true,
           title: const Text('LinkTree'),
         ),
-        body: Center(
-          child: Container(
-            constraints: BoxConstraints.tight(const Size(400, double.infinity)),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      onTap: () => toggleTheme(),
-                      child: SizedBox(
-                        width: 104,
-                        height: 104,
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          child: Icon(
-                            isDark ? Icons.dark_mode : Icons.light_mode,
-                            size: 64,
+        body: SingleChildScrollView(
+          child: Center(
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 400),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      GestureDetector(
+                        onTap: () => toggleTheme(),
+                        child: SizedBox(
+                          width: 104,
+                          height: 104,
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child: Icon(
+                              isDark ? Icons.dark_mode : Icons.light_mode,
+                              size: 64,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: SizedBox(
-                        height: 104,
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Center(
-                              child: Text(
-                                'Ahmet Emir Kalafat',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .displaySmall!
-                                    .copyWith(fontSize: 24),
+                      Expanded(
+                        child: SizedBox(
+                          height: 104,
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Center(
+                                child: Text(
+                                  'Ahmet Emir Kalafat',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displaySmall!
+                                      .copyWith(fontSize: 24),
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: linkTreeModelList.length,
-                  itemBuilder: (context, index) {
-                    return LinkTreeCard(
-                        linkTreeModel: linkTreeModelList[index]);
-                  },
-                ),
-              ],
+                    ],
+                  ),
+                  ListView.builder(
+                    padding: const EdgeInsets.only(bottom: 100),
+                    shrinkWrap: true,
+                    itemCount: linkTreeModelList.length,
+                    itemBuilder: (context, index) {
+                      return LinkTreeCard(
+                          linkTreeModel: linkTreeModelList[index]);
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ));
