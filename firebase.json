@@ -5,6 +5,10 @@
       {
         "source": "**",
         "destination": "/index.html"
+      },
+      {
+        "source": "**/assetlinks.json",
+        "destination": "/assetlinks.json"
       }
     ],
     "ignore": [
