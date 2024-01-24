@@ -7,7 +7,7 @@
         "destination": "/index.html"
       },
       {
-        "source": "**/assetlinks.json",
+        "source": "**/.well-know/assetlinks.json",
         "destination": "/assetlinks.json"
       }
     ],
