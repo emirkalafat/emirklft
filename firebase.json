@@ -9,6 +9,11 @@
       {
         "source": "**/.well-known/assetlinks.json",
         "destination": "/.well-known/assetlinks.json"
+      },
+      { "source": "**/ads.txt", "destination": "/ads.txt" },
+      {
+        "source": "**/app-ads.txt",
+        "destination": "/app-ads.txt"
       }
     ],
     "ignore": [
