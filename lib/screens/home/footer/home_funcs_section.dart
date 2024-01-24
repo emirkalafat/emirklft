@@ -5,8 +5,8 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class HomeScreenFunctionsSection extends StatelessWidget {
   const HomeScreenFunctionsSection({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -5,10 +5,10 @@ class TimelineWidget extends StatelessWidget {
   final String year;
 
   const TimelineWidget({
-    Key? key,
+    super.key,
     required this.event,
     required this.year,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

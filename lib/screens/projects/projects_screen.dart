@@ -6,8 +6,8 @@ import 'package:blog_web_site/services/firestore/changelogs/changelogs_controlle
 
 class MyProjectsPage extends ConsumerStatefulWidget {
   const MyProjectsPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   ConsumerState<MyProjectsPage> createState() => _MyProjectsPageState();

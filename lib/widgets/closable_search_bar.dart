@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class ClosableSearchBar extends StatefulWidget {
   const ClosableSearchBar({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<ClosableSearchBar> createState() => _ClosableSearchBarState();

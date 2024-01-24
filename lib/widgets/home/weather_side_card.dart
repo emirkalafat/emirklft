@@ -9,10 +9,10 @@ class WeatherSideCard extends StatefulWidget {
   final double width;
   final double height;
   const WeatherSideCard({
-    Key? key,
+    super.key,
     this.width = 180,
     this.height = 380,
-  }) : super(key: key);
+  });
 
   @override
   State<WeatherSideCard> createState() => _WeatherSideCardState();

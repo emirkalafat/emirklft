@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class ShimmerBlogCards extends StatelessWidget {
   const ShimmerBlogCards({
-    Key? key,
+    super.key,
     required this.less600,
-  }) : super(key: key);
+  });
   final bool less600;
 
   @override

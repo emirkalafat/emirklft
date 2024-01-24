@@ -7,9 +7,9 @@ import 'package:blog_web_site/screens/home/header/social%20media%20buttons/socia
 class SocialMediaButtons extends StatelessWidget {
   final int delayDuration;
   const SocialMediaButtons({
-    Key? key,
+    super.key,
     this.delayDuration = 1500,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

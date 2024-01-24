@@ -7,8 +7,8 @@ class AnimatedImageOverlay extends StatefulWidget {
 
   const AnimatedImageOverlay(
     this.topic, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<AnimatedImageOverlay> createState() => _AnimatedImageOverlayState();

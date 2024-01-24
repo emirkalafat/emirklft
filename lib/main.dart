@@ -18,7 +18,7 @@ void main() async {
 }
 
 class WebApp extends ConsumerStatefulWidget {
-  const WebApp({Key? key}) : super(key: key);
+  const WebApp({super.key});
 
   @override
   ConsumerState<WebApp> createState() => _WebAppState();
@@ -29,7 +29,7 @@ class _WebAppState extends ConsumerState<WebApp> {
 
   final routerDelegate = BeamerDelegate(
       initialPath: '/linktree',
-      locationBuilder: locationBuilder,
+      locationBuilder: locationBuilder.call,
       guards: [
         BeamGuard(
           pathPatterns: ['/projects'],

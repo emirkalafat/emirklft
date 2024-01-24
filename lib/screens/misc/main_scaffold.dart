@@ -18,7 +18,7 @@ const _screensToDisplay = [
 ];
 
 class HomePage extends ConsumerStatefulWidget {
-  HomePage({Key? key, required this.initialIndex}) : super(key: key);
+  HomePage({super.key, required this.initialIndex});
 
   final int initialIndex;
 
@@ -48,14 +48,13 @@ class _HomePageState extends ConsumerState<HomePage> {
   onPageNameTap(int index) {
     Beamer.of(context).update(
       configuration: RouteInformation(
-        location: index == 3
-            ? '/?tab=contact'
-            : index == 2
-                ? '/?tab=projects'
-                : index == 1
-                    ? '/?tab=blog'
-                    : '/?tab=home',
-      ),
+          uri: Uri.parse(index == 3
+              ? '/?tab=contact'
+              : index == 2
+                  ? '/?tab=projects'
+                  : index == 1
+                      ? '/?tab=blog'
+                      : '/?tab=home')),
       rebuild: false,
     );
     setState(() {

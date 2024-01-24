@@ -16,12 +16,12 @@ class DelayedWidget extends StatefulWidget {
   final DelayFrom from;
 
   const DelayedWidget({
-    Key? key,
+    super.key,
     required this.child,
     this.duration = const Duration(milliseconds: 500),
     this.delayDuration = Duration.zero,
     this.from = DelayFrom.bottom,
-  }) : super(key: key);
+  });
 
   @override
   DelayedWidgetState createState() => DelayedWidgetState();

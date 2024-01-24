@@ -38,10 +38,10 @@ class Utils {
 
 class CustomNotification extends StatelessWidget {
   const CustomNotification({
-    Key? key,
+    super.key,
     required this.message,
     this.isError = false,
-  }) : super(key: key);
+  });
 
   final String message;
   final bool isError;

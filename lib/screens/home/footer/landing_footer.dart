@@ -9,8 +9,8 @@ import 'package:blog_web_site/core/utils.dart';
 
 class LandingFooter extends StatelessWidget {
   const LandingFooter({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
