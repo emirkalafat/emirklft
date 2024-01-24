@@ -8,7 +8,7 @@
       },
       {
         "source": "**/assetlinks.json",
-        "destination": "/assetlinks.json"
+        "destination": "/.well-known/assetlinks.json"
       }
     ],
     "ignore": [
