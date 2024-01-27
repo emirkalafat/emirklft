@@ -1,23 +1,30 @@
 [
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "com.garlicman.aile_yonetim_app",
       "sha256_cert_fingerprints": [
-        "04:D6:A9:3A:61:73:52:EB:F7:3B:A6:6B:B9:76:C2:F4:17:EE:B8:26:77:7E:E8:7E:7A:61:1D:AD:DD:3C:00:5F"
+        "04:D6:A9:3A:61:73:52:EB:F7:3B:A6:6B:B9:76:C2:F4:17:EE:B8:26:77:7E:E8:7E:7A:61:1D:AD:DD:3C:00:5F",
+        "22:F1:ED:15:70:70:40:52:8A:F4:A8:7D:C4:18:5C:52:22:4B:4F:46:46:7B:EC:9A:05:32:BC:DD:8B:24:91:4A"
       ]
     }
   },
   {
-    "relation": ["delegate_permission/common.get_login_creds"],
+    "relation": [
+      "delegate_permission/common.get_login_creds"
+    ],
     "target": {
       "namespace": "web",
       "site": "https://aemirkalafat.com"
     }
   },
   {
-    "relation": ["delegate_permission/common.get_login_creds"],
+    "relation": [
+      "delegate_permission/common.get_login_creds"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "com.garlicman.aile_yonetim_app",
@@ -27,7 +34,9 @@
     }
   },
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "com.garlicman.aile_yonetim_app",
@@ -37,14 +46,18 @@
     }
   },
   {
-    "relation": ["delegate_permission/common.get_login_creds"],
+    "relation": [
+      "delegate_permission/common.get_login_creds"
+    ],
     "target": {
       "namespace": "web",
       "site": "https://aemirkalafat.com"
     }
   },
   {
-    "relation": ["delegate_permission/common.get_login_creds"],
+    "relation": [
+      "delegate_permission/common.get_login_creds"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "com.garlicman.aile_yonetim_app",
