@@ -13,6 +13,8 @@ class TimelineSection extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Wrap(
+        runAlignment: WrapAlignment.start,
+        crossAxisAlignment: WrapCrossAlignment.start,
           children: List.generate(
               timeline.length,
               (index) => DelayedWidget(

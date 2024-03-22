@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:blog_web_site/core/theme.dart';
 import 'package:flutter/material.dart';
 
 class TimelineWidget extends StatelessWidget {
@@ -15,9 +18,13 @@ class TimelineWidget extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     return SizedBox(
       width: 350,
-      height: 220,
+      height: 250,
       child: Card(
-        color: colorScheme.tertiaryContainer,
+        color: Theme.of(context).brightness == Brightness.dark
+            ? darkGreenPalette
+                .elementAt(Random().nextInt(darkGreenPalette.length))
+            : lightGreenPalette
+                .elementAt(Random().nextInt(lightGreenPalette.length)),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -35,7 +42,7 @@ class TimelineWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Divider(
-                  color: colorScheme.tertiary,
+                  color: colorScheme.onSurface,
                   thickness: 1,
                 ),
               ),

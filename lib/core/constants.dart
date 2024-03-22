@@ -18,6 +18,8 @@ abstract class AppConstants {
   static const landingMotto =
       'Flutter Mobil ve Web Uygulama Geliştirici\nElektrik-Elektronik Mühendisi - Bilgisayar Mühendisi';
 
+  static const appVersion = 'Version: v4.0 - 3.2024';
+
   static const webSiteURL = 'emirklftweb.web.app';
   static const gitHubProfileURL = 'https://github.com/emirkalafat';
   static const linkedInProfileURL = 'https://www.linkedin.com/in/emir-kalafat/';
@@ -31,16 +33,19 @@ abstract class AppConstants {
       "https://docs.google.com/document/d/1YRE8eCepquyiYQR0dgThBx3gFZak302e/edit?usp=sharing&ouid=102026540238976098790&rtpof=true&sd=true";
 
   static const aboutMeText =
-      'Merhaba, Ben Ahmet Emir Kalafat.\n21 yaşındayım. Fatih Sultan Mehmet Vakıf Üniversitesi\'nde Elektrik-Elektronik Mühendisliği bölümünde okuyorum. Python, Java, Dart-Flutter, C ve C# dillerini biliyorum. İlk kodumu 12 yaşımda Python ile yazdım. Basit bir hesap makinesiydi. Aktif olarak Flutter Mobil ve Web uygulamaları yazıyorum. En son yazdığım uygulamamı Play Store\'da "Yemek Deposu" adıyla bulabilirsiniz.';
+      'Merhaba, Ben Ahmet Emir Kalafat.\n22 yaşındayım.SameUp Yazılım ve Danışmanlık Şirketi\'nde yarı zamanlı mobil geliştirici olarak çalışıyorum. Fatih Sultan Mehmet Vakıf Üniversitesi\'nde Elektrik-Elektronik Mühendisliği bölümünde son sınıfım. Aynı zamanda Bilgisayar Mühendisiğine ÇAP yapıyorum. Python, Java, Dart-Flutter, C ve C# dillerini biliyorum. Bir süre Flutter ile mobil ve Web uygulama geliştirdikten sonra React-Native ile mobil uygulama geliştirmeye başladım. Şu an da SameUp\'ta React-Native ile mobil uygulama geliştiriyorum. Officia cillum labore incididunt nisi nulla nostrud laboris labore pariatur nostrud in deserunt aute.';
+
 
   static const Map<String, String> timeline = {
+    '2024':
+        'SameUp Yazılım Danışmanlık Şirketi\'nde yarı zamanlı olarak çalışıyorum. Burada farklı projelerde React Native ile mobil uygulama geliştirmekteyim.',
     '2023':
-        'Erasmus eğitimim için Litvanya\'ya gittim. Buradaki terübelerimi bu sitede blog bölümünde paylaşıyorum.',
-    '2022': 'İlk büyük ölçekli uygulamamı Play Store\'da yayınladım.',
+        'Erasmus+ projesi kapsamında Elektrik-Elektronik Mühendisliği Eğitimi için Litvanya\'ya gittim. Burada yaklaşık 5 aylık bir eğitim süreci geçirdim. Hem Kariyer eğitimi açısından hem de kültürel eğitim açısından çok faydalı olduğunu düşündüğüm bir süreç oldu.',
+    '2022': 'Flutter ile Yemek Deposu (daha iyi bir isim bulabilirdim sanırım) adında bir uygulama geliştirdim. Bu uygulama ile Play Store\'da yayınladım. ',
     '2021':
-        'Flutter ile bir çok uygulama geliştirdim. Bu uygulamayı da Flutter ile yazıyorum.',
+        'Çift Ana Dal programı ile Bilgisayar Mühendisliği bölümüne başladım. Ayrıca Flutter ile bu dönemde tanıştım ve bu web sitesi dahil olmak üzere küçük kişisel projeler geliştirmeye başladım.',
     '2020':
-        'Fatih Sultan Mehmet Vakıf Üniversitesi\'nde lisans eğitimime başladım. Flutter ile ilk uygulamamı yazdım. Bu uygulamayı da Flutter ile yazıyorum.',
+        'Fatih Sultan Mehmet Vakıf Üniversitesi\'nde Elektrik-Elektronik Mühendisliği lisans eğitimime başladım. Özellikle C ve Java dillerini öğrenmeye başladım.',
     '2016':
         'Şehremini Anadolu Lisesi\'nde eğitime başladım.\nVisual Basic ile ilk uygulamamı yazdım. TicTacToe oyunuydu. Visual Basic\'i çok sevemedim.',
     '2013':
@@ -49,7 +54,7 @@ abstract class AppConstants {
 }
 
 enum ColorSeed {
-  baseColor('M3 Baseline', Color(0xff6750a4)),
+  baseColor('Base', Color(0xff6750a4)),
   indigo('Indigo', Colors.indigo),
   blue('Blue', Colors.blue),
   teal('Teal', Colors.teal),

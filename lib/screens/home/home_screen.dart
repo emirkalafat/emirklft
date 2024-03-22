@@ -48,9 +48,7 @@ class _AnaSayfaState extends ConsumerState<AnaSayfa> {
                 child: const Icon(Icons.arrow_upward))
             : null,
       ),
-      backgroundColor:
-          isDark ? const Color(0xFF0D1C36) : colorScheme.background,
-      //backgroundColor: const Color(0xFF0D1C36),
+      backgroundColor: colorScheme.background,
       body: NotificationListener(
         onNotification: (notification) {
           if (notification is ScrollEndNotification) {
