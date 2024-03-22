@@ -53,7 +53,7 @@ class ShowcaseAppItem extends StatelessWidget {
 
   Widget _buildChild(BuildContext context) {
     return Container(
-      color: const Color.fromRGBO(54, 56, 72, 1.0),
+      color: Theme.of(context).colorScheme.primaryContainer,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

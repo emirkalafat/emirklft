@@ -31,7 +31,7 @@ dependencies:
   #döviz çevirici
   currency_picker: ^2.0.15
   #hava durumu
-  geolocator: ^10.0.0
+  geolocator: ^11.0.0
   weather: ^3.1.0
   ####
   http: ^1.1.0

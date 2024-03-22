@@ -1,4 +1,6 @@
 import 'package:beamer/beamer.dart';
+import 'package:blog_web_site/core/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -121,6 +123,42 @@ class _HomePageState extends ConsumerState<HomePage> {
                     ),
                     title: const Text('Karanlık Tema'),
                   ),
+                  ListTile(
+                    leading: const Icon(Icons.color_lens),
+                    title: const Text('Renk Teması'),
+                    trailing: DropdownButton<ColorSeed>(
+                      items: List.generate(
+                          ColorSeed.values.length,
+                          (index) => DropdownMenuItem(
+                                value: ColorSeed.values[index],
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(16)),
+                                        color: ColorSeed.values[index].color,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Text(ColorSeed.values[index].label)
+                                  ],
+                                ),
+                              )),
+                      onChanged: (color) {
+                        setState(() {
+                          ref
+                              .read(themeNotifierProvider.notifier)
+                              .setColorSeed(color!);
+                        });
+                      },
+                      value:
+                          ref.watch(themeNotifierProvider.notifier).colorSeed,
+                    ),
+                  ),
                   const Divider(),
                   Align(
                     alignment: Alignment.bottomCenter,
@@ -136,6 +174,15 @@ class _HomePageState extends ConsumerState<HomePage> {
                       },
                     ),
                   ),
+                  ListTile(
+                    enabled: false,
+                    leading: Icon(
+                      Icons.bolt,
+                      color: colorScheme.onBackground.withOpacity(0.5),
+                    ),
+                    title: const Text(AppConstants.appVersion),
+                    onTap: () => {},
+                  ),
                 ],
               ),
             )
@@ -145,7 +192,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         centerTitle: isSmall,
         title: AnimatedOpacityWhenHovered(
           child: GestureDetector(
-            child: const Text("Ahmet Emir Kalafat"),
+            child: const Text("Ahmet Emir Kalafat", style: TextStyle(fontWeight: FontWeight.bold),),
             onTap: () => onPageNameTap(0),
           ),
         ),
@@ -192,7 +239,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ),
                   onPressed: () => showAboutDialog(
                     context: context,
-                    applicationVersion: 'v3.0.0',
+                    applicationVersion: AppConstants.appVersion,
                   ),
                   child: const Text("Lisanslar"),
                 ),
@@ -200,6 +247,86 @@ class _HomePageState extends ConsumerState<HomePage> {
                   onPressed: toggleTheme,
                   icon: Icon(
                     isDark ? Icons.dark_mode : Icons.light_mode,
+                    color: colorScheme.onBackground,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      backgroundColor: colorScheme.background,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(24),
+                          topRight: Radius.circular(24),
+                        ),
+                      ),
+                      context: context,
+                      builder: (context) {
+                        return StatefulBuilder(
+                          builder: (context, _) => Container(
+                            decoration: BoxDecoration(
+                              color: colorScheme.background,
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(24),
+                                topRight: Radius.circular(24),
+                              ),
+                            ),
+                            padding: const EdgeInsets.all(16),
+                            height: 200,
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  leading: Icon(
+                                    isDark ? Icons.dark_mode : Icons.light_mode,
+                                    color: colorScheme.onBackground,
+                                  ),
+                                  trailing: Switch.adaptive(
+                                    value: isDark,
+                                    onChanged: (value) {
+                                      Navigator.pop(context);
+                                      toggleTheme();
+                                    },
+                                  ),
+                                  title: const Text('Karanlık Tema'),
+                                ),
+                                const Divider(),
+                                SegmentedButton<ColorSeed>(
+                                  onSelectionChanged: (color) {
+                                    ref
+                                        .read(themeNotifierProvider.notifier)
+                                        .setColorSeed(color.first);
+                                  },
+                                  selected: {
+                                    ref
+                                        .watch(themeNotifierProvider.notifier)
+                                        .colorSeed
+                                  },
+                                  segments: List.generate(
+                                      ColorSeed.values.length,
+                                      (index) => ButtonSegment(
+                                          value: ColorSeed.values[index],
+                                          label: Container(
+                                            width: 24,
+                                            height: 24,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(16)),
+                                              color:
+                                                  ColorSeed.values[index].color,
+                                            ),
+                                          ))),
+                                  multiSelectionEnabled: false,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  icon: Icon(
+                    Icons.settings,
                     color: colorScheme.onBackground,
                   ),
                 ),

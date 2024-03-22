@@ -25,15 +25,15 @@ class ExternalLinkButton extends StatelessWidget {
           children: [
             Icon(
               iconData,
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
             ),
             const SizedBox(width: 24.0),
             Text(
               label.toUpperCase(),
-              style: const TextStyle(
+              style:  TextStyle(
                 fontSize: 16.0,
                 fontWeight: FontWeight.w600,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
                 letterSpacing: 1.4,
               ),
             ),

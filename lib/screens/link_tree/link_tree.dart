@@ -1,6 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/core/theme.dart';
 import 'package:blog_web_site/core/utils.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,10 +16,10 @@ const linkTreeModelList = [
       title: 'Youtube',
       icon: FontAwesomeIcons.youtube,
       url: 'https://www.youtube.com/@emirklft'),
-  LinkTreeModel(
-      title: 'Twitter',
-      icon: FontAwesomeIcons.twitter,
-      url: 'https://x.com/garlicmanklft'),
+  //LinkTreeModel(
+  //    title: 'Twitter',
+  //    icon: FontAwesomeIcons.twitter,
+  //    url: 'https://x.com/garlicmanklft'),
   LinkTreeModel(
       title: 'Github',
       icon: FontAwesomeIcons.github,
@@ -98,7 +99,7 @@ class _LinkTreeScreenState extends ConsumerState<LinkTreeScreen> {
                                   style: Theme.of(context)
                                       .textTheme
                                       .displaySmall!
-                                      .copyWith(fontSize: 24),
+                                      .copyWith(fontSize: 24,fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ),
@@ -108,6 +109,7 @@ class _LinkTreeScreenState extends ConsumerState<LinkTreeScreen> {
                     ],
                   ),
                   ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.only(bottom: 100),
                     shrinkWrap: true,
                     itemCount: linkTreeModelList.length,
@@ -145,11 +147,19 @@ class LinkTreeCard extends StatelessWidget {
         color: Theme.of(context).colorScheme.primaryContainer,
         child: Container(
           decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Theme.of(context).colorScheme.primaryContainer,
+                Theme.of(context).colorScheme.tertiaryContainer,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
               BoxShadow(
-                color: Theme.of(context).colorScheme.primaryContainer,
-                blurRadius: 12,
+                color:Theme.of(context).colorScheme.shadow.withOpacity(0.25),
+                blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
             ],

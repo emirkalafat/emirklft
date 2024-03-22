@@ -1,3 +1,4 @@
+import 'package:blog_web_site/core/color_schemes.dart';
 import 'package:blog_web_site/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,12 +12,14 @@ final themeNotifierProvider =
 
 class ThemeNotifier extends StateNotifier<ThemeData> {
   ThemeMode _mode;
+  ColorSeed _colorSeed;
 
   ThemeNotifier({
     ThemeMode mode = ThemeMode.dark,
-    ColorSeed colorSeed = ColorSeed.blue,
+    ColorSeed colorSeed = ColorSeed.orange,
   })  : _mode = mode,
-        super(darkThemeMode) {
+        _colorSeed = colorSeed,
+        super(darkThemeMode(colorSeed)) {
     getTheme();
   }
 
@@ -24,23 +27,42 @@ class ThemeNotifier extends StateNotifier<ThemeData> {
     return _mode;
   }
 
+  ColorSeed get colorSeed {
+    return _colorSeed;
+  }
+
+  Future<void> setColorSeed(ColorSeed colorSeed) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _colorSeed = colorSeed;
+    prefs.setInt('colorSeed', colorSeed.index);
+    if (_mode == ThemeMode.dark) {
+      state = darkThemeMode(colorSeed);
+    } else {
+      state = lightThemeMode(colorSeed);
+    }
+  }
+
   Future<ThemeMode> getTheme() async {
     String? theme;
+    int? colorSeed;
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       theme = prefs.getString('theme');
+      colorSeed = prefs.getInt('colorSeed');
     } catch (e) {
-      //print(e.toString());
+      print(e.toString());
     } finally {
       theme ??= 'dark';
     }
 
+    _colorSeed = ColorSeed.values[colorSeed ?? 2];
+
     if (theme == 'light') {
       _mode = ThemeMode.light;
-      state = lightThemeMode;
+      state = lightThemeMode(_colorSeed);
     } else {
       _mode = ThemeMode.dark;
-      state = darkThemeMode;
+      state = darkThemeMode(_colorSeed);
     }
     return _mode;
   }
@@ -49,28 +71,39 @@ class ThemeNotifier extends StateNotifier<ThemeData> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (_mode == ThemeMode.dark) {
       _mode = ThemeMode.light;
-      state = lightThemeMode;
+      state = lightThemeMode(_colorSeed);
       prefs.setString('theme', 'light');
     } else {
       _mode = ThemeMode.dark;
-      state = darkThemeMode;
+      state = darkThemeMode(_colorSeed);
       prefs.setString('theme', 'dark');
     }
   }
 }
 
-final darkThemeMode = ThemeData(
-  brightness: Brightness.dark,
-  visualDensity: VisualDensity.adaptivePlatformDensity,
-  fontFamily: GoogleFonts.ubuntu().fontFamily,
-  colorSchemeSeed: ColorSeed.blue.color,
-  useMaterial3: true,
-);
+ThemeData darkThemeMode(ColorSeed seedColor) => ThemeData(
+      brightness: Brightness.dark,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      fontFamily: GoogleFonts.ubuntu().fontFamily,
+      colorSchemeSeed: seedColor.color,
+      useMaterial3: true,
+    );
 
-final lightThemeMode = ThemeData(
-  brightness: Brightness.light,
-  visualDensity: VisualDensity.adaptivePlatformDensity,
-  fontFamily: GoogleFonts.ubuntu().fontFamily,
-  colorSchemeSeed: ColorSeed.indigo.color,
-  useMaterial3: true,
-);
+ThemeData lightThemeMode(ColorSeed seedColor) => ThemeData(
+      brightness: Brightness.light,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      fontFamily: GoogleFonts.ubuntu().fontFamily,
+      colorSchemeSeed: seedColor.color,
+      useMaterial3: true,
+    );
+
+final darkGreenPalette = [
+  Color(0xFF35374B),
+  Color(0xFF344955),
+  Color(0xFF50727B),
+];
+final lightGreenPalette = [
+  Color(0xFFE1F0DA),
+  Color(0xFFD4E7C5),
+  Color(0xFFBFD8AF),
+];
