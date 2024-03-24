@@ -1,6 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/core/constants.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:blog_web_site/screens/photos/photos_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,6 +16,7 @@ const _screensToDisplay = [
   AnaSayfa(),
   MyBlog(),
   MyProjectsPage(),
+  PhotosPage(),
   ContactWithMe(),
 ];
 
@@ -28,6 +29,7 @@ class HomePage extends ConsumerStatefulWidget {
     'Ana Sayfa',
     'Blog',
     'Projelerim',
+    'Fotoğraflarım',
     'İletişim',
   ];
 
@@ -35,6 +37,7 @@ class HomePage extends ConsumerStatefulWidget {
     Icons.home,
     Icons.article,
     Icons.work,
+    Icons.photo,
     Icons.mail,
   ];
 
@@ -188,11 +191,14 @@ class _HomePageState extends ConsumerState<HomePage> {
             )
           : null,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        //backgroundColor: Colors.transparent,
         centerTitle: isSmall,
         title: AnimatedOpacityWhenHovered(
           child: GestureDetector(
-            child: const Text("Ahmet Emir Kalafat", style: TextStyle(fontWeight: FontWeight.bold),),
+            child: const Text(
+              "Ahmet Emir Kalafat",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             onTap: () => onPageNameTap(0),
           ),
         ),
