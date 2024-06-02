@@ -16,14 +16,14 @@ abstract class AppConstants {
 
   static const landingTitle = 'Ahmet Emir Kalafat';
   static const landingMotto =
-      'Flutter Mobil ve Web Uygulama Geliştirici\nElektrik-Elektronik Mühendisi - Bilgisayar Mühendisi';
+      'Flutter ve React-Native Mobil Uygulama Geliştirici\nElektrik-Elektronik Mühendisi - Bilgisayar Mühendisi';
 
   static const appVersion = 'Version: v4.0 - 3.2024';
 
-  static const webSiteURL = 'emirklftweb.web.app';
+  static const webSiteURL = 'aemikalafat.com';
   static const gitHubProfileURL = 'https://github.com/emirkalafat';
   static const linkedInProfileURL = 'https://www.linkedin.com/in/emir-kalafat/';
-  static const twitterURL = 'localhost';
+  static const twitterProfileURL = 'localhost';
   static const instagramProfileURL = 'https://www.instagram.com/aeklft/';
   static const youtubeProfileURL = 'https://www.youtube.com/@emirklft';
   static const eMail = 'mailto:emirklft@outlook.com';
