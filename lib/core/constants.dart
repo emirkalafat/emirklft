@@ -33,7 +33,7 @@ abstract class AppConstants {
       "https://docs.google.com/document/d/1YRE8eCepquyiYQR0dgThBx3gFZak302e/edit?usp=sharing&ouid=102026540238976098790&rtpof=true&sd=true";
 
   static const aboutMeText =
-      'Merhaba, Ben Ahmet Emir Kalafat.\n22 yaşındayım.SameUp Yazılım ve Danışmanlık Şirketi\'nde yarı zamanlı mobil geliştirici olarak çalışıyorum. Fatih Sultan Mehmet Vakıf Üniversitesi\'nde Elektrik-Elektronik Mühendisliği bölümünde son sınıfım. Aynı zamanda Bilgisayar Mühendisiğine ÇAP yapıyorum. Python, Java, Dart-Flutter, C ve C# dillerini biliyorum. Bir süre Flutter ile mobil ve Web uygulama geliştirdikten sonra React-Native ile mobil uygulama geliştirmeye başladım. Şu an da SameUp\'ta React-Native ile mobil uygulama geliştiriyorum. Officia cillum labore incididunt nisi nulla nostrud laboris labore pariatur nostrud in deserunt aute.';
+      'Merhaba, Ben Ahmet Emir Kalafat.\n22 yaşındayım.SameUp Yazılım ve Danışmanlık Şirketi\'nde yarı zamanlı mobil geliştirici olarak çalışıyorum. Fatih Sultan Mehmet Vakıf Üniversitesi\'nde Elektrik-Elektronik Mühendisliği bölümünde son sınıfım. Aynı zamanda Bilgisayar Mühendisiğine ÇAP yapıyorum. Python, Java, Dart-Flutter, C ve C# dillerini biliyorum. Bir süre Flutter ile mobil ve Web uygulama geliştirdikten sonra React-Native ile mobil uygulama geliştirmeye başladım. Şu an da SameUp\'ta React-Native ile mobil uygulama geliştiriyorum.';
 
 
   static const Map<String, String> timeline = {

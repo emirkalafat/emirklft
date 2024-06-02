@@ -29,6 +29,7 @@ final locationBuilder = RoutesLocationBuilder(
                     ? 'AEK - Projelerim'
                     : 'AEK - İletişim',
         child: HomePage(
+          key: ValueKey('home-$tab'),
           initialIndex: initialIndex,
         ),
       );
@@ -42,14 +43,16 @@ final locationBuilder = RoutesLocationBuilder(
     '/yemekdeposu': (context, state, data) => const BeamPage(
           key: ValueKey('yemekdeposu'),
           title: 'Yemek Deposu Gizlilik Sözleşmesi',
-          child: YemekDeposuGizlilikSozlesmesi(),
+          child: YemekDeposuGizlilikSozlesmesi(
+            key: ValueKey('yemekdeposu'),
+          ),
         ),
     '/projects/:pid': (context, state, data) {
       final pid = state.pathParameters['pid'] as String;
 
       return BeamPage(
         key: ValueKey('pid-$pid'),
-        child: ProjectDetails(projectID: pid),
+        child: ProjectDetails(projectID: pid, key: ValueKey('pid-$pid')),
         title: 'Proje - $pid',
       );
     }
