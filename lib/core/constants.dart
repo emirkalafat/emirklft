@@ -16,14 +16,14 @@ abstract class AppConstants {
 
   static const landingTitle = 'Ahmet Emir Kalafat';
   static const landingMotto =
-      'Flutter Mobil ve Web Uygulama Geliştirici\nElektrik-Elektronik Mühendisi - Bilgisayar Mühendisi';
+      'Flutter ve React-Native Mobil Uygulama Geliştirici\nElektrik-Elektronik Mühendisi - Bilgisayar Mühendisi';
 
-  static const appVersion = 'Version: v4.0 - 3.2024';
+  static const appVersion = 'Version: v4.1 - 6.2024';
 
-  static const webSiteURL = 'emirklftweb.web.app';
+  static const webSiteURL = 'aemikalafat.com';
   static const gitHubProfileURL = 'https://github.com/emirkalafat';
   static const linkedInProfileURL = 'https://www.linkedin.com/in/emir-kalafat/';
-  static const twitterURL = 'localhost';
+  static const twitterProfileURL = 'localhost';
   static const instagramProfileURL = 'https://www.instagram.com/aeklft/';
   static const youtubeProfileURL = 'https://www.youtube.com/@emirklft';
   static const eMail = 'mailto:emirklft@outlook.com';
@@ -33,15 +33,15 @@ abstract class AppConstants {
       "https://docs.google.com/document/d/1YRE8eCepquyiYQR0dgThBx3gFZak302e/edit?usp=sharing&ouid=102026540238976098790&rtpof=true&sd=true";
 
   static const aboutMeText =
-      'Merhaba, Ben Ahmet Emir Kalafat.\n22 yaşındayım.SameUp Yazılım ve Danışmanlık Şirketi\'nde yarı zamanlı mobil geliştirici olarak çalışıyorum. Fatih Sultan Mehmet Vakıf Üniversitesi\'nde Elektrik-Elektronik Mühendisliği bölümünde son sınıfım. Aynı zamanda Bilgisayar Mühendisiğine ÇAP yapıyorum. Python, Java, Dart-Flutter, C ve C# dillerini biliyorum. Bir süre Flutter ile mobil ve Web uygulama geliştirdikten sonra React-Native ile mobil uygulama geliştirmeye başladım. Şu an da SameUp\'ta React-Native ile mobil uygulama geliştiriyorum. Officia cillum labore incididunt nisi nulla nostrud laboris labore pariatur nostrud in deserunt aute.';
-
+      'Merhaba, Ben Ahmet Emir Kalafat.\n22 yaşındayım.SameUp Yazılım ve Danışmanlık Şirketi\'nde yarı zamanlı mobil geliştirici olarak çalışıyorum. Fatih Sultan Mehmet Vakıf Üniversitesi\'nde Elektrik-Elektronik Mühendisliği bölümünde son sınıfım. Aynı zamanda Bilgisayar Mühendisiğine ÇAP yapıyorum. Python, Java, Dart-Flutter, C ve C# dillerini biliyorum. Bir süre Flutter ile mobil ve Web uygulama geliştirdikten sonra React-Native ile mobil uygulama geliştirmeye başladım. Şu an da SameUp\'ta React-Native ile mobil uygulama geliştiriyorum.';
 
   static const Map<String, String> timeline = {
     '2024':
         'SameUp Yazılım Danışmanlık Şirketi\'nde yarı zamanlı olarak çalışıyorum. Burada farklı projelerde React Native ile mobil uygulama geliştirmekteyim.',
     '2023':
         'Erasmus+ projesi kapsamında Elektrik-Elektronik Mühendisliği Eğitimi için Litvanya\'ya gittim. Burada yaklaşık 5 aylık bir eğitim süreci geçirdim. Hem Kariyer eğitimi açısından hem de kültürel eğitim açısından çok faydalı olduğunu düşündüğüm bir süreç oldu.',
-    '2022': 'Flutter ile Yemek Deposu (daha iyi bir isim bulabilirdim sanırım) adında bir uygulama geliştirdim. Bu uygulama ile Play Store\'da yayınladım. ',
+    '2022':
+        'Flutter ile Yemek Deposu (daha iyi bir isim bulabilirdim sanırım) adında bir uygulama geliştirdim. Bu uygulama ile Play Store\'da yayınladım. ',
     '2021':
         'Çift Ana Dal programı ile Bilgisayar Mühendisliği bölümüne başladım. Ayrıca Flutter ile bu dönemde tanıştım ve bu web sitesi dahil olmak üzere küçük kişisel projeler geliştirmeye başladım.',
     '2020':
@@ -51,6 +51,8 @@ abstract class AppConstants {
     '2013':
         'İlk uygulamamı Python ile yazdım. Basit bir hesap makinesi uygulamasıydı.',
   };
+
+  static const String yemekDeposuPlayLink = 'https://play.google.com/store/apps/details?id=com.garlicman.flutter_tarif_sitesi';
 }
 
 enum ColorSeed {

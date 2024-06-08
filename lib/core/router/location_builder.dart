@@ -2,6 +2,7 @@ import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/screens/link_tree/link_tree.dart';
 import 'package:blog_web_site/screens/misc/gizlilik_sozlesmesi.dart';
 import 'package:blog_web_site/screens/misc/main_scaffold.dart';
+import 'package:blog_web_site/screens/misc/yemek_tarifi_user_deletion.dart';
 import 'package:blog_web_site/screens/projects/projects_details.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -29,6 +30,7 @@ final locationBuilder = RoutesLocationBuilder(
                     ? 'AEK - Projelerim'
                     : 'AEK - İletişim',
         child: HomePage(
+          key: ValueKey('home-$tab'),
           initialIndex: initialIndex,
         ),
       );
@@ -42,14 +44,22 @@ final locationBuilder = RoutesLocationBuilder(
     '/yemekdeposu': (context, state, data) => const BeamPage(
           key: ValueKey('yemekdeposu'),
           title: 'Yemek Deposu Gizlilik Sözleşmesi',
-          child: YemekDeposuGizlilikSozlesmesi(),
+          child: YemekDeposuGizlilikSozlesmesi(
+            key: ValueKey('yemekdeposu'),
+          ),
         ),
+    '/yemekdeposu/user-deletion': (context, state, data) => const BeamPage(
+        key: ValueKey('yemekdeposu-user-deletion'),
+        title: 'Yemek Deposu Kullanıcı Silme',
+        child: YemekTarifiUserDeletion(
+          key: ValueKey('yemekdeposu-user-deletion'),
+        )),
     '/projects/:pid': (context, state, data) {
       final pid = state.pathParameters['pid'] as String;
 
       return BeamPage(
         key: ValueKey('pid-$pid'),
-        child: ProjectDetails(projectID: pid),
+        child: ProjectDetails(projectID: pid, key: ValueKey('pid-$pid')),
         title: 'Proje - $pid',
       );
     }
