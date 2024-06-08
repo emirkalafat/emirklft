@@ -18,7 +18,7 @@ abstract class AppConstants {
   static const landingMotto =
       'Flutter ve React-Native Mobil Uygulama Geliştirici\nElektrik-Elektronik Mühendisi - Bilgisayar Mühendisi';
 
-  static const appVersion = 'Version: v4.0 - 3.2024';
+  static const appVersion = 'Version: v4.1 - 6.2024';
 
   static const webSiteURL = 'aemikalafat.com';
   static const gitHubProfileURL = 'https://github.com/emirkalafat';
