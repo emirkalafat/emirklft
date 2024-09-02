@@ -37,7 +37,7 @@ class _ProjectDetailsState extends ConsumerState<ProjectDetails> {
     final TextTheme textStyle = Theme.of(context).textTheme;
 
     return Scaffold(
-        backgroundColor: colorScheme.background,
+        backgroundColor: colorScheme.surface,
         appBar: AppBar(
             //title: Text(projectID),
             leading: IconButton(

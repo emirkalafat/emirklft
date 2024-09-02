@@ -32,7 +32,7 @@ class SocialMediaButton extends StatelessWidget {
           onPressed: () => Utils.startUrl(url),
           icon: Icon(
             iconData,
-            color: colorScheme.onBackground,
+            color: colorScheme.onSurface,
             size: size,
           ),
         ),

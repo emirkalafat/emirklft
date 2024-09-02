@@ -1,4 +1,3 @@
-import 'package:blog_web_site/core/color_schemes.dart';
 import 'package:blog_web_site/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -98,12 +97,12 @@ ThemeData lightThemeMode(ColorSeed seedColor) => ThemeData(
     );
 
 final darkGreenPalette = [
-  Color(0xFF35374B),
-  Color(0xFF344955),
-  Color(0xFF50727B),
+  const Color(0xFF35374B),
+  const Color(0xFF344955),
+  const Color(0xFF50727B),
 ];
 final lightGreenPalette = [
-  Color(0xFFE1F0DA),
-  Color(0xFFD4E7C5),
-  Color(0xFFBFD8AF),
+  const Color(0xFFE1F0DA),
+  const Color(0xFFD4E7C5),
+  const Color(0xFFBFD8AF),
 ];

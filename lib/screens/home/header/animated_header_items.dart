@@ -45,7 +45,7 @@ class AnimatedHeaderItems extends StatelessWidget {
                     AppConstants.landingTitle,
                     style: Theme.of(context).textTheme.displayMedium!.copyWith(
                           fontWeight: FontWeight.w600,
-                          color: colorScheme.onBackground,
+                          color: colorScheme.onSurface,
                           letterSpacing: 4.0,
                         ),
                   ),
@@ -73,7 +73,7 @@ class AnimatedHeaderItems extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     fontSize: 16,
                     //fontWeight: FontWeight.w400,
-                    color: colorScheme.onBackground,
+                    color: colorScheme.onSurface,
                     letterSpacing: 1.8,
                   ),
             ),
