@@ -17,7 +17,7 @@ class _MyProjectsPageState extends ConsumerState<MyProjectsPage> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final backgroundC = colorScheme.background;
+    final backgroundC = colorScheme.surface;
     return Center(
       child: Container(
         constraints: const BoxConstraints(maxWidth: 600),

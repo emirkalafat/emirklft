@@ -1,9 +1,5 @@
 import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/core/constants.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:blog_web_site/core/theme.dart';
 import 'package:blog_web_site/screens/blog/blog.dart';
 import 'package:blog_web_site/screens/contact_with_me/contact.dart';
@@ -11,6 +7,8 @@ import 'package:blog_web_site/screens/home/home_screen.dart';
 import 'package:blog_web_site/screens/projects/projects_screen.dart';
 import 'package:blog_web_site/services/firebase_storage/storage_controller.dart';
 import 'package:blog_web_site/widgets/animated_opacity_when_hovered.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const _screensToDisplay = [
   AnaSayfa(),
@@ -85,7 +83,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     final onSurface = colorScheme.onSurface;
 
     return Scaffold(
-      backgroundColor: colorScheme.background,
+      backgroundColor: colorScheme.surface,
       endDrawer: isSmall
           ? Drawer(
               child: ListView(
@@ -115,7 +113,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ListTile(
                     leading: Icon(
                       isDark ? Icons.dark_mode : Icons.light_mode,
-                      color: colorScheme.onBackground,
+                      color: colorScheme.onSurface,
                     ),
                     trailing: Switch.adaptive(
                       value: isDark,
@@ -125,7 +123,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ),
                   ListTile(
                     leading: const Icon(Icons.color_lens),
-                    title: const Text('Renk Teması'),
+                    title: const Text('Tema Rengi'),
                     trailing: DropdownButton<ColorSeed>(
                       items: List.generate(
                           ColorSeed.values.length,
@@ -165,7 +163,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                     child: ListTile(
                       leading: Icon(
                         Icons.info,
-                        color: colorScheme.onBackground,
+                        color: colorScheme.onSurface,
                       ),
                       title: const Text("Lisanslar"),
                       onTap: () {
@@ -178,7 +176,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                     enabled: false,
                     leading: Icon(
                       Icons.bolt,
-                      color: colorScheme.onBackground.withOpacity(0.5),
+                      color: colorScheme.onSurface.withOpacity(0.5),
                     ),
                     title: const Text(AppConstants.appVersion),
                     onTap: () => {},
@@ -192,7 +190,10 @@ class _HomePageState extends ConsumerState<HomePage> {
         centerTitle: isSmall,
         title: AnimatedOpacityWhenHovered(
           child: GestureDetector(
-            child: const Text("Ahmet Emir Kalafat", style: TextStyle(fontWeight: FontWeight.bold),),
+            child: const Text(
+              "Ahmet Emir Kalafat",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             onTap: () => onPageNameTap(0),
           ),
         ),
@@ -247,13 +248,13 @@ class _HomePageState extends ConsumerState<HomePage> {
                   onPressed: toggleTheme,
                   icon: Icon(
                     isDark ? Icons.dark_mode : Icons.light_mode,
-                    color: colorScheme.onBackground,
+                    color: colorScheme.onSurface,
                   ),
                 ),
                 IconButton(
                   onPressed: () {
                     showModalBottomSheet(
-                      backgroundColor: colorScheme.background,
+                      backgroundColor: colorScheme.surface,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(24),
@@ -265,7 +266,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                         return StatefulBuilder(
                           builder: (context, _) => Container(
                             decoration: BoxDecoration(
-                              color: colorScheme.background,
+                              color: colorScheme.surface,
                               borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(24),
                                 topRight: Radius.circular(24),
@@ -278,7 +279,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                 ListTile(
                                   leading: Icon(
                                     isDark ? Icons.dark_mode : Icons.light_mode,
-                                    color: colorScheme.onBackground,
+                                    color: colorScheme.onSurface,
                                   ),
                                   trailing: Switch.adaptive(
                                     value: isDark,
@@ -327,7 +328,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   },
                   icon: Icon(
                     Icons.settings,
-                    color: colorScheme.onBackground,
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ],
