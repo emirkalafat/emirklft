@@ -18,7 +18,7 @@ abstract class AppConstants {
   static const landingMotto =
       'Flutter ve React-Native Mobil Uygulama Geliştirici\nElektrik-Elektronik Mühendisi - Bilgisayar Mühendisi';
 
-  static const appVersion = 'Version: v4.1 - 6.2024';
+  static const appVersion = 'Version: v4.2 - Eylül 2024';
 
   static const webSiteURL = 'aemikalafat.com';
   static const gitHubProfileURL = 'https://github.com/emirkalafat';
@@ -26,7 +26,7 @@ abstract class AppConstants {
   static const twitterProfileURL = 'localhost';
   static const instagramProfileURL = 'https://www.instagram.com/aeklft/';
   static const youtubeProfileURL = 'https://www.youtube.com/@emirklft';
-  static const eMail = 'mailto:emirklft@outlook.com';
+  static const eMail = 'mailto:a.emirkalafat@gmail.com';
   static const flutterWebSiteURL = 'https://flutter.dev';
   static const openSourceRepoURL = 'https://github.com/emirkalafat/emirklft';
   static const publicCVurl =
@@ -37,8 +37,10 @@ abstract class AppConstants {
 
   static const Map<String, String> timeline = {
     '2024':
+        "NetNucleus Şirketinde Mobil Uygulama Geliştirici olarak çalışmaktayım.",
+    'Temmuz 2023':
         'SameUp Yazılım Danışmanlık Şirketi\'nde yarı zamanlı olarak çalışıyorum. Burada farklı projelerde React Native ile mobil uygulama geliştirmekteyim.',
-    '2023':
+    'Ocak 2023':
         'Erasmus+ projesi kapsamında Elektrik-Elektronik Mühendisliği Eğitimi için Litvanya\'ya gittim. Burada yaklaşık 5 aylık bir eğitim süreci geçirdim. Hem Kariyer eğitimi açısından hem de kültürel eğitim açısından çok faydalı olduğunu düşündüğüm bir süreç oldu.',
     '2022':
         'Flutter ile Yemek Deposu (daha iyi bir isim bulabilirdim sanırım) adında bir uygulama geliştirdim. Bu uygulama ile Play Store\'da yayınladım. ',
@@ -52,7 +54,8 @@ abstract class AppConstants {
         'İlk uygulamamı Python ile yazdım. Basit bir hesap makinesi uygulamasıydı.',
   };
 
-  static const String yemekDeposuPlayLink = 'https://play.google.com/store/apps/details?id=com.garlicman.flutter_tarif_sitesi';
+  static const String yemekDeposuPlayLink =
+      'https://play.google.com/store/apps/details?id=com.garlicman.flutter_tarif_sitesi';
 }
 
 enum ColorSeed {
