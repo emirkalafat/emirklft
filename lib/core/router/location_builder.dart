@@ -4,6 +4,7 @@ import 'package:blog_web_site/screens/misc/gizlilik_sozlesmesi.dart';
 import 'package:blog_web_site/screens/misc/main_scaffold.dart';
 import 'package:blog_web_site/screens/misc/yemek_tarifi_user_deletion.dart';
 import 'package:blog_web_site/screens/projects/projects_details.dart';
+import 'package:blog_web_site/screens/recap/recap.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,12 @@ final locationBuilder = RoutesLocationBuilder(
       return const BeamPage(
         child: LinkTreeScreen(),
         title: 'LinkTree',
+      );
+    },
+    '/recap': (context, state, data) {
+      return const BeamPage(
+        child: RecapScreen(),
+        title: "N'aptım Ben?",
       );
     },
     '/yemekdeposu': (context, state, data) => const BeamPage(

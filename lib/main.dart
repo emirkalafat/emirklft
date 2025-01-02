@@ -3,7 +3,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:url_strategy/url_strategy.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 
 import 'package:blog_web_site/core/router/location_builder.dart';
 import 'package:blog_web_site/core/theme.dart';
@@ -11,7 +11,7 @@ import 'package:blog_web_site/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setPathUrlStrategy();
+  usePathUrlStrategy();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.web);
   FirebaseAnalytics.instance.logAppOpen();
   runApp(const ProviderScope(child: WebApp()));
