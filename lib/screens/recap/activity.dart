@@ -8,8 +8,8 @@ class Activity {
   String id;
   String title;
   String description;
-  String imageUrl;
-  String url;
+  String? imageUrl;
+  String? url;
   DateTime? startedDate;
   DateTime? finishedDate;
 
@@ -20,8 +20,8 @@ class Activity {
     required this.id,
     required this.title,
     required this.description,
-    required this.imageUrl,
-    required this.url,
+    this.imageUrl,
+    this.url,
     required this.startedDate,
     required this.finishedDate,
     this.status = ActivityStatus.unknown,
