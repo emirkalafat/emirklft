@@ -22,8 +22,8 @@ class Activity {
     required this.description,
     this.imageUrl,
     this.url,
-    required this.startedDate,
-    required this.finishedDate,
+    this.startedDate,
+    this.finishedDate,
     this.status = ActivityStatus.unknown,
     this.type = ActivityType.unknown,
   });
