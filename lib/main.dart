@@ -1,4 +1,3 @@
-import 'package:beamer/beamer.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -27,30 +26,16 @@ class WebApp extends ConsumerStatefulWidget {
 class _WebAppState extends ConsumerState<WebApp> {
   static final messengerKey = GlobalKey<ScaffoldMessengerState>();
 
-  final routerDelegate = BeamerDelegate(
-      initialPath: '/linktree',
-      locationBuilder: locationBuilder.call,
-      guards: [
-        BeamGuard(
-          pathPatterns: ['/projects'],
-          check: (context, location) => false,
-          beamToNamed: (origin, target) => '/?tab=projects',
-        ),
-      ]);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       locale: const Locale('tr', 'TR'),
       scaffoldMessengerKey: messengerKey,
-      routerDelegate: routerDelegate,
-      routeInformationParser: BeamerParser(),
-      backButtonDispatcher: BeamerBackButtonDispatcher(
-        delegate: routerDelegate,
-        alwaysBeamBack: true,
-      ),
+      routerConfig: router,
       theme: ref.watch(themeNotifierProvider),
       title: 'Ahmet Emir Kalafat',
     );
   }
 }
+
+

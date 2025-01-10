@@ -70,7 +70,7 @@ class _ActivitiesTimeline extends StatelessWidget {
       child: FixedTimeline.tileBuilder(
         theme: TimelineThemeData(
           nodePosition: 0,
-          color: const Color(0xff989898),
+          color: const Color.fromARGB(255, 39, 37, 86),
           indicatorTheme: const IndicatorThemeData(
             position: 0,
             size: 20.0,

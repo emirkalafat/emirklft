@@ -1,74 +1,74 @@
-import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/screens/link_tree/link_tree.dart';
 import 'package:blog_web_site/screens/misc/gizlilik_sozlesmesi.dart';
 import 'package:blog_web_site/screens/misc/main_scaffold.dart';
 import 'package:blog_web_site/screens/misc/yemek_tarifi_user_deletion.dart';
 import 'package:blog_web_site/screens/projects/projects_details.dart';
-import 'package:blog_web_site/screens/recap/recap.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-final locationBuilder = RoutesLocationBuilder(
-  routes: {
-    '/': (context, state, data) {
-      final tab = state.queryParameters['tab'];
-      final initialIndex = tab == 'contact'
-          ? 3
-          : tab == 'projects'
-              ? 2
-              : tab == 'blog'
-                  ? 1
-                  : 0;
+final router = GoRouter(
+  initialLocation: '/linktree',
+  redirect: (context, state) {
+    return state.uri.path == 'projects' ? '/?tab=projects' : null;
+  },
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) {
+        final tab = state.uri.queryParameters['tab'];
+        final initialIndex = tab == 'contact'
+            ? 4
+            : tab == 'recap'
+                ? 3
+                : tab == 'projects'
+                    ? 2
+                    : tab == 'blog'
+                        ? 1
+                        : 0;
 
-      return BeamPage(
-        key: ValueKey('home-$tab'),
-        title: initialIndex == 0
+        final pageName = initialIndex == 0
             ? 'Ahmet Emir Kalafat'
             : initialIndex == 1
                 ? 'AEK - Blog'
                 : initialIndex == 2
                     ? 'AEK - Projelerim'
-                    : 'AEK - İletişim',
-        child: HomePage(
+                    : 'AEK - İletişim';
+        return HomePage(
           key: ValueKey('home-$tab'),
           initialIndex: initialIndex,
-        ),
-      );
-    },
-    '/linktree': (context, state, data) {
-      return const BeamPage(
-        child: LinkTreeScreen(),
-        title: 'LinkTree',
-      );
-    },
-    '/recap': (context, state, data) {
-      return const BeamPage(
-        child: RecapScreen(),
-        title: "N'aptım Ben?",
-      );
-    },
-    '/yemekdeposu': (context, state, data) => const BeamPage(
-          key: ValueKey('yemekdeposu'),
-          title: 'Yemek Deposu Gizlilik Sözleşmesi',
-          child: YemekDeposuGizlilikSozlesmesi(
+        );
+      },
+    ),
+    GoRoute(
+      path: '/linktree',
+      builder: (context, state) => const LinkTreeScreen(),
+      name: 'LinkTree',
+    ),
+    GoRoute(
+        path: '/yemekdeposu',
+        builder: (context, state) {
+          return const YemekDeposuGizlilikSozlesmesi(
             key: ValueKey('yemekdeposu'),
-          ),
-        ),
-    '/yemekdeposu/user-deletion': (context, state, data) => const BeamPage(
-        key: ValueKey('yemekdeposu-user-deletion'),
-        title: 'Yemek Deposu Kullanıcı Silme',
-        child: YemekTarifiUserDeletion(
-          key: ValueKey('yemekdeposu-user-deletion'),
-        )),
-    '/projects/:pid': (context, state, data) {
-      final pid = state.pathParameters['pid'] as String;
-
-      return BeamPage(
-        key: ValueKey('pid-$pid'),
-        child: ProjectDetails(projectID: pid, key: ValueKey('pid-$pid')),
-        title: 'Proje - $pid',
-      );
-    }
-  },
+          );
+        },
+        name: 'Yemek Deposu Gizlilik Sözleşmesi',
+        routes: [
+          GoRoute(
+              path: '/user-deletion',
+              builder: (context, state) {
+                return const YemekTarifiUserDeletion(
+                  key: ValueKey('yemekdeposu-user-deletion'),
+                );
+              },
+              name: 'Yemek Deposu Kullanıcı Silme'),
+        ]),
+    GoRoute(
+        path: '/projects/:pid',
+        builder: (context, state) {
+          final pid = state.pathParameters['pid'] ?? '0';
+          return ProjectDetails(projectID: pid, key: ValueKey('pid-$pid'));
+        }),
+  ],
 );

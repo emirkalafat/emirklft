@@ -1,4 +1,3 @@
-import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/models/changelog_model.dart';
 import 'package:blog_web_site/widgets/animated_image_overlay.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';

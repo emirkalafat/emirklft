@@ -5,6 +5,7 @@ import 'package:blog_web_site/screens/blog/blog.dart';
 import 'package:blog_web_site/screens/contact_with_me/contact.dart';
 import 'package:blog_web_site/screens/home/home_screen.dart';
 import 'package:blog_web_site/screens/projects/projects_screen.dart';
+import 'package:blog_web_site/screens/recap/recap.dart';
 import 'package:blog_web_site/services/firebase_storage/storage_controller.dart';
 import 'package:blog_web_site/widgets/animated_opacity_when_hovered.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ const _screensToDisplay = [
   AnaSayfa(),
   MyBlog(),
   MyProjectsPage(),
+  RecapScreen(),
   ContactWithMe(),
 ];
 
@@ -26,6 +28,7 @@ class HomePage extends ConsumerStatefulWidget {
     'Ana Sayfa',
     'Blog',
     'Projelerim',
+    'Ne Yaptım Ben?!',
     'İletişim',
   ];
 
@@ -33,6 +36,7 @@ class HomePage extends ConsumerStatefulWidget {
     Icons.home,
     Icons.article,
     Icons.work,
+    Icons.history,
     Icons.mail,
   ];
 
@@ -48,9 +52,12 @@ class _HomePageState extends ConsumerState<HomePage> {
   onPageNameTap(int index) {
     Beamer.of(context).update(
       configuration: RouteInformation(
-          uri: Uri.parse(index == 3
+          uri: Uri.parse(index == 4
               ? '/?tab=contact'
-              : index == 2
+              : index == 3
+                  ? '/?tab=recap'
+                  :
+              index == 2
                   ? '/?tab=projects'
                   : index == 1
                       ? '/?tab=blog'
