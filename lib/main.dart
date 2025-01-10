@@ -1,6 +1,9 @@
 import 'package:beamer/beamer.dart';
+import 'package:blog_web_site/services/providers.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -11,9 +14,21 @@ import 'package:blog_web_site/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   setPathUrlStrategy();
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.web);
+
   FirebaseAnalytics.instance.logAppOpen();
+
+  FirebaseUIAuth.configureProviders(
+    [
+      GoogleProvider(
+          clientId:
+              '1015551801756-rtls12icqg2o0k9f5hssgm5nk5sc52gl.apps.googleusercontent.com'),
+    ],
+  );
+
   runApp(const ProviderScope(child: WebApp()));
 }
 
@@ -31,6 +46,22 @@ class _WebAppState extends ConsumerState<WebApp> {
       initialPath: '/linktree',
       locationBuilder: locationBuilder.call,
       guards: [
+        BeamGuard(
+          pathPatterns: ['/admin'],
+          check: (context, location) {
+            final user = ProviderScope.containerOf(context)
+                .read(authProvider)
+                .currentUser;
+            if (user == null) {
+              return true;
+            }
+            return false;
+          },
+          onCheckFailed: (context, location) {
+            Beamer.of(context).popToNamed('/linktree');
+            Beamer.of(context).update();
+          },
+        ),
         BeamGuard(
           pathPatterns: ['/projects'],
           check: (context, location) => false,

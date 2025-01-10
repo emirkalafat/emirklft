@@ -1,4 +1,5 @@
 import 'package:beamer/beamer.dart';
+import 'package:blog_web_site/screens/admin/auth_page.dart';
 import 'package:blog_web_site/screens/link_tree/link_tree.dart';
 import 'package:blog_web_site/screens/misc/gizlilik_sozlesmesi.dart';
 import 'package:blog_web_site/screens/misc/main_scaffold.dart';
@@ -7,6 +8,8 @@ import 'package:blog_web_site/screens/projects/projects_details.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../screens/admin/admin_page.dart';
 
 final locationBuilder = RoutesLocationBuilder(
   routes: {
@@ -61,6 +64,20 @@ final locationBuilder = RoutesLocationBuilder(
         key: ValueKey('pid-$pid'),
         child: ProjectDetails(projectID: pid, key: ValueKey('pid-$pid')),
         title: 'Proje - $pid',
+      );
+    },
+    '/auth': (context, state, data){
+      return const BeamPage(
+        child: AuthScreen(),
+        key: ValueKey('auth'),
+        title: 'Admin Giriş',
+      );
+    },
+    '/admin': (context, state, data) {
+      return const BeamPage(
+        child: AdminPage(),
+        key: ValueKey('admin'),
+        title: 'Admin',
       );
     }
   },

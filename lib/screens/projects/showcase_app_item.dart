@@ -37,7 +37,7 @@ class ShowcaseAppItem extends StatelessWidget {
               onTap: () {
                 FirebaseAnalytics.instance.logEvent(
                   name: 'showcase_app_item_tapped',
-                  parameters: <String, dynamic>{
+                  parameters: <String, Object>{
                     'app_name': app.name,
                   },
                 );
