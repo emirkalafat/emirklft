@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:blog_web_site/widgets/external_link_button.dart';
 import 'package:blog_web_site/widgets/source_aware_image.dart';
+import 'package:go_router/go_router.dart';
 
 class ShowcaseAppItem extends StatelessWidget {
   final Changelog app;
@@ -40,7 +41,7 @@ class ShowcaseAppItem extends StatelessWidget {
                     'app_name': app.name,
                   },
                 );
-                return Beamer.of(context).beamToNamed('/projects/${app.id}');
+                return context.go('/projects/${app.id}');
               },
               child: AnimatedImageOverlay(app.name),
             ),

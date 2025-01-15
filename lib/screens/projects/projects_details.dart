@@ -1,4 +1,3 @@
-import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/screens/projects/project_details_info_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'package:blog_web_site/core/utils.dart';
 import 'package:blog_web_site/screens/projects/app_versions_card.dart';
 import 'package:blog_web_site/services/firestore/changelogs/changelogs_controller.dart';
 import 'package:blog_web_site/services/firestore/versions/versions_controller.dart';
+import 'package:go_router/go_router.dart';
 
 class ProjectDetails extends ConsumerStatefulWidget {
   final String projectID;
@@ -43,10 +43,10 @@ class _ProjectDetailsState extends ConsumerState<ProjectDetails> {
             leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            if (Beamer.of(context).canBeamBack) {
-              Beamer.of(context).beamBack();
+            if (GoRouter.of(context).canPop()) {
+              context.pop();
             } else {
-              Beamer.of(context).beamToNamed('/?tab=projects');
+              context.go('/?tab=projects');
             }
           },
         )),

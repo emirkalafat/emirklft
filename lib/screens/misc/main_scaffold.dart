@@ -1,4 +1,3 @@
-import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/core/constants.dart';
 import 'package:blog_web_site/core/theme.dart';
 import 'package:blog_web_site/screens/blog/blog.dart';
@@ -11,7 +10,7 @@ import 'package:blog_web_site/widgets/animated_opacity_when_hovered.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-const _screensToDisplay = [
+final _screensToDisplay = [
   AnaSayfa(),
   MyBlog(),
   MyProjectsPage(),
@@ -50,20 +49,20 @@ class _HomePageState extends ConsumerState<HomePage> {
   bool _isScreenSelected(int index) => currentIndex == index;
 
   onPageNameTap(int index) {
-    Beamer.of(context).update(
-      configuration: RouteInformation(
-          uri: Uri.parse(index == 4
-              ? '/?tab=contact'
-              : index == 3
-                  ? '/?tab=recap'
-                  :
-              index == 2
-                  ? '/?tab=projects'
-                  : index == 1
-                      ? '/?tab=blog'
-                      : '/?tab=home')),
-      rebuild: false,
-    );
+    //GoRouter.of(context).replace(
+    //  configuration: RouteInformation(
+    //      uri: Uri.parse(index == 4
+    //          ? '/?tab=contact'
+    //          : index == 3
+    //              ? '/?tab=recap'
+    //              :
+    //          index == 2
+    //              ? '/?tab=projects'
+    //              : index == 1
+    //                  ? '/?tab=blog'
+    //                  : '/?tab=home')),
+    //  rebuild: false,
+    //);
     setState(() {
       currentIndex = index;
     });

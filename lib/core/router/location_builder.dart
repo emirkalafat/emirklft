@@ -3,9 +3,11 @@ import 'package:blog_web_site/screens/misc/gizlilik_sozlesmesi.dart';
 import 'package:blog_web_site/screens/misc/main_scaffold.dart';
 import 'package:blog_web_site/screens/misc/yemek_tarifi_user_deletion.dart';
 import 'package:blog_web_site/screens/projects/projects_details.dart';
+import 'package:blog_web_site/screens/recap/activity_detail.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
@@ -70,5 +72,17 @@ final router = GoRouter(
           final pid = state.pathParameters['pid'] ?? '0';
           return ProjectDetails(projectID: pid, key: ValueKey('pid-$pid'));
         }),
+    GoRoute(
+      path: '/recap/activity/:id',
+      builder: (context, state) {
+        final id = state.pathParameters['id']!;
+        final isDialog = state.uri.queryParameters['dialog'] == 'true';
+        return ActivityDetailScreen(
+          activityId: id,
+          key: ValueKey('activity-$id'),
+          isDialog: isDialog,
+        );
+      },
+    ),
   ],
 );

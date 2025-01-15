@@ -4,6 +4,11 @@ enum ActivityType { book, movie, tvShow, other, unknown }
 
 enum ActivityStatus { ongoing, finished, unknown }
 
+
+abstract class ActivityRepository {
+  List<Activity> getActivities();
+}
+
 class Activity {
   String id;
   String title;
@@ -22,8 +27,8 @@ class Activity {
     required this.description,
     this.imageUrl,
     this.url,
-    required this.startedDate,
-    required this.finishedDate,
+    this.startedDate,
+    this.finishedDate,
     this.status = ActivityStatus.unknown,
     this.type = ActivityType.unknown,
   });
@@ -123,5 +128,34 @@ class Activity {
         finishedDate.hashCode ^
         status.hashCode ^
         type.hashCode;
+  }
+}
+
+class ActivityGrouper {
+  static Map<int, Map<int, List<Activity>>> groupByYearAndMonth(
+      List<Activity> activities) {
+    final groupedByYear = <int, List<Activity>>{};
+    for (var activity in activities) {
+      final year = activity.startedDate?.year ?? 0;
+      groupedByYear.putIfAbsent(year, () => []);
+      groupedByYear[year]!.add(activity);
+    }
+
+    final groupedByYearAndMonth = <int, Map<int, List<Activity>>>{};
+    for (var year in groupedByYear.keys) {
+      groupedByYearAndMonth[year] = _groupByMonth(groupedByYear[year]!);
+    }
+
+    return groupedByYearAndMonth;
+  }
+
+  static Map<int, List<Activity>> _groupByMonth(List<Activity> activities) {
+    final grouped = <int, List<Activity>>{};
+    for (var activity in activities) {
+      final month = activity.startedDate?.month ?? 0;
+      grouped.putIfAbsent(month, () => []);
+      grouped[month]!.add(activity);
+    }
+    return grouped;
   }
 }

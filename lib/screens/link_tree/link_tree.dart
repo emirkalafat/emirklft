@@ -1,10 +1,10 @@
-import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/core/constants.dart';
 import 'package:blog_web_site/core/theme.dart';
 import 'package:blog_web_site/core/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 const linkTreeModelList = [
   LinkTreeModel(title: 'Siteye Devam Et', icon: Icons.home, route: '/'),
@@ -139,7 +139,7 @@ class LinkTreeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => linkTreeModel.route != null
-          ? Beamer.of(context).popToNamed(linkTreeModel.route!)
+          ? context.replace(linkTreeModel.route!)
           : Utils.startUrl(linkTreeModel.url!),
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 8),
