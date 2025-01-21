@@ -40,8 +40,6 @@ class ActivityUIHelper {
   }
 }
 
-
-
 class DateFormatter {
   static final List<String> _monthNames = [
     'Ocak',
@@ -83,43 +81,40 @@ class RecapScreen extends StatelessWidget {
     final groupedActivities = ActivityGrouper.groupByYearAndMonth(activities);
     final isWideScreen = MediaQuery.of(context).size.width > 1000;
 
-    if (!isWideScreen) {
-      return Scaffold(
-        body: YearMonthTimeline(
-          groupedActivities: groupedActivities,
-          onActivityTap: null,
-          //(activity) {
-          //  context.go('/recap/activity/${activity.id}');
-          //},
-        ),
-      );
-    }
-
     return Scaffold(
-      body: Row(
-        children: [
-          Expanded(
-            flex: 2,
-            child: YearMonthTimeline(
-              groupedActivities: groupedActivities,
-              onActivityTap: null,
-              //(activity) {
-              //  context.go('/?tab=recap&activity=${activity.id}');
-              //},
-            ),
-          ),
-          if (selectedActivityId != null) ...[
-            const VerticalDivider(width: 1),
-            Expanded(
-              flex: 3,
-              child: ActivityDetailScreen(
-                activityId: selectedActivityId!,
-                isDialog: true,
-              ),
-            ),
-          ],
-        ],
+      body: YearMonthTimeline(
+        groupedActivities: groupedActivities,
+        onActivityTap: (activity) {
+          context.go('/recap/activity/${activity.id}');
+        },
       ),
     );
+
+    //return Scaffold(
+    //  body: Row(
+    //    children: [
+    //      Expanded(
+    //        flex: 2,
+    //        child: YearMonthTimeline(
+    //          groupedActivities: groupedActivities,
+    //          onActivityTap: null,
+    //          //(activity) {
+    //          //  context.go('/?tab=recap&activity=${activity.id}');
+    //          //},
+    //        ),
+    //      ),
+    //      if (selectedActivityId != null) ...[
+    //        const VerticalDivider(width: 1),
+    //        Expanded(
+    //          flex: 3,
+    //          child: ActivityDetailScreen(
+    //            activityId: selectedActivityId!,
+    //            isDialog: true,
+    //          ),
+    //        ),
+    //      ],
+    //    ],
+    //  ),
+    //);
   }
 }
