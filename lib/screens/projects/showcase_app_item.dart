@@ -52,6 +52,7 @@ class ShowcaseAppItem extends StatelessWidget {
   }
 
   Widget _buildChild(BuildContext context) {
+    print(app.image);
     return Container(
       color: Theme.of(context).colorScheme.primaryContainer,
       child: Column(

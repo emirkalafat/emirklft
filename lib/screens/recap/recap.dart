@@ -87,9 +87,10 @@ class RecapScreen extends StatelessWidget {
       return Scaffold(
         body: YearMonthTimeline(
           groupedActivities: groupedActivities,
-          onActivityTap: (activity) {
-            context.go('/recap/activity/${activity.id}');
-          },
+          onActivityTap: null,
+          //(activity) {
+          //  context.go('/recap/activity/${activity.id}');
+          //},
         ),
       );
     }
@@ -101,9 +102,10 @@ class RecapScreen extends StatelessWidget {
             flex: 2,
             child: YearMonthTimeline(
               groupedActivities: groupedActivities,
-              onActivityTap: (activity) {
-                context.go('/?tab=recap&activity=${activity.id}');
-              },
+              onActivityTap: null,
+              //(activity) {
+              //  context.go('/?tab=recap&activity=${activity.id}');
+              //},
             ),
           ),
           if (selectedActivityId != null) ...[
