@@ -17,8 +17,9 @@ class MonthTimeline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return FixedTimeline.tileBuilder(
-      theme: _getTimelineTheme(),
+      theme: _getTimelineTheme(colorScheme),
       builder: TimelineTileBuilder.connected(
         connectionDirection: ConnectionDirection.before,
         itemCount: monthActivities.length,
@@ -53,10 +54,10 @@ class MonthTimeline extends StatelessWidget {
     );
   }
 
-  TimelineThemeData _getTimelineTheme() {
+  TimelineThemeData _getTimelineTheme(ColorScheme colorScheme) {
     return TimelineThemeData(
       nodePosition: 0,
-      color: Colors.grey,
+      color: colorScheme.secondary,
       indicatorTheme: const IndicatorThemeData(
         position: 0,
         size: 20.0,

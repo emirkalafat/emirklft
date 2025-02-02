@@ -17,22 +17,23 @@ class YearMonthTimeline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Center(
           child: SizedBox(
             width: 400.0,
-            child: _buildYearTimeline(),
+            child: _buildYearTimeline(colorScheme),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildYearTimeline() {
+  Widget _buildYearTimeline(ColorScheme colorScheme) {
     return FixedTimeline.tileBuilder(
-      theme: _getTimelineTheme(isYear: true),
+      theme: _getTimelineTheme(colorScheme, isYear: true),
       builder: TimelineTileBuilder.connected(
         connectionDirection: ConnectionDirection.before,
         itemCount: groupedActivities.length,
@@ -67,10 +68,10 @@ class YearMonthTimeline extends StatelessWidget {
     );
   }
 
-  TimelineThemeData _getTimelineTheme({bool isYear = false}) {
+  TimelineThemeData _getTimelineTheme(ColorScheme colorScheme, {bool isYear = false}) {
     return TimelineThemeData(
       nodePosition: 0,
-      color: isYear ? Colors.blue : Colors.grey,
+      color: isYear ? colorScheme.primary : Colors.grey,
       indicatorTheme: IndicatorThemeData(
         position: 0,
         size: isYear ? 30.0 : 20.0,
