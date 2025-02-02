@@ -30,7 +30,14 @@ class NavigationService {
 
   static int calculateSelectedIndex(BuildContext context) {
     final String location = GoRouterState.of(context).uri.path;
-    return menuItems.indexWhere((item) => location.startsWith(item.route));
+    // Ana sayfa için özel kontrol
+    if (location == '/') {
+      return 0;
+    }
+    // Diğer sayfalar için tam eşleşme kontrolü
+    return menuItems.indexWhere((item) => 
+      item.route != '/' && location == item.route
+    );
   }
 
   static void navigateTo(BuildContext context, int index) {
@@ -76,21 +83,13 @@ class MainPageScaffold extends ConsumerStatefulWidget {
 }
 
 class _MainPageScaffoldState extends ConsumerState<MainPageScaffold> {
-  late int currentIndex;
-
-  @override
-  void initState() {
-    super.initState();
-    currentIndex = widget.initialIndex;
-  }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final isSmall = size.width < 800;
     final colorScheme = Theme.of(context).colorScheme;
 
-    currentIndex = NavigationService.calculateSelectedIndex(context);
+    final currentIndex = NavigationService.calculateSelectedIndex(context);
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
@@ -103,16 +102,12 @@ class _MainPageScaffoldState extends ConsumerState<MainPageScaffold> {
         actions: isSmall ? null : [AppBarActions(currentIndex: currentIndex)],
       ),
       body: widget.child,
-      floatingActionButton: _buildFAB(),
-    );
-  }
-
-  Widget? _buildFAB() {
-    if (currentIndex != 1) return null;
-
-    return FloatingActionButton(
-      onPressed: () => ref.invalidate(blogPostsFuture),
-      child: const Icon(Icons.refresh),
+      floatingActionButton: currentIndex != 1
+          ? null
+          : FloatingActionButton(
+              onPressed: () => ref.invalidate(blogPostsFuture),
+              child: const Icon(Icons.refresh),
+            ),
     );
   }
 }
