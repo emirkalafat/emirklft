@@ -16,9 +16,9 @@ abstract class AppConstants {
 
   static const landingTitle = 'Ahmet Emir Kalafat';
   static const landingMotto =
-      'Flutter ve React-Native Mobil Uygulama Geliştirici\nElektrik-Elektronik Mühendisi - Bilgisayar Mühendisi';
+      'Yazılım Geliştirici\nElektrik-Elektronik Mühendisi - Bilgisayar Mühendisi';
 
-  static const appVersion = 'Version: v4.2 - Eylül 2024';
+  static const appVersion = 'Version: v5 - Şubat 2025';
 
   static const webSiteURL = 'aemikalafat.com';
   static const gitHubProfileURL = 'https://github.com/emirkalafat';
@@ -33,11 +33,11 @@ abstract class AppConstants {
       "https://docs.google.com/document/d/1YRE8eCepquyiYQR0dgThBx3gFZak302e/edit?usp=sharing&ouid=102026540238976098790&rtpof=true&sd=true";
 
   static const aboutMeText =
-      'Merhaba, Ben Ahmet Emir Kalafat.\n22 yaşındayım.SameUp Yazılım ve Danışmanlık Şirketi\'nde yarı zamanlı mobil geliştirici olarak çalışıyorum. Fatih Sultan Mehmet Vakıf Üniversitesi\'nde Elektrik-Elektronik Mühendisliği bölümünde son sınıfım. Aynı zamanda Bilgisayar Mühendisiğine ÇAP yapıyorum. Python, Java, Dart-Flutter, C ve C# dillerini biliyorum. Bir süre Flutter ile mobil ve Web uygulama geliştirdikten sonra React-Native ile mobil uygulama geliştirmeye başladım. Şu an da SameUp\'ta React-Native ile mobil uygulama geliştiriyorum.';
+      'Merhaba, Ben Ahmet Emir Kalafat.\n23 yaşındayım. talsen team GmbH Şirketinde yarı zamanlı yazılım geliştirici olarak çalışıyorum. Bilgisayar Mühendisliği son sınıf öğrencisi (ÇAP) ve Elektrik-Elektronik Mühendisiyim. Python, Java, Dart-Flutter, C ve C# dillerini biliyorum. Bir süre Flutter ile mobil ve Web uygulama geliştirdikten sonra React-Native ile mobil uygulama geliştirmeye başladım. Şu an Almanya merkezli çalıştığım şirkette Python geliştirici olarak çalışmaktayım.';
 
   static const Map<String, String> timeline = {
     '2024':
-        "NetNucleus Şirketinde Mobil Uygulama Geliştirici olarak çalışmaktayım.",
+        "Talsen Team GmbH Şirketinde Yazılım Geliştirici olarak çalışmaktayım.",
     'Temmuz 2023':
         'SameUp Yazılım Danışmanlık Şirketi\'nde yarı zamanlı olarak çalışıyorum. Burada farklı projelerde React Native ile mobil uygulama geliştirmekteyim.',
     'Ocak 2023':

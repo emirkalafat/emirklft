@@ -1,4 +1,3 @@
-import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/models/changelog_model.dart';
 import 'package:blog_web_site/widgets/animated_image_overlay.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -6,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:blog_web_site/widgets/external_link_button.dart';
 import 'package:blog_web_site/widgets/source_aware_image.dart';
+import 'package:go_router/go_router.dart';
 
 class ShowcaseAppItem extends StatelessWidget {
   final Changelog app;
@@ -37,11 +37,11 @@ class ShowcaseAppItem extends StatelessWidget {
               onTap: () {
                 FirebaseAnalytics.instance.logEvent(
                   name: 'showcase_app_item_tapped',
-                  parameters: <String, dynamic>{
+                  parameters: <String, Object>{
                     'app_name': app.name,
                   },
                 );
-                return Beamer.of(context).beamToNamed('/projects/${app.id}');
+                return context.go('/projects/${app.id}');
               },
               child: AnimatedImageOverlay(app.name),
             ),
@@ -52,6 +52,7 @@ class ShowcaseAppItem extends StatelessWidget {
   }
 
   Widget _buildChild(BuildContext context) {
+    print(app.image);
     return Container(
       color: Theme.of(context).colorScheme.primaryContainer,
       child: Column(

@@ -190,7 +190,7 @@ class _BlogCardListViewState extends State<BlogCardListView> {
   @override
   void initState() {
     super.initState();
-    isOpenList = List.filled(widget.data.length, true);
+    isOpenList = List.filled(widget.data.length, false);
   }
 
   @override
