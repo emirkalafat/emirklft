@@ -93,6 +93,7 @@ class RecapScreen extends ConsumerWidget {
           child: Text('Error loading activities: $error'),
         ),
       ),
+      bottomNavigationBar: Text('*Bu sayfa geliştirme aşamasındadır.'),
     );
   }
 }
