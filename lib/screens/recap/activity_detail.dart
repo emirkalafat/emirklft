@@ -88,7 +88,7 @@ class ActivityDetailScreen extends StatelessWidget {
         title: Text(activity.title),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go('/'),
+          onPressed: () => context.pop(),
         ),
       ),
       body: content,
