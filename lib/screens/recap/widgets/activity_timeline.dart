@@ -5,6 +5,8 @@ import 'package:timelines_plus/timelines_plus.dart';
 import 'package:blog_web_site/screens/recap/activity.dart';
 import 'package:blog_web_site/screens/recap/widgets/activity_content.dart';
 
+
+@Deprecated('Use [ActivityList] instead')
 class ActivityTimeline extends StatelessWidget {
   final List<Activity> activities;
   final Function(Activity)? onActivityTap;

@@ -2,8 +2,8 @@ import 'package:blog_web_site/screens/recap/mock_activities.dart';
 import 'package:blog_web_site/screens/recap/widgets/year_month_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import 'package:blog_web_site/screens/recap/activity_detail.dart';
+import 'package:blog_web_site/services/firestore/activities/activities_controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'activity.dart';
 
@@ -65,56 +65,34 @@ class DateFormatter {
 }
 
 // Main Screen
-class RecapScreen extends StatelessWidget {
-  final ActivityRepository _repository;
+class RecapScreen extends ConsumerWidget {
   final String? selectedActivityId;
 
-  RecapScreen({
+  const RecapScreen({
     super.key,
-    ActivityRepository? repository,
     this.selectedActivityId,
-  }) : _repository = repository ?? MockActivityRepository();
+  });
 
   @override
-  Widget build(BuildContext context) {
-    final activities = _repository.getActivities();
-    final groupedActivities = ActivityGrouper.groupByYearAndMonth(activities);
-    final isWideScreen = MediaQuery.of(context).size.width > 1000;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final activitiesAsync = ref.watch(activitiesProvider);
 
     return Scaffold(
-      body: YearMonthTimeline(
-        groupedActivities: groupedActivities,
-        onActivityTap: (activity) {
-          context.go('/recap/activity/${activity.id}');
+      body: activitiesAsync.when(
+        data: (activities) {
+          final groupedActivities = ActivityGrouper.groupByYearAndMonth(activities);
+          return YearMonthTimeline(
+            groupedActivities: groupedActivities,
+            onActivityTap: (activity) {
+              context.go('/recap/activity/${activity.id}');
+            },
+          );
         },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stack) => Center(
+          child: Text('Error loading activities: $error'),
+        ),
       ),
     );
-
-    //return Scaffold(
-    //  body: Row(
-    //    children: [
-    //      Expanded(
-    //        flex: 2,
-    //        child: YearMonthTimeline(
-    //          groupedActivities: groupedActivities,
-    //          onActivityTap: null,
-    //          //(activity) {
-    //          //  context.go('/?tab=recap&activity=${activity.id}');
-    //          //},
-    //        ),
-    //      ),
-    //      if (selectedActivityId != null) ...[
-    //        const VerticalDivider(width: 1),
-    //        Expanded(
-    //          flex: 3,
-    //          child: ActivityDetailScreen(
-    //            activityId: selectedActivityId!,
-    //            isDialog: true,
-    //          ),
-    //        ),
-    //      ],
-    //    ],
-    //  ),
-    //);
   }
 }

@@ -44,7 +44,7 @@ class VersionsController extends StateNotifier<bool> {
         storageID, showBetaVersions);
   }
 
-  Future<void> addVersion(String id, Version version) async {
-    await _versionsRepository.addVersion(id, version);
-  }
+  //Future<void> addVersion(String id, Version version) async {
+  //  await _versionsRepository.addVersion(id, version);
+  //}
 }

@@ -3,7 +3,7 @@ import 'package:timelines_plus/timelines_plus.dart';
 
 import 'package:blog_web_site/screens/recap/activity.dart';
 import 'package:blog_web_site/screens/recap/recap.dart';
-import 'package:blog_web_site/screens/recap/widgets/activity_timeline.dart';
+import 'package:blog_web_site/screens/recap/widgets/activity_list.dart';
 
 class MonthTimeline extends StatelessWidget {
   final Map<int, List<Activity>> monthActivities;
@@ -44,7 +44,7 @@ class MonthTimeline extends StatelessWidget {
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
           ),
           const SizedBox(height: 8.0),
-          ActivityTimeline(
+          ActivityList(
             activities: activities,
             onActivityTap: onActivityTap,
           ),

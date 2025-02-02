@@ -1,9 +1,9 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 enum ActivityType { book, movie, tvShow, other, unknown }
 
 enum ActivityStatus { ongoing, finished, unknown }
-
 
 abstract class ActivityRepository {
   List<Activity> getActivities();
@@ -64,8 +64,10 @@ class Activity {
       'description': description,
       'imageUrl': imageUrl,
       'url': url,
-      'startedDate': startedDate?.millisecondsSinceEpoch,
-      'finishedDate': finishedDate?.millisecondsSinceEpoch,
+      'startedDate':
+          startedDate != null ? Timestamp.fromDate(startedDate!) : null,
+      'finishedDate':
+          finishedDate != null ? Timestamp.fromDate(finishedDate!) : null,
       'type': type.name,
       'status': status.name,
     };
@@ -76,10 +78,14 @@ class Activity {
       id: map['id'] ?? '',
       title: map['title'] ?? '',
       description: map['description'] ?? '',
-      imageUrl: map['imageUrl'] ?? '',
-      url: map['url'] ?? '',
-      startedDate: DateTime.fromMillisecondsSinceEpoch(map['startedDate']),
-      finishedDate: DateTime.fromMillisecondsSinceEpoch(map['finishedDate']),
+      imageUrl: map['imageUrl'],
+      url: map['url'],
+      startedDate: map['startedDate'] != null
+          ? (map['startedDate'] as Timestamp).toDate()
+          : null,
+      finishedDate: map['finishedDate'] != null
+          ? (map['finishedDate'] as Timestamp).toDate()
+          : null,
       type: ActivityType.values.firstWhere(
         (element) => element.name == map['type'],
         orElse: () => ActivityType.unknown,
@@ -141,8 +147,15 @@ class ActivityGrouper {
       groupedByYear[year]!.add(activity);
     }
 
+    // Sort years in descending order
+    final sortedYears = groupedByYear.keys.toList()
+      ..sort((a, b) => b.compareTo(a));
+
     final groupedByYearAndMonth = <int, Map<int, List<Activity>>>{};
-    for (var year in groupedByYear.keys) {
+    for (var year in sortedYears) {
+      // Sort activities within each year by date
+      groupedByYear[year]!.sort((a, b) => (b.startedDate ?? DateTime(0))
+          .compareTo(a.startedDate ?? DateTime(0)));
       groupedByYearAndMonth[year] = _groupByMonth(groupedByYear[year]!);
     }
 
@@ -156,6 +169,13 @@ class ActivityGrouper {
       grouped.putIfAbsent(month, () => []);
       grouped[month]!.add(activity);
     }
+
+    // Sort activities within each month by date
+    for (var month in grouped.keys) {
+      grouped[month]!.sort((a, b) => (b.startedDate ?? DateTime(0))
+          .compareTo(a.startedDate ?? DateTime(0)));
+    }
+
     return grouped;
   }
 }
