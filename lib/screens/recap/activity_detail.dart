@@ -1,9 +1,9 @@
+import 'package:blog_web_site/core/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:blog_web_site/services/firestore/activities/activities_controller.dart';
 
-import 'package:blog_web_site/screens/recap/mock_activities.dart';
 import 'package:blog_web_site/screens/recap/recap.dart';
 
 import 'activity.dart';
@@ -99,7 +99,7 @@ class ActivityDetailScreen extends ConsumerWidget {
           body: content,
         );
       },
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () => CenterLoading(withText: true),
       error: (error, stack) => Center(
         child: Text('Error loading activity: $error'),
       ),

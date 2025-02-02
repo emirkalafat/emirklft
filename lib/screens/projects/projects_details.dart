@@ -226,9 +226,7 @@ class _ProjectDetailsState extends ConsumerState<ProjectDetails> {
               error: (error, stackTrace) => Center(
                 child: Text(error.toString()),
               ),
-              loading: () => const Center(
-                child: CircularProgressIndicator(),
-              ),
+              loading: () => CenterLoading(withText: true)
             ));
   }
 }

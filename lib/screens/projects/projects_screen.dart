@@ -1,3 +1,4 @@
+import 'package:blog_web_site/core/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -50,9 +51,7 @@ class _MyProjectsPageState extends ConsumerState<MyProjectsPage> {
               error: (error, stackTrace) => Center(
                 child: Text(error.toString()),
               ),
-              loading: () => const Center(
-                child: CircularProgressIndicator(),
-              ),
+              loading: () => CenterLoading(withText: true)
             ),
       ),
     );
