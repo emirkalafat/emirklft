@@ -66,7 +66,7 @@ class Changelog {
       storageID: map['storageID'],
       name: map['name'] ?? '',
       explanation: map['explanation'] ?? '',
-      image: map['image'],
+      image: map['image'] ?? '',
       googlePlayLink: map['googlePlayLink'],
       appStoreLink: map['appStoreLink'],
       githubLink: map['githubLink'],

@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import 'package:blog_web_site/services/auth/auth_controller.dart';
 import 'package:blog_web_site/services/firestore/changelogs/changelogs_controller.dart';
 import 'package:blog_web_site/models/changelog_model.dart';
+import 'package:blog_web_site/core/providers/selected_changelog_provider.dart';
 
 class AdminPage extends ConsumerStatefulWidget {
   const AdminPage({super.key});
@@ -70,11 +71,12 @@ class _AdminPageState extends ConsumerState<AdminPage>
               );
               break;
             case 1:
-              if (ref.read(selectedChangelogIdProvider) != null) {
+              final selectedId = ref.read(selectedChangelogIdProvider);
+              if (selectedId?.isNotEmpty ?? false) {
                 showDialog(
                   context: context,
                   builder: (context) => VersionFormDialog(
-                    storageID: ref.read(selectedChangelogIdProvider)!,
+                    storageID: selectedId!,
                   ),
                 );
               } else {
@@ -99,9 +101,6 @@ class _AdminPageState extends ConsumerState<AdminPage>
     );
   }
 }
-
-// Add a provider for selected changelog
-final selectedChangelogIdProvider = StateProvider<String?>((ref) => null);
 
 // Changelog için arama provider'ı ekle (dosyanın üst kısmına)
 final changelogSearchQueryProvider = StateProvider<String>((ref) => '');

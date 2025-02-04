@@ -5,9 +5,9 @@ import 'package:blog_web_site/services/firestore/versions/versions_controller.da
 import 'package:blog_web_site/models/version.dart';
 import 'package:blog_web_site/screens/projects/project_details_info_model.dart';
 import 'package:blog_web_site/screens/admin/dialogs/version_form_dialog.dart';
+import 'package:blog_web_site/core/providers/selected_changelog_provider.dart';
 
 // Provider moved from admin_page.dart
-final selectedChangelogIdProvider = StateProvider<String?>((ref) => null);
 
 class VersionManagementTab extends ConsumerStatefulWidget {
   const VersionManagementTab({super.key});
@@ -45,8 +45,11 @@ class _VersionManagementTabState extends ConsumerState<VersionManagementTab> {
                     );
                   }).toList(),
                   onChanged: (value) {
-                    ref.read(selectedChangelogIdProvider.notifier).state =
-                        value;
+                    if (value != null) {
+                      debugPrint('Selected changelog ID: $value'); // Debug için
+                      ref.read(selectedChangelogIdProvider.notifier).state =
+                          value;
+                    }
                   },
                 ),
                 loading: () => const CircularProgressIndicator(),
@@ -55,9 +58,17 @@ class _VersionManagementTabState extends ConsumerState<VersionManagementTab> {
             ),
             // Versions List
             Expanded(
-              child: selectedChangelogId == null
-                  ? const Center(child: Text('Please select a project'))
-                  : _buildVersionsList(selectedChangelogId),
+              child: Builder(
+                builder: (context) {
+                  final currentSelectedId =
+                      ref.watch(selectedChangelogIdProvider);
+                  debugPrint(
+                      'Current selected ID: $currentSelectedId'); // Debug için
+                  return currentSelectedId?.isNotEmpty == true
+                      ? _buildVersionsList(currentSelectedId!)
+                      : const Center(child: Text('Please select a project'));
+                },
+              ),
             ),
           ],
         ),
