@@ -21,8 +21,8 @@ final authControllerProvider = StateNotifierProvider<AuthController, User?>(
 class AuthController extends StateNotifier<User?> {
   final AuthRepository _authRepository;
   final Ref _ref;
-
   StreamSubscription<User?>? _authStateChangesSubscription;
+
   AuthController({
     required AuthRepository authRepository,
     required Ref ref,
@@ -31,7 +31,10 @@ class AuthController extends StateNotifier<User?> {
         super(null) {
     _authStateChangesSubscription?.cancel();
     _authStateChangesSubscription =
-        _authRepository.authStateChanges.listen((user) => state = user);
+        _authRepository.authStateChanges.listen((user) {
+      state = user;
+      _ref.read(userProvider.notifier).state = user;
+    });
   }
 
   @override
@@ -40,44 +43,21 @@ class AuthController extends StateNotifier<User?> {
     super.dispose();
   }
 
-  appStarted() async {
-    final user = _authRepository.currentUser;
-    state = user;
-  }
-
-  void signOut() async {
-    await _authRepository.logOut();
-  }
-
-  Stream<User?> get authStageChange => _authRepository.authStateChanges;
-
-  void signInWithGoogle(BuildContext context, bool isFromLogin) async {
-    final user = await _authRepository.signInWithGoogle(isFromLogin);
-
-    user.fold(
-      (l) => showTopSnackBar(
-        Overlay.of(context),
-        CustomNotification(
-          message: l.message,
-        ),
-      ),
-      (r) {
-        Beamer.of(context).update();
-      },
-    );
+  void appStarted() async {
+    state = _authRepository.currentUser;
   }
 
   void logOut(BuildContext context) async {
     final res = await _authRepository.logOut();
     res.fold(
-      (l) {
-        //print(l.message);
-        showTopSnackBar(
-          Overlay.of(context),
-          CustomNotification(message: l.message),
-        );
+      (l) => showTopSnackBar(
+        Overlay.of(context),
+        CustomNotification(message: l.message),
+      ),
+      (r) {
+        context.beamToNamed('/auth');
+        Beamer.of(context).update();
       },
-      (r) => Beamer.of(context).update(),
     );
   }
 }

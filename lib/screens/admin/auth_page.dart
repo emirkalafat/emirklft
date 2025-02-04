@@ -1,4 +1,5 @@
 import 'package:beamer/beamer.dart';
+import 'package:blog_web_site/screens/admin/admin_page.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,9 +18,14 @@ class AuthScreen extends ConsumerStatefulWidget {
 class _AuthScreenState extends ConsumerState<AuthScreen> {
   @override
   Widget build(BuildContext context) {
+    if (ref.read(authProvider).currentUser != null) {
+      return const AdminPage();
+    }
+
     return SignInScreen(
         auth: ref.read(authProvider),
         showAuthActionSwitch: false,
+        providers: [EmailAuthProvider()],
         headerBuilder: (context, constraints, shrinkOffset) {
           return Center(
             child: Text(
@@ -39,8 +45,9 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                 ),
               )),
           AuthStateChangeAction<SignedIn>((context, state) {
-            Beamer.of(context).popToNamed('/admin');
-            Beamer.of(context).update();
+            if (context.mounted) {
+              context.beamToNamed('/admin');
+            }
           }),
         ]);
   }

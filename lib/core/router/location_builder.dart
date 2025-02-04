@@ -5,6 +5,8 @@ import 'package:blog_web_site/screens/misc/gizlilik_sozlesmesi.dart';
 import 'package:blog_web_site/screens/misc/main_scaffold.dart';
 import 'package:blog_web_site/screens/misc/yemek_tarifi_user_deletion.dart';
 import 'package:blog_web_site/screens/projects/projects_details.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:blog_web_site/services/auth/auth_guard.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +68,7 @@ final locationBuilder = RoutesLocationBuilder(
         title: 'Proje - $pid',
       );
     },
-    '/auth': (context, state, data){
+    '/auth': (context, state, data) {
       return const BeamPage(
         child: AuthScreen(),
         key: ValueKey('auth'),

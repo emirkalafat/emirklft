@@ -1,5 +1,5 @@
 import 'package:beamer/beamer.dart';
-import 'package:blog_web_site/services/providers.dart';
+import 'package:blog_web_site/services/auth/auth_guard.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
@@ -46,22 +46,7 @@ class _WebAppState extends ConsumerState<WebApp> {
       initialPath: '/linktree',
       locationBuilder: locationBuilder.call,
       guards: [
-        BeamGuard(
-          pathPatterns: ['/admin'],
-          check: (context, location) {
-            final user = ProviderScope.containerOf(context)
-                .read(authProvider)
-                .currentUser;
-            if (user == null) {
-              return true;
-            }
-            return false;
-          },
-          onCheckFailed: (context, location) {
-            Beamer.of(context).popToNamed('/linktree');
-            Beamer.of(context).update();
-          },
-        ),
+        AuthGuard(),
         BeamGuard(
           pathPatterns: ['/projects'],
           check: (context, location) => false,

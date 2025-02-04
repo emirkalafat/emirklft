@@ -16,7 +16,7 @@ class AdminPage extends ConsumerWidget {
           TextButton(
               onPressed: () {
                 ref.read(authControllerProvider.notifier).logOut(context);
-                context.popToNamed('/linktree');
+                context.beamToReplacementNamed('/');
                 Beamer.of(context).update();
               },
               child: const Text('Çıkış Yap'))
