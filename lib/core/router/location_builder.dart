@@ -1,86 +1,92 @@
-import 'package:beamer/beamer.dart';
-import 'package:blog_web_site/screens/admin/auth_page.dart';
+import 'package:blog_web_site/screens/blog/blog.dart';
+import 'package:blog_web_site/screens/contact_with_me/contact.dart';
+import 'package:blog_web_site/screens/home/home_screen.dart';
 import 'package:blog_web_site/screens/link_tree/link_tree.dart';
 import 'package:blog_web_site/screens/misc/gizlilik_sozlesmesi.dart';
 import 'package:blog_web_site/screens/misc/main_scaffold.dart';
 import 'package:blog_web_site/screens/misc/yemek_tarifi_user_deletion.dart';
 import 'package:blog_web_site/screens/projects/projects_details.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:blog_web_site/services/auth/auth_guard.dart';
+import 'package:blog_web_site/screens/projects/projects_screen.dart';
+import 'package:blog_web_site/screens/recap/activity_detail.dart';
+import 'package:blog_web_site/screens/recap/recap.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../screens/admin/admin_page.dart';
+final _rootNavigatorKey = GlobalKey<NavigatorState>();
+final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
-final locationBuilder = RoutesLocationBuilder(
-  routes: {
-    '/': (context, state, data) {
-      final tab = state.queryParameters['tab'];
-      final initialIndex = tab == 'contact'
-          ? 3
-          : tab == 'projects'
-              ? 2
-              : tab == 'blog'
-                  ? 1
-                  : 0;
-
-      return BeamPage(
-        key: ValueKey('home-$tab'),
-        title: initialIndex == 0
-            ? 'Ahmet Emir Kalafat'
-            : initialIndex == 1
-                ? 'AEK - Blog'
-                : initialIndex == 2
-                    ? 'AEK - Projelerim'
-                    : 'AEK - İletişim',
-        child: HomePage(
-          key: ValueKey('home-$tab'),
-          initialIndex: initialIndex,
-        ),
-      );
-    },
-    '/linktree': (context, state, data) {
-      return const BeamPage(
-        child: LinkTreeScreen(),
-        title: 'LinkTree',
-      );
-    },
-    '/yemekdeposu': (context, state, data) => const BeamPage(
-          key: ValueKey('yemekdeposu'),
-          title: 'Yemek Deposu Gizlilik Sözleşmesi',
-          child: YemekDeposuGizlilikSozlesmesi(
-            key: ValueKey('yemekdeposu'),
+final router = GoRouter(
+  debugLogDiagnostics: true,
+  navigatorKey: _rootNavigatorKey,
+  initialLocation: '/linktree',
+  routes: [
+    ShellRoute(
+        navigatorKey: _shellNavigatorKey,
+        builder: (context, state, child) {
+          return MainPageScaffold(
+            key: ValueKey('main-scaffold'),
+            initialIndex: 0,
+            child: child,
+          );
+        },
+        routes: [
+          GoRoute(
+            path: '/',
+            builder: (context, state) => const AnaSayfa(),
           ),
-        ),
-    '/yemekdeposu/user-deletion': (context, state, data) => const BeamPage(
-        key: ValueKey('yemekdeposu-user-deletion'),
-        title: 'Yemek Deposu Kullanıcı Silme',
-        child: YemekTarifiUserDeletion(
-          key: ValueKey('yemekdeposu-user-deletion'),
-        )),
-    '/projects/:pid': (context, state, data) {
-      final pid = state.pathParameters['pid'] as String;
-
-      return BeamPage(
-        key: ValueKey('pid-$pid'),
-        child: ProjectDetails(projectID: pid, key: ValueKey('pid-$pid')),
-        title: 'Proje - $pid',
-      );
-    },
-    '/auth': (context, state, data) {
-      return const BeamPage(
-        child: AuthScreen(),
-        key: ValueKey('auth'),
-        title: 'Admin Giriş',
-      );
-    },
-    '/admin': (context, state, data) {
-      return const BeamPage(
-        child: AdminPage(),
-        key: ValueKey('admin'),
-        title: 'Admin',
-      );
-    }
-  },
+          GoRoute(path: '/contact', builder: (context, state) => ContactWithMe()),
+          GoRoute(path: '/blog', builder: (context, state) => MyBlog()),
+          GoRoute(
+              path: '/projects',
+              builder: (context, state) => MyProjectsPage(),
+              routes: [
+                GoRoute(
+                    path: '/:pid',
+                    builder: (context, state) {
+                      final pid = state.pathParameters['pid'] ?? '0';
+                      return ProjectDetails(
+                          projectID: pid, key: ValueKey('pid-$pid'));
+                    }),
+              ]),
+          GoRoute(
+              path: '/recap',
+              builder: (context, state) => RecapScreen(),
+              routes: [
+                GoRoute(
+                  path: '/activity/:id',
+                  builder: (context, state) {
+                    final id = state.pathParameters['id']!;
+                    return ActivityDetailScreen(
+                      activityId: id,
+                    );
+                  },
+                ),
+              ]),
+        ]),
+    GoRoute(
+      path: '/linktree',
+      builder: (context, state) => const LinkTreeScreen(),
+      name: 'LinkTree',
+    ),
+    GoRoute(
+        path: '/yemekdeposu',
+        builder: (context, state) {
+          return const YemekDeposuGizlilikSozlesmesi(
+            key: ValueKey('yemekdeposu'),
+          );
+        },
+        name: 'Yemek Deposu Gizlilik Sözleşmesi',
+        routes: [
+          GoRoute(
+              path: '/user-deletion',
+              builder: (context, state) {
+                return const YemekTarifiUserDeletion(
+                  key: ValueKey('yemekdeposu-user-deletion'),
+                );
+              },
+              name: 'Yemek Deposu Kullanıcı Silme'),
+        ]),
+  ],
 );
