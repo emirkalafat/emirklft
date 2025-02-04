@@ -1,3 +1,4 @@
+import 'package:blog_web_site/screens/admin/auth_page.dart';
 import 'package:blog_web_site/screens/blog/blog.dart';
 import 'package:blog_web_site/screens/contact_with_me/contact.dart';
 import 'package:blog_web_site/screens/home/home_screen.dart';
@@ -9,6 +10,8 @@ import 'package:blog_web_site/screens/projects/projects_details.dart';
 import 'package:blog_web_site/screens/projects/projects_screen.dart';
 import 'package:blog_web_site/screens/recap/activity_detail.dart';
 import 'package:blog_web_site/screens/recap/recap.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:blog_web_site/screens/admin/admin_page.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +24,22 @@ final router = GoRouter(
   debugLogDiagnostics: true,
   navigatorKey: _rootNavigatorKey,
   initialLocation: '/linktree',
+  redirect: (context, state) {
+    final auth = FirebaseAuth.instance;
+    final isAuthPage = state.fullPath?.startsWith('/auth') ?? false;
+
+    if (state.fullPath?.startsWith('/admin') ?? false) {
+      if (auth.currentUser == null) {
+        return '/auth';
+      }
+    }
+
+    if (isAuthPage && auth.currentUser != null) {
+      return '/';
+    }
+
+    return null;
+  },
   routes: [
     ShellRoute(
         navigatorKey: _shellNavigatorKey,
@@ -36,7 +55,8 @@ final router = GoRouter(
             path: '/',
             builder: (context, state) => const AnaSayfa(),
           ),
-          GoRoute(path: '/contact', builder: (context, state) => ContactWithMe()),
+          GoRoute(
+              path: '/contact', builder: (context, state) => ContactWithMe()),
           GoRoute(path: '/blog', builder: (context, state) => MyBlog()),
           GoRoute(
               path: '/projects',
@@ -88,5 +108,14 @@ final router = GoRouter(
               },
               name: 'Yemek Deposu Kullanıcı Silme'),
         ]),
+    GoRoute(
+      path: '/admin',
+      builder: (context, state) => const AdminPage(),
+    ),
+    GoRoute(
+      path: '/auth',
+      builder: (context, state) =>
+          const AuthScreen(), // Add your auth screen widget
+    ),
   ],
 );

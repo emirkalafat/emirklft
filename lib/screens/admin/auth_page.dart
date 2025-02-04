@@ -1,4 +1,4 @@
-import 'package:beamer/beamer.dart';
+import 'package:go_router/go_router.dart';
 import 'package:blog_web_site/screens/admin/admin_page.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +46,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
               )),
           AuthStateChangeAction<SignedIn>((context, state) {
             if (context.mounted) {
-              context.beamToNamed('/admin');
+              context.go('/admin');
             }
           }),
         ]);

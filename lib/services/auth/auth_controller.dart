@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:beamer/beamer.dart';
+import 'package:go_router/go_router.dart';
 import 'package:blog_web_site/services/auth/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -55,8 +55,7 @@ class AuthController extends StateNotifier<User?> {
         CustomNotification(message: l.message),
       ),
       (r) {
-        context.beamToNamed('/auth');
-        Beamer.of(context).update();
+        context.go('/auth');
       },
     );
   }

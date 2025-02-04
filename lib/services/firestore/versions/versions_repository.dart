@@ -49,12 +49,28 @@ class VersionsRepository {
     });
   }
 
-  //Future<void> addVersion(String id, Version version) async {
-  //  await showcaseappsCollection
-  //      .doc(id)
-  //      .collection('versions')
-  //      .add(version.toMap());
-  //}
+  Future<void> addVersion(String storageID, Version version) async {
+    await showcaseappsCollection
+        .doc(storageID)
+        .collection('versions')
+        .add(version.toMap());
+  }
+
+  Future<void> updateVersion(String storageID, String versionId, Version version) async {
+    await showcaseappsCollection
+        .doc(storageID)
+        .collection('versions')
+        .doc(versionId)
+        .update(version.toMap());
+  }
+
+  Future<void> deleteVersion(String storageID, String versionId) async {
+    await showcaseappsCollection
+        .doc(storageID)
+        .collection('versions')
+        .doc(versionId)
+        .delete();
+  }
 
   CollectionReference<Map<String, dynamic>> get showcaseappsCollection {
     return _firestore.collection('showcase_apps');

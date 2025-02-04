@@ -14,9 +14,22 @@ class ActivitiesRepository {
   ActivitiesRepository({required FirebaseFirestore firestore})
       : _firestore = firestore;
 
+  Stream<List<Activity>> getActivitiesStream() {
+    return activitiesCollection
+        .orderBy('startedDate', descending: true)
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => Activity.fromMap(doc.data()..['id'] = doc.id))
+            .toList());
+  }
+
   Future<List<Activity>> getActivities() async {
-    final snapshot = await activitiesCollection.get();
-    return snapshot.docs.map((doc) => Activity.fromMap(doc.data())).toList();
+    final snapshot = await activitiesCollection
+        .orderBy('startedDate', descending: true)
+        .get();
+    return snapshot.docs
+        .map((doc) => Activity.fromMap(doc.data()..['id'] = doc.id))
+        .toList();
   }
 
   Future<Activity?> getActivity(String id) async {
@@ -25,17 +38,17 @@ class ActivitiesRepository {
     return Activity.fromMap(doc.data()!..['id'] = doc.id);
   }
 
-  //Future<void> addActivity(Activity activity) async {
-  //  await activitiesCollection.add(activity.toMap());
-  //}
+  Future<void> addActivity(Activity activity) async {
+    await activitiesCollection.doc(activity.id).set(activity.toMap());
+  }
 
-  //Future<void> updateActivity(Activity activity) async {
-  //  await activitiesCollection.doc(activity.id).update(activity.toMap());
-  //}
+  Future<void> updateActivity(Activity activity) async {
+    await activitiesCollection.doc(activity.id).update(activity.toMap());
+  }
 
-  //Future<void> deleteActivity(Activity activity) async {
-  //  await activitiesCollection.doc(activity.id).delete();
-  //}
+  Future<void> deleteActivity(String id) async {
+    await activitiesCollection.doc(id).delete();
+  }
 
   CollectionReference<Map<String, dynamic>> get activitiesCollection =>
       _firestore.collection('activities');
