@@ -1,11 +1,10 @@
-import 'package:beamer/beamer.dart';
 import 'package:blog_web_site/models/changelog_model.dart';
-import 'package:blog_web_site/widgets/animated_image_overlay.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:blog_web_site/widgets/external_link_button.dart';
 import 'package:blog_web_site/widgets/source_aware_image.dart';
+import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ShowcaseAppItem extends StatelessWidget {
   final Changelog app;
@@ -17,101 +16,96 @@ class ShowcaseAppItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(16.0),
-        topRight: Radius.circular(16.0),
-        bottomLeft: Radius.circular(4.0),
-        bottomRight: Radius.circular(4.0),
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
       ),
-      child: Stack(
-        children: [
-          _buildChild(context),
-          Positioned(
-            top: 0.0,
-            // bottom: 192.0,
-            left: 0.0,
-            right: 0.0,
-            child: GestureDetector(
-              // When overlay tapped, open full screen interactive image viewer.
-              onTap: () {
-                FirebaseAnalytics.instance.logEvent(
-                  name: 'showcase_app_item_tapped',
-                  parameters: <String, dynamic>{
-                    'app_name': app.name,
-                  },
-                );
-                return Beamer.of(context).beamToNamed('/projects/${app.id}');
-              },
-              child: AnimatedImageOverlay(app.name),
-            ),
-          ),
-        ],
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: () {
+          FirebaseAnalytics.instance.logEvent(
+            name: 'showcase_app_item_tapped',
+            parameters: <String, Object>{
+              'app_name': app.name,
+            },
+          );
+          context.go('/projects/${app.id}');
+        },
+        child: _buildChild(context),
       ),
     );
   }
 
   Widget _buildChild(BuildContext context) {
-    return Container(
-      color: Theme.of(context).colorScheme.primaryContainer,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Visibility(
-            visible: app.image != null,
-            child: SourceAwareImage(
-              image: app.image!,
-              isNetworkImage: true,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (app.image != null)
+          ClipRRect(
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+            child: SizedBox(
+              height: 180,
+              child: SourceAwareImage(
+                image: app.image!,
+                isNetworkImage: true,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-          _buildBottom(context),
-        ],
-      ),
+        _buildBottom(context),
+      ],
     );
   }
 
   Widget _buildBottom(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(24.0).copyWith(bottom: 8.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Text(
+            app.name,
+            style: Theme.of(context).textTheme.titleLarge,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 8),
+          const Divider(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              //App Title
-              Text(app.name, style: Theme.of(context).textTheme.titleLarge),
-              const Divider(
-                thickness: 1.5,
-                height: 32.0,
-              ),
+              if (app.googlePlayLink != null)
+                _buildIconButton(
+                  icon: FontAwesomeIcons.googlePlay,
+                  onTap: () => launchUrlString(app.googlePlayLink!),
+                ),
+              if (app.appStoreLink != null)
+                _buildIconButton(
+                  icon: FontAwesomeIcons.appStoreIos,
+                  onTap: () => launchUrlString(app.appStoreLink!),
+                ),
+              if (app.githubLink != null)
+                _buildIconButton(
+                  icon: FontAwesomeIcons.github,
+                  onTap: () => launchUrlString(app.githubLink!),
+                ),
             ],
           ),
-          if (app.googlePlayLink != null) ...[
-            ExternalLinkButton(
-              url: app.googlePlayLink!,
-              iconData: FontAwesomeIcons.googlePlay,
-              label: 'Play Store',
-            ),
-            const SizedBox(height: 10.0),
-          ],
-          if (app.appStoreLink != null) ...[
-            ExternalLinkButton(
-              url: app.appStoreLink!,
-              iconData: FontAwesomeIcons.appStoreIos,
-              label: 'App Store',
-            ),
-            const SizedBox(height: 10.0),
-          ],
-          if (app.githubLink != null)
-            ExternalLinkButton(
-              url: app.githubLink!,
-              iconData: FontAwesomeIcons.squareGithub,
-              label: 'GitHub',
-            ),
         ],
       ),
+    );
+  }
+
+  Widget _buildIconButton({
+    required IconData icon,
+    required VoidCallback onTap,
+  }) {
+    return IconButton(
+      icon: FaIcon(icon),
+      onPressed: onTap,
+      tooltip: 'Open Link',
     );
   }
 }

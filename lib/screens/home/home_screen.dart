@@ -1,9 +1,3 @@
-import 'package:blog_web_site/widgets/delayed_widget.dart';
-import 'package:blog_web_site/widgets/home/currency_side_card.dart';
-import 'package:blog_web_site/widgets/home/weather_side_card.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:blog_web_site/core/theme.dart';
 import 'package:blog_web_site/screens/home/footer/home_funcs_section.dart';
 import 'package:blog_web_site/screens/home/footer/landing_footer.dart';
@@ -12,6 +6,11 @@ import 'package:blog_web_site/screens/home/info/about_me_section.dart';
 import 'package:blog_web_site/screens/home/info/timeline_section.dart';
 import 'package:blog_web_site/screens/home/sider/left_side_section.dart';
 import 'package:blog_web_site/screens/home/sider/right_side_section.dart';
+import 'package:blog_web_site/widgets/delayed_widget.dart';
+import 'package:blog_web_site/widgets/home/weather_side_card.dart';
+import 'package:blog_web_site/widgets/home/currency_side_card.dart';  // Add this import
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AnaSayfa extends ConsumerStatefulWidget {
   const AnaSayfa({super.key});

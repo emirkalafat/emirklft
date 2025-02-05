@@ -1,3 +1,4 @@
+import 'package:blog_web_site/core/providers/error_provider.dart';
 import 'package:blog_web_site/models/version.dart';
 import 'package:blog_web_site/screens/projects/project_details_info_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -44,7 +45,43 @@ class VersionsController extends StateNotifier<bool> {
         storageID, showBetaVersions);
   }
 
-  Future<void> addVersion(String id, Version version) async {
-    await _versionsRepository.addVersion(id, version);
+  Future<bool> addVersion(String storageID, Version version) async {
+    state = true;
+    try {
+      await _versionsRepository.addVersion(storageID, version);
+      return true;
+    } catch (e) {
+      _ref.read(errorProvider.notifier).state = e.toString();
+      return false;
+    } finally {
+      state = false;
+    }
+  }
+
+  Future<bool> updateVersion(
+      String storageID, String versionId, Version version) async {
+    state = true;
+    try {
+      await _versionsRepository.updateVersion(storageID, versionId, version);
+      return true;
+    } catch (e) {
+      _ref.read(errorProvider.notifier).state = e.toString();
+      return false;
+    } finally {
+      state = false;
+    }
+  }
+
+  Future<bool> deleteVersion(String storageID, String versionId) async {
+    state = true;
+    try {
+      await _versionsRepository.deleteVersion(storageID, versionId);
+      return true;
+    } catch (e) {
+      _ref.read(errorProvider.notifier).state = e.toString();
+      return false;
+    } finally {
+      state = false;
+    }
   }
 }

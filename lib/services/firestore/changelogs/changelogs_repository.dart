@@ -25,4 +25,16 @@ class ChangelogsRepository {
 
   CollectionReference<Map<String, dynamic>> get showcaseCollection =>
       _firestore.collection('showcase_apps');
+
+  Future<void> addChangelog(Changelog changelog) async {
+    await showcaseCollection.doc(changelog.id).set(changelog.toMap());
+  }
+
+  Future<void> updateChangelog(Changelog changelog) async {
+    await showcaseCollection.doc(changelog.id).update(changelog.toMap());
+  }
+
+  Future<void> deleteChangelog(String id) async {
+    await showcaseCollection.doc(id).delete();
+  }
 }

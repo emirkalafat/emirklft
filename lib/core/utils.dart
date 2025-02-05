@@ -64,7 +64,7 @@ class CustomNotification extends StatelessWidget {
               message,
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontSize: 24, color: colorScheme.onPrimaryContainer),
+                  fontSize: 10, color: colorScheme.onPrimaryContainer),
             ),
           ),
         ),

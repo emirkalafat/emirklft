@@ -16,8 +16,7 @@ class VersionsRepository {
   Stream<List<Version>> getAppVersions(
       String storageID, bool showBetaVersions) {
     if (showBetaVersions) {
-      return _firestore
-          .collection('showcase_apps')
+      return showcaseappsCollection
           .doc(storageID)
           .collection('versions')
           .orderBy('date', descending: true)
@@ -26,8 +25,7 @@ class VersionsRepository {
         return snapshot.docs.map((doc) => Version.fromMap(doc.data())).toList();
       });
     } else {
-      return _firestore
-          .collection('showcase_apps')
+      return showcaseappsCollection
           .doc(storageID)
           .collection('versions')
           .where('isBeta', isEqualTo: false)
@@ -41,8 +39,7 @@ class VersionsRepository {
 
   Future<List<Version>> getFutureAppVersion(
       String storageID, bool showBetaVersions) async {
-    return await _firestore
-        .collection('showcase_apps')
+    return await showcaseappsCollection
         .doc(storageID)
         .collection('versions')
         .orderBy('date', descending: true)
@@ -52,11 +49,30 @@ class VersionsRepository {
     });
   }
 
-  Future<void> addVersion(String id, Version version) async {
-    await _firestore
-        .collection('showcase_apps')
-        .doc(id)
+  Future<void> addVersion(String storageID, Version version) async {
+    await showcaseappsCollection
+        .doc(storageID)
         .collection('versions')
         .add(version.toMap());
+  }
+
+  Future<void> updateVersion(String storageID, String versionId, Version version) async {
+    await showcaseappsCollection
+        .doc(storageID)
+        .collection('versions')
+        .doc(versionId)
+        .update(version.toMap());
+  }
+
+  Future<void> deleteVersion(String storageID, String versionId) async {
+    await showcaseappsCollection
+        .doc(storageID)
+        .collection('versions')
+        .doc(versionId)
+        .delete();
+  }
+
+  CollectionReference<Map<String, dynamic>> get showcaseappsCollection {
+    return _firestore.collection('showcase_apps');
   }
 }
