@@ -8,6 +8,7 @@ import 'package:blog_web_site/screens/home/sider/left_side_section.dart';
 import 'package:blog_web_site/screens/home/sider/right_side_section.dart';
 import 'package:blog_web_site/widgets/delayed_widget.dart';
 import 'package:blog_web_site/widgets/home/weather_side_card.dart';
+import 'package:blog_web_site/widgets/home/currency_side_card.dart';  // Add this import
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -85,7 +86,7 @@ class _AnaSayfaState extends ConsumerState<AnaSayfa> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               WeatherSideCard(width: 200),
-                              //CurrencySideCard(width: 200),
+                              CurrencySideCard(width: 200),
                             ],
                           ),
                         ),

@@ -28,6 +28,7 @@ class _MyProjectsPageState extends ConsumerState<MyProjectsPage> {
                 return LayoutBuilder(
                   builder: (context, constraints) {
                     return Wrap(
+                      direction: Axis.horizontal,
                       spacing: 24.0,
                       runSpacing: 24.0,
                       alignment: WrapAlignment.center,
