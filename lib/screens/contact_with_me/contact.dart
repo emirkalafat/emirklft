@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-import '../../core/utils.dart';
+import '../../core/utils/utils.dart';
 
 class ContactWithMe extends StatefulWidget {
   const ContactWithMe({super.key});

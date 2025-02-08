@@ -17,18 +17,17 @@ class CustomNotification extends StatelessWidget {
       color: Colors.transparent,
       child: Center(
         child: Container(
-          width: 300,
+          constraints: const BoxConstraints(maxWidth: 500),
           decoration: BoxDecoration(
             color: colorScheme.primaryContainer,
             borderRadius: const BorderRadius.all(Radius.circular(24)),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: Text(
               message,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 10, color: colorScheme.onPrimaryContainer),
+              style: TextStyle(color: colorScheme.onPrimaryContainer),
             ),
           ),
         ),

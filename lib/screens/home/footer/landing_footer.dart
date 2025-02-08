@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:blog_web_site/core/constants.dart';
 
-import 'package:blog_web_site/core/utils.dart';
+import 'package:blog_web_site/core/utils/utils.dart';
 
 class LandingFooter extends StatelessWidget {
   const LandingFooter({

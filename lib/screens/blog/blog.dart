@@ -9,7 +9,7 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import 'package:blog_web_site/core/constants.dart';
 import 'package:blog_web_site/core/theme.dart';
-import 'package:blog_web_site/core/utils.dart';
+import 'package:blog_web_site/core/utils/utils.dart';
 import 'package:blog_web_site/services/firebase_storage/storage_controller.dart';
 import 'package:blog_web_site/widgets/blog/blog_title_widget.dart';
 import 'package:blog_web_site/widgets/delayed_widget.dart';
