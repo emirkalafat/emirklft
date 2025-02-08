@@ -1,4 +1,5 @@
 import 'package:blog_web_site/core/utils.dart';
+import 'package:blog_web_site/core/utils/center_error.dart';
 import 'package:blog_web_site/screens/recap/widgets/year_month_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -93,7 +94,6 @@ class RecapScreen extends ConsumerWidget {
           child: Text('Error loading activities: $error'),
         ),
       ),
-      bottomNavigationBar: Text('*Bu sayfa geliştirme aşamasındadır.'),
     );
   }
 }

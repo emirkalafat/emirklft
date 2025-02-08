@@ -1,3 +1,4 @@
+import 'package:blog_web_site/core/utils/custom_notification.dart';
 import 'package:go_router/go_router.dart';
 import 'package:blog_web_site/screens/admin/admin_page.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
@@ -5,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-import '../../core/utils.dart';
 import '../../services/providers.dart';
 
 class AuthScreen extends ConsumerStatefulWidget {

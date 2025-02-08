@@ -31,5 +31,5 @@
   "peacock.color": "#215732",
   "githubPullRequests.ignoredPullRequestBranches": ["main"],
   "explorerExclude.backup": {},
-  "cSpell.words": ["beamer", "Beamer", "riverpod", "showcaseapps"]
+  "cSpell.words": ["beamer", "Beamer", "prefs", "riverpod", "showcaseapps"]
 }

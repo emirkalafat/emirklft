@@ -1,3 +1,5 @@
+import 'package:blog_web_site/core/utils/center_error.dart';
+import 'package:blog_web_site/core/utils/center_error_text.dart';
 import 'package:blog_web_site/screens/projects/project_details_info_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

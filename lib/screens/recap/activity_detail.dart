@@ -1,4 +1,4 @@
-import 'package:blog_web_site/core/utils.dart';
+import 'package:blog_web_site/core/utils/center_error.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
