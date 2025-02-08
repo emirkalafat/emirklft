@@ -1,10 +1,12 @@
+import 'package:blog_web_site/core/utils/center_error.dart';
+import 'package:blog_web_site/core/utils/center_error_text.dart';
 import 'package:blog_web_site/screens/projects/project_details_info_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:blog_web_site/core/utils.dart';
+import 'package:blog_web_site/core/utils/utils.dart';
 import 'package:blog_web_site/screens/projects/app_versions_card.dart';
 import 'package:blog_web_site/services/firestore/changelogs/changelogs_controller.dart';
 import 'package:blog_web_site/services/firestore/versions/versions_controller.dart';

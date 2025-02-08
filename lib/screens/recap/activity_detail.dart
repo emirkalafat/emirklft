@@ -1,4 +1,5 @@
-import 'package:blog_web_site/core/utils.dart';
+import 'package:blog_web_site/core/utils/center_error.dart';
+import 'package:blog_web_site/core/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -74,7 +75,7 @@ class ActivityDetailScreen extends ConsumerWidget {
                 const SizedBox(height: 20),
                 ElevatedButton.icon(
                   onPressed: () {
-                    // URL'yi aç
+                    Utils.startUrl(activity.url!);
                   },
                   icon: const Icon(Icons.link),
                   label: const Text('Bağlantıya Git'),

@@ -1,5 +1,5 @@
 import 'package:blog_web_site/services/firebase_storage/storage_repository.dart';
-import 'package:blog_web_site/core/utils.dart';
+import 'package:blog_web_site/core/utils/utils.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

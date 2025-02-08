@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:blog_web_site/widgets/delayed_widget.dart';
 import 'package:blog_web_site/widgets/animated_opacity_when_hovered.dart';
-import 'package:blog_web_site/core/utils.dart';
+import 'package:blog_web_site/core/utils/utils.dart';
 
 class SocialMediaButton extends StatelessWidget {
   final String url;

@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather/weather.dart';
 
 import 'package:blog_web_site/core/string_extensions.dart';
@@ -24,21 +25,54 @@ class _WeatherSideCardState extends State<WeatherSideCard> {
   Position? konum;
   late WeatherFactory wf;
   Weather? w;
+  late SharedPreferences prefs;
 
   @override
   void initState() {
     super.initState();
-    getLocation();
+    initializeWeather();
   }
 
-  getLocation() async {
-    konum = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+  Future<void> initializeWeather() async {
+    prefs = await SharedPreferences.getInstance();
     wf = WeatherFactory("8afeaa7003fbb9940622882daf57b218",
         language: Language.TURKISH);
-    w = await wf.currentWeatherByLocation(
-        konum?.latitude ?? 41.0111, konum?.longitude ?? 28.9711);
-    setState(() {});
+
+    // Check cached location
+    final cachedLat = prefs.getDouble('weather_lat');
+    final cachedLng = prefs.getDouble('weather_lng');
+
+    if (cachedLat != null && cachedLng != null) {
+      try {
+        w = await wf.currentWeatherByLocation(cachedLat, cachedLng);
+        setState(() {});
+      } catch (e) {
+        // If cache fetch fails, clear cache
+        await prefs.remove('weather_lat');
+        await prefs.remove('weather_lng');
+      }
+    }
+  }
+
+  Future<void> getLocation() async {
+    try {
+      final permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        return;
+      }
+
+      konum = await Geolocator.getCurrentPosition(
+          locationSettings: WebSettings(accuracy: LocationAccuracy.low));
+
+      // Cache the location
+      await prefs.setDouble('weather_lat', konum!.latitude);
+      await prefs.setDouble('weather_lng', konum!.longitude);
+
+      w = await wf.currentWeatherByLocation(konum!.latitude, konum!.longitude);
+      setState(() {});
+    } catch (e) {
+      // Handle errors
+    }
   }
 
   @override
@@ -65,9 +99,11 @@ class _WeatherSideCardState extends State<WeatherSideCard> {
                 ),
                 ElevatedButton(
                     onPressed: () async {
-                      await Geolocator.requestPermission();
-                      getLocation();
-                      setState(() {});
+                      final permission = await Geolocator.checkPermission();
+                      if (permission == LocationPermission.denied) {
+                        await Geolocator.requestPermission();
+                      }
+                      await getLocation();
                     },
                     child: const Text('Tekrar Dene')),
               ],

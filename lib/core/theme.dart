@@ -1,4 +1,5 @@
 import 'package:blog_web_site/core/constants.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -49,7 +50,9 @@ class ThemeNotifier extends StateNotifier<ThemeData> {
       theme = prefs.getString('theme');
       colorSeed = prefs.getInt('colorSeed');
     } catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
     } finally {
       theme ??= 'dark';
     }
