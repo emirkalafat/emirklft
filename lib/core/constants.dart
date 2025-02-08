@@ -18,7 +18,7 @@ abstract class AppConstants {
   static const landingMotto =
       'Yazılım Geliştirici\nElektrik-Elektronik Mühendisi - Bilgisayar Mühendisi';
 
-  static const appVersion = 'Version: v5 - Şubat 2025';
+  static const appVersion = 'Version: v5.1 - Şubat 2025';
 
   static const webSiteURL = 'aemikalafat.com';
   static const gitHubProfileURL = 'https://github.com/emirkalafat';
