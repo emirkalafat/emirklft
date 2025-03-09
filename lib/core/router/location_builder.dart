@@ -23,7 +23,7 @@ final _shellNavigatorKey = GlobalKey<NavigatorState>();
 final router = GoRouter(
   debugLogDiagnostics: true,
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/linktree',
+  initialLocation: '/',
   redirect: (context, state) {
     final auth = FirebaseAuth.instance;
     final isAuthPage = state.fullPath?.startsWith('/auth') ?? false;
