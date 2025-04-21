@@ -1,3 +1,5 @@
+import 'package:blog_web_site/features/projects/views/project_detail_view.dart';
+import 'package:blog_web_site/features/projects/views/projects_view.dart';
 import 'package:blog_web_site/screens/admin/auth_page.dart';
 import 'package:blog_web_site/screens/blog/blog.dart';
 import 'package:blog_web_site/screens/contact_with_me/contact.dart';
@@ -6,8 +8,6 @@ import 'package:blog_web_site/screens/link_tree/link_tree.dart';
 import 'package:blog_web_site/screens/misc/gizlilik_sozlesmesi.dart';
 import 'package:blog_web_site/screens/misc/main_scaffold.dart';
 import 'package:blog_web_site/screens/misc/yemek_tarifi_user_deletion.dart';
-import 'package:blog_web_site/screens/projects/projects_details.dart';
-import 'package:blog_web_site/screens/projects/projects_screen.dart';
 import 'package:blog_web_site/screens/recap/activity_detail.dart';
 import 'package:blog_web_site/screens/recap/recap.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -51,23 +51,22 @@ final router = GoRouter(
           );
         },
         routes: [
-          GoRoute(
-            path: '/',
-            builder: (context, state) => const AnaSayfa(),
-          ),
+          GoRoute(path: '/', builder: (context, state) => const AnaSayfa()),
           GoRoute(
               path: '/contact', builder: (context, state) => ContactWithMe()),
           GoRoute(path: '/blog', builder: (context, state) => MyBlog()),
           GoRoute(
               path: '/projects',
-              builder: (context, state) => MyProjectsPage(),
+              builder: (context, state) => ProjectsView(),
               routes: [
                 GoRoute(
                     path: '/:pid',
                     builder: (context, state) {
                       final pid = state.pathParameters['pid'] ?? '0';
-                      return ProjectDetails(
-                          projectID: pid, key: ValueKey('pid-$pid'));
+                      return ProjectDetailView(
+                        key: ValueKey('pid-$pid'),
+                        projectId: pid,
+                      );
                     }),
               ]),
           GoRoute(
@@ -86,10 +85,7 @@ final router = GoRouter(
               ]),
         ]),
     GoRoute(
-      path: '/linktree',
-      builder: (context, state) => const LinkTreeScreen(),
-      name: 'LinkTree',
-    ),
+        path: '/linktree', builder: (context, state) => const LinkTreeScreen()),
     GoRoute(
         path: '/yemekdeposu',
         builder: (context, state) {
@@ -108,14 +104,7 @@ final router = GoRouter(
               },
               name: 'Yemek Deposu Kullanıcı Silme'),
         ]),
-    GoRoute(
-      path: '/admin',
-      builder: (context, state) => const AdminPage(),
-    ),
-    GoRoute(
-      path: '/auth',
-      builder: (context, state) =>
-          const AuthScreen(), // Add your auth screen widget
-    ),
+    GoRoute(path: '/admin', builder: (context, state) => const AdminPage()),
+    GoRoute(path: '/auth', builder: (context, state) => const AuthScreen()),
   ],
 );

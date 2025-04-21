@@ -1,8 +1,9 @@
-import 'package:blog_web_site/screens/recap/activity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:blog_web_site/services/firestore/activities/activities_controller.dart';
+
 import 'package:blog_web_site/core/providers/error_provider.dart';
+import 'package:blog_web_site/screens/recap/activity.dart';
+import 'package:blog_web_site/services/firestore/activities/activities_controller.dart';
 
 class ActivityFormDialog extends ConsumerStatefulWidget {
   final Activity? activity;

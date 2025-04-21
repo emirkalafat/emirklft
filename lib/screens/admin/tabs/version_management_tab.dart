@@ -1,11 +1,12 @@
-import 'package:blog_web_site/services/firestore/changelogs/changelogs_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:blog_web_site/services/firestore/versions/versions_controller.dart';
-import 'package:blog_web_site/models/version.dart';
-import 'package:blog_web_site/screens/projects/project_details_info_model.dart';
-import 'package:blog_web_site/screens/admin/dialogs/version_form_dialog.dart';
+
 import 'package:blog_web_site/core/providers/selected_changelog_provider.dart';
+import 'package:blog_web_site/features/projects/models/project_version_filter_model.dart';
+import 'package:blog_web_site/features/projects/models/version_model.dart';
+import 'package:blog_web_site/features/projects/viewmodels/projects_view_model.dart';
+import 'package:blog_web_site/features/projects/viewmodels/version_view_model.dart';
+import 'package:blog_web_site/screens/admin/dialogs/version_form_dialog.dart';
 
 // Provider moved from admin_page.dart
 
@@ -20,7 +21,7 @@ class VersionManagementTab extends ConsumerStatefulWidget {
 class _VersionManagementTabState extends ConsumerState<VersionManagementTab> {
   @override
   Widget build(BuildContext context) {
-    final changelogs = ref.watch(changelogAllProvider);
+    final changelogs = ref.watch(projectsProvider);
     final isLoading = ref.watch(versionsControllerProvider);
     final selectedChangelogId = ref.watch(selectedChangelogIdProvider);
 
@@ -82,7 +83,7 @@ class _VersionManagementTabState extends ConsumerState<VersionManagementTab> {
 
   Widget _buildVersionsList(String storageId) {
     final versions = ref.watch(versionsProvider(
-      ProjectDetailsInfoModel(storageID: storageId, showBetaVersions: true),
+      ProjectVersionFilterModel(storageID: storageId, showBetaVersions: true),
     ));
 
     return versions.when(
@@ -144,7 +145,7 @@ class _VersionManagementTabState extends ConsumerState<VersionManagementTab> {
   }
 
   void _showVersionDialog(BuildContext context, String storageId,
-      [Version? version]) {
+      [VersionModel? version]) {
     showDialog(
       context: context,
       builder: (context) => VersionFormDialog(

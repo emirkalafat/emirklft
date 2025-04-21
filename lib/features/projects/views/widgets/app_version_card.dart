@@ -1,38 +1,31 @@
 import 'package:flutter/material.dart';
-
-import 'package:blog_web_site/models/version.dart';
+import '../../models/version_model.dart';
 
 class AppVersionCard extends StatelessWidget {
+  final VersionModel version;
+  final bool latest;
+
   const AppVersionCard({
     super.key,
     required this.version,
     this.latest = false,
   });
 
-  final Version version;
-  final bool latest;
-
   @override
   Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
+    final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-    final List changes = version.changes;
-    final List fixes = version.fixes;
+
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  version.version,
-                  style: textTheme.headlineLarge,
-                ),
+                Text(version.version, style: textTheme.headlineLarge),
                 const Spacer(),
                 if (latest)
                   Card(
@@ -56,33 +49,27 @@ class AppVersionCard extends StatelessWidget {
               ],
             ),
             const Divider(),
-            if (changes.isNotEmpty) ...[
-              Text(
-                'Yeni Özellikler:',
-                style: textTheme.labelLarge!.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: version.changes.map((str) => Text(str)).toList(),
-              ),
-            ],
-            if (fixes.isNotEmpty) ...[
-              Text(
-                'Düzeltmeler:',
-                style: textTheme.labelLarge!.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: version.fixes.map((str) => Text(str)).toList(),
-              ),
-            ]
+            _buildChangeList('Yeni Özellikler:', version.changes, textTheme),
+            _buildChangeList('Düzeltmeler:', version.fixes, textTheme),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildChangeList(String title, List<dynamic> items, TextTheme textTheme) {
+    if (items.isEmpty) return const SizedBox.shrink();
+    
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        ...items.map((item) => Text(item)),
+        const SizedBox(height: 8),
+      ],
     );
   }
 }

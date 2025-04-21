@@ -1,13 +1,14 @@
-import 'package:blog_web_site/core/providers/error_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:blog_web_site/models/version.dart';
-import 'package:blog_web_site/services/firestore/versions/versions_controller.dart';
+
+import 'package:blog_web_site/core/providers/error_provider.dart';
 import 'package:blog_web_site/core/utils/form_validators.dart';
+import 'package:blog_web_site/features/projects/models/version_model.dart';
+import 'package:blog_web_site/features/projects/viewmodels/version_view_model.dart';
 
 class VersionFormDialog extends ConsumerStatefulWidget {
   final String storageID;
-  final Version? version;
+  final VersionModel? version;
   final String? versionId;
 
   const VersionFormDialog({
@@ -158,7 +159,7 @@ class _VersionFormDialogState extends ConsumerState<VersionFormDialog> {
 
   void _saveVersion() async {
     if (_formKey.currentState?.validate() ?? false) {
-      final version = Version(
+      final version = VersionModel(
         version: _versionController.text,
         date: _dateController.text,
         isBeta: _isBeta,

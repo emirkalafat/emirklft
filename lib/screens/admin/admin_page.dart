@@ -1,16 +1,18 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+import 'package:blog_web_site/core/providers/selected_changelog_provider.dart';
+import 'package:blog_web_site/features/projects/models/project_model.dart';
+import 'package:blog_web_site/features/projects/viewmodels/projects_view_model.dart';
+
 import 'package:blog_web_site/screens/admin/dialogs/activity_form_dialog.dart';
 import 'package:blog_web_site/screens/admin/dialogs/changelog_form_dialog.dart';
 import 'package:blog_web_site/screens/admin/dialogs/version_form_dialog.dart';
 import 'package:blog_web_site/screens/admin/tabs/activity_management_tab.dart';
 import 'package:blog_web_site/screens/admin/tabs/changelog_management_tab.dart';
 import 'package:blog_web_site/screens/admin/tabs/version_management_tab.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:blog_web_site/services/auth/auth_controller.dart';
-import 'package:blog_web_site/services/firestore/changelogs/changelogs_controller.dart';
-import 'package:blog_web_site/models/changelog_model.dart';
-import 'package:blog_web_site/core/providers/selected_changelog_provider.dart';
 
 class AdminPage extends ConsumerStatefulWidget {
   const AdminPage({super.key});
@@ -26,8 +28,7 @@ class _AdminPageState extends ConsumerState<AdminPage>
   @override
   void initState() {
     super.initState();
-    _tabController =
-        TabController(length: 3, vsync: this); // Changed from 2 to 3
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -49,7 +50,7 @@ class _AdminPageState extends ConsumerState<AdminPage>
           tabs: const [
             Tab(text: 'Changelog'),
             Tab(text: 'Versions'),
-            Tab(text: 'Activities'), // New tab
+            Tab(text: 'Activities'),
           ],
         ),
       ),
@@ -58,7 +59,7 @@ class _AdminPageState extends ConsumerState<AdminPage>
         children: const [
           ChangelogManagementTab(),
           VersionManagementTab(),
-          ActivityManagementTab(), // New tab content
+          ActivityManagementTab(),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -106,8 +107,9 @@ class _AdminPageState extends ConsumerState<AdminPage>
 final changelogSearchQueryProvider = StateProvider<String>((ref) => '');
 
 // Filtrelenmiş changelog'lar için provider
-final filteredChangelogsProvider = Provider<AsyncValue<List<Changelog>>>((ref) {
-  final changelogsAsync = ref.watch(changelogAllProvider);
+final filteredChangelogsProvider =
+    Provider<AsyncValue<List<ProjectModel>>>((ref) {
+  final changelogsAsync = ref.watch(projectsProvider);
   final searchQuery = ref.watch(changelogSearchQueryProvider).toLowerCase();
 
   return changelogsAsync.when(

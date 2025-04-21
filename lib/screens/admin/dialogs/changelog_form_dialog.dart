@@ -1,14 +1,15 @@
-import 'package:blog_web_site/core/providers/error_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:blog_web_site/models/changelog_model.dart';
-import 'package:blog_web_site/services/firestore/changelogs/changelogs_controller.dart';
+
+import 'package:blog_web_site/core/providers/error_provider.dart';
 import 'package:blog_web_site/core/utils/form_validators.dart';
+import 'package:blog_web_site/features/projects/models/project_model.dart';
+import 'package:blog_web_site/features/projects/viewmodels/projects_view_model.dart';
 
 class ChangelogFormDialog extends ConsumerStatefulWidget {
-  final Changelog? changelog;
+  final ProjectModel? project;
 
-  const ChangelogFormDialog({super.key, this.changelog});
+  const ChangelogFormDialog({super.key, this.project});
 
   @override
   ConsumerState<ChangelogFormDialog> createState() =>
@@ -29,20 +30,19 @@ class _ChangelogFormDialogState extends ConsumerState<ChangelogFormDialog> {
   @override
   void initState() {
     super.initState();
-    _idController = TextEditingController(text: widget.changelog?.id ?? '');
+    _idController = TextEditingController(text: widget.project?.id ?? '');
     _storageIDController =
-        TextEditingController(text: widget.changelog?.storageID ?? '');
-    _nameController = TextEditingController(text: widget.changelog?.name ?? '');
+        TextEditingController(text: widget.project?.storageID ?? '');
+    _nameController = TextEditingController(text: widget.project?.name ?? '');
     _explanationController =
-        TextEditingController(text: widget.changelog?.explanation ?? '');
-    _imageController =
-        TextEditingController(text: widget.changelog?.image ?? '');
+        TextEditingController(text: widget.project?.explanation ?? '');
+    _imageController = TextEditingController(text: widget.project?.image ?? '');
     _googlePlayController =
-        TextEditingController(text: widget.changelog?.googlePlayLink ?? '');
+        TextEditingController(text: widget.project?.googlePlayLink ?? '');
     _appStoreController =
-        TextEditingController(text: widget.changelog?.appStoreLink ?? '');
+        TextEditingController(text: widget.project?.appStoreLink ?? '');
     _githubController =
-        TextEditingController(text: widget.changelog?.githubLink ?? '');
+        TextEditingController(text: widget.project?.githubLink ?? '');
   }
 
   @override
@@ -61,8 +61,7 @@ class _ChangelogFormDialogState extends ConsumerState<ChangelogFormDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title:
-          Text(widget.changelog == null ? 'Add Changelog' : 'Edit Changelog'),
+      title: Text(widget.project == null ? 'Add Changelog' : 'Edit Changelog'),
       content: SingleChildScrollView(
         child: Form(
           key: _formKey,
@@ -130,7 +129,7 @@ class _ChangelogFormDialogState extends ConsumerState<ChangelogFormDialog> {
 
   void _saveChangelog() async {
     if (_formKey.currentState?.validate() ?? false) {
-      final changelog = Changelog(
+      final changelog = ProjectModel(
         id: _idController.text,
         storageID: _storageIDController.text,
         name: _nameController.text,
@@ -145,10 +144,10 @@ class _ChangelogFormDialogState extends ConsumerState<ChangelogFormDialog> {
             _githubController.text.isEmpty ? null : _githubController.text,
       );
 
-      final controller = ref.read(changelogsControllerProvider.notifier);
+      final controller = ref.read(projectsControllerProvider.notifier);
       bool success;
-      
-      if (widget.changelog == null) {
+
+      if (widget.project == null) {
         success = await controller.addChangelog(changelog);
       } else {
         success = await controller.updateChangelog(changelog);

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:blog_web_site/services/firestore/changelogs/changelogs_controller.dart';
-import 'package:blog_web_site/models/changelog_model.dart';
+
+import 'package:blog_web_site/features/projects/models/project_model.dart';
+import 'package:blog_web_site/features/projects/viewmodels/projects_view_model.dart';
 import 'package:blog_web_site/screens/admin/dialogs/changelog_form_dialog.dart';
 
 final changelogSearchQueryProvider = StateProvider<String>((ref) => '');
 
-final filteredChangelogsProvider = Provider<AsyncValue<List<Changelog>>>((ref) {
-  final changelogsAsync = ref.watch(changelogAllProvider);
+final filteredChangelogsProvider =
+    Provider<AsyncValue<List<ProjectModel>>>((ref) {
+  final changelogsAsync = ref.watch(projectsProvider);
   final searchQuery = ref.watch(changelogSearchQueryProvider).toLowerCase();
 
   return changelogsAsync.when(
@@ -31,7 +33,7 @@ class ChangelogManagementTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final filteredChangelogs = ref.watch(filteredChangelogsProvider);
-    final isLoading = ref.watch(changelogsControllerProvider);
+    final isLoading = ref.watch(projectsControllerProvider);
 
     return Stack(
       children: [
@@ -135,10 +137,10 @@ class ChangelogManagementTab extends ConsumerWidget {
   }
 
   void _showChangelogDialog(BuildContext context, WidgetRef ref,
-      [Changelog? changelog]) {
+      [ProjectModel? changelog]) {
     showDialog(
       context: context,
-      builder: (context) => ChangelogFormDialog(changelog: changelog),
+      builder: (context) => ChangelogFormDialog(project: changelog),
     );
   }
 
@@ -155,9 +157,7 @@ class ChangelogManagementTab extends ConsumerWidget {
           ),
           TextButton(
             onPressed: () {
-              ref
-                  .read(changelogsControllerProvider.notifier)
-                  .deleteChangelog(id);
+              ref.read(projectsControllerProvider.notifier).deleteChangelog(id);
               Navigator.pop(context);
             },
             child: const Text('Delete'),

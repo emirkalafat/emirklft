@@ -1,21 +1,13 @@
-import 'package:blog_web_site/core/providers/error_provider.dart';
-import 'package:blog_web_site/models/version.dart';
-import 'package:blog_web_site/screens/projects/project_details_info_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'package:blog_web_site/services/firestore/versions/versions_repository.dart';
+import 'package:blog_web_site/core/providers/error_provider.dart';
+import '../models/project_version_filter_model.dart';
+import '../models/version_model.dart';
+import '../repositories/versions_repository.dart';
 
 final versionsProvider =
-    StreamProvider.family((ref, ProjectDetailsInfoModel searchModel) {
+    StreamProvider.family((ref, ProjectVersionFilterModel searchModel) {
   final versionsController = ref.watch(versionsControllerProvider.notifier);
   return versionsController.getAppVersions(
-      searchModel.storageID, searchModel.showBetaVersions);
-});
-
-final versionsFutureProvider =
-    FutureProviderFamily((ref, ProjectDetailsInfoModel searchModel) async {
-  final versionsController = ref.watch(versionsControllerProvider.notifier);
-  return await versionsController.getFutureAppVersion(
       searchModel.storageID, searchModel.showBetaVersions);
 });
 
@@ -34,18 +26,18 @@ class VersionsController extends StateNotifier<bool> {
         _ref = ref,
         super(false);
 
-  Stream<List<Version>> getAppVersions(
+  Stream<List<VersionModel>> getAppVersions(
       String storageID, bool showBetaVersions) {
     return _versionsRepository.getAppVersions(storageID, showBetaVersions);
   }
 
-  Future<List<Version>> getFutureAppVersion(
+  Future<List<VersionModel>> getFutureAppVersion(
       String storageID, bool showBetaVersions) async {
     return await _versionsRepository.getFutureAppVersion(
         storageID, showBetaVersions);
   }
 
-  Future<bool> addVersion(String storageID, Version version) async {
+  Future<bool> addVersion(String storageID, VersionModel version) async {
     state = true;
     try {
       await _versionsRepository.addVersion(storageID, version);
@@ -59,7 +51,7 @@ class VersionsController extends StateNotifier<bool> {
   }
 
   Future<bool> updateVersion(
-      String storageID, String versionId, Version version) async {
+      String storageID, String versionId, VersionModel version) async {
     state = true;
     try {
       await _versionsRepository.updateVersion(storageID, versionId, version);

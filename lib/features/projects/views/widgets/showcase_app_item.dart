@@ -1,4 +1,3 @@
-import 'package:blog_web_site/models/changelog_model.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,8 +5,10 @@ import 'package:blog_web_site/widgets/source_aware_image.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../models/project_model.dart';
+
 class ShowcaseAppItem extends StatelessWidget {
-  final Changelog app;
+  final ProjectModel app;
 
   const ShowcaseAppItem(
     this.app, {
