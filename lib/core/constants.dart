@@ -18,7 +18,7 @@ abstract class AppConstants {
   static const landingMotto =
       'Yazılım Geliştirici\nElektrik-Elektronik Mühendisi - Bilgisayar Mühendisi';
 
-  static const appVersion = 'Version: v5.2 - Mayıs 2025';
+  static const appVersion = 'Version: v5.2.1 - Temmuz 2025';
 
   static const webSiteURL = 'aemikalafat.com';
   static const gitHubProfileURL = 'https://github.com/emirkalafat';
@@ -30,7 +30,7 @@ abstract class AppConstants {
   static const flutterWebSiteURL = 'https://flutter.dev';
   static const openSourceRepoURL = 'https://github.com/emirkalafat/emirklft';
   static const publicCVurl =
-      "https://docs.google.com/document/d/1YRE8eCepquyiYQR0dgThBx3gFZak302e/edit?usp=sharing&ouid=102026540238976098790&rtpof=true&sd=true";
+      "https://docs.google.com/document/d/1LjXl7al7xDXZBRXmo4v39nsFiSJJVMxm/edit?usp=sharing&ouid=102026540238976098790&rtpof=true&sd=true";
 
   static const aboutMeText =
       'Merhaba, Ben Ahmet Emir Kalafat.\n23 yaşındayım. talsen team GmbH Şirketinde yarı zamanlı yazılım geliştirici olarak çalışıyorum. Bilgisayar Mühendisliği son sınıf öğrencisi (ÇAP) ve Elektrik-Elektronik Mühendisiyim. Python, Java, Dart-Flutter, C ve C# dillerini biliyorum. Bir süre Flutter ile mobil ve Web uygulama geliştirdikten sonra React-Native ile mobil uygulama geliştirmeye başladım. Şu an Almanya merkezli çalıştığım şirkette Python geliştirici olarak çalışmaktayım.';
