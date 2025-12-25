@@ -47,7 +47,6 @@ class _VersionManagementTabState extends ConsumerState<VersionManagementTab> {
                   }).toList(),
                   onChanged: (value) {
                     if (value != null) {
-                      debugPrint('Selected changelog ID: $value'); // Debug için
                       ref.read(selectedChangelogIdProvider.notifier).state =
                           value;
                     }
@@ -63,8 +62,7 @@ class _VersionManagementTabState extends ConsumerState<VersionManagementTab> {
                 builder: (context) {
                   final currentSelectedId =
                       ref.watch(selectedChangelogIdProvider);
-                  debugPrint(
-                      'Current selected ID: $currentSelectedId'); // Debug için
+
                   return currentSelectedId?.isNotEmpty == true
                       ? _buildVersionsList(currentSelectedId!)
                       : const Center(child: Text('Please select a project'));

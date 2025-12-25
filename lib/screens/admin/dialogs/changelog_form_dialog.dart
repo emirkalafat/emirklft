@@ -26,6 +26,8 @@ class _ChangelogFormDialogState extends ConsumerState<ChangelogFormDialog> {
   late TextEditingController _googlePlayController;
   late TextEditingController _appStoreController;
   late TextEditingController _githubController;
+  final List<MapEntry<TextEditingController, TextEditingController>>
+      _additionalLinkControllers = [];
 
   @override
   void initState() {
@@ -43,6 +45,15 @@ class _ChangelogFormDialogState extends ConsumerState<ChangelogFormDialog> {
         TextEditingController(text: widget.project?.appStoreLink ?? '');
     _githubController =
         TextEditingController(text: widget.project?.githubLink ?? '');
+
+    if (widget.project?.additionalLinks != null) {
+      widget.project!.additionalLinks!.forEach((key, value) {
+        _additionalLinkControllers.add(MapEntry(
+          TextEditingController(text: key),
+          TextEditingController(text: value.toString()),
+        ));
+      });
+    }
   }
 
   @override
@@ -55,6 +66,10 @@ class _ChangelogFormDialogState extends ConsumerState<ChangelogFormDialog> {
     _googlePlayController.dispose();
     _appStoreController.dispose();
     _githubController.dispose();
+    for (var controllerPair in _additionalLinkControllers) {
+      controllerPair.key.dispose();
+      controllerPair.value.dispose();
+    }
     super.dispose();
   }
 
@@ -110,6 +125,53 @@ class _ChangelogFormDialogState extends ConsumerState<ChangelogFormDialog> {
                 controller: _githubController,
                 decoration: const InputDecoration(labelText: 'GitHub Link'),
               ),
+              const SizedBox(height: 16),
+              const Text('Additional Links',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              ..._additionalLinkControllers.asMap().entries.map((entry) {
+                final index = entry.key;
+                final pair = entry.value;
+                return Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: pair.key,
+                        decoration:
+                            const InputDecoration(labelText: 'Button Name'),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: TextFormField(
+                        controller: pair.value,
+                        decoration: const InputDecoration(labelText: 'URL'),
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.delete),
+                      onPressed: () {
+                        setState(() {
+                          pair.key.dispose();
+                          pair.value.dispose();
+                          _additionalLinkControllers.removeAt(index);
+                        });
+                      },
+                    ),
+                  ],
+                );
+              }),
+              TextButton.icon(
+                onPressed: () {
+                  setState(() {
+                    _additionalLinkControllers.add(MapEntry(
+                      TextEditingController(),
+                      TextEditingController(),
+                    ));
+                  });
+                },
+                icon: const Icon(Icons.add),
+                label: const Text('Add Link'),
+              ),
             ],
           ),
         ),
@@ -142,6 +204,11 @@ class _ChangelogFormDialogState extends ConsumerState<ChangelogFormDialog> {
             _appStoreController.text.isEmpty ? null : _appStoreController.text,
         githubLink:
             _githubController.text.isEmpty ? null : _githubController.text,
+        additionalLinks: {
+          for (var pair in _additionalLinkControllers)
+            if (pair.key.text.isNotEmpty && pair.value.text.isNotEmpty)
+              pair.key.text: pair.value.text,
+        },
       );
 
       final controller = ref.read(projectsControllerProvider.notifier);
