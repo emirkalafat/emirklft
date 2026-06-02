@@ -1,288 +1,158 @@
 import 'package:blog_web_site/core/utils/center_error_text.dart';
+import 'package:blog_web_site/services/firebase_storage/storage_controller.dart';
+import 'package:blog_web_site/widgets/page_header.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-
-import 'package:blog_web_site/core/constants.dart';
-import 'package:blog_web_site/core/theme.dart';
-import 'package:blog_web_site/core/utils/utils.dart';
-import 'package:blog_web_site/services/firebase_storage/storage_controller.dart';
-import 'package:blog_web_site/widgets/blog/blog_title_widget.dart';
-import 'package:blog_web_site/widgets/delayed_widget.dart';
-import 'package:blog_web_site/widgets/shimmer/shimmer.dart';
-import 'package:blog_web_site/widgets/shimmer/shimmer_blog_cards.dart';
-import 'package:blog_web_site/widgets/shimmer/shimmer_blog_titles.dart';
+import 'blog_detail_view.dart';
+import 'widgets/blog_card_new.dart';
 
 class MyBlog extends ConsumerStatefulWidget {
   const MyBlog({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _MyBlogState();
+  ConsumerState<MyBlog> createState() => _MyBlogState();
 }
 
 class _MyBlogState extends ConsumerState<MyBlog> {
-  late ItemScrollController itemScrollController;
-  late ItemPositionsListener itemPositionsListener;
-  late int selectedBlogIndex;
-
-  @override
-  void initState() {
-    super.initState();
-    itemScrollController = ItemScrollController();
-    itemPositionsListener = ItemPositionsListener.create();
-    initializeDateFormatting('tr-TR', '');
-    selectedBlogIndex = 0;
-    itemPositionsListener.itemPositions.addListener(() {
-      if (itemPositionsListener.itemPositions.value.isNotEmpty) {
-        setState(() {
-          selectedBlogIndex =
-              itemPositionsListener.itemPositions.value.first.index;
-        });
-      }
-    });
-  }
-
-  bool get isDark {
-    return ref.watch(themeNotifierProvider.notifier).theme == ThemeMode.dark;
-  }
-
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final Size size = MediaQuery.of(context).size;
-    final bool isVertical = size.height / size.width < 0.8;
-    final bool less600 = size.width < 600;
+    final colorScheme = Theme.of(context).colorScheme;
+    final size = MediaQuery.of(context).size;
+    final isSmall = size.width < 800;
 
-    return ref.watch(blogPostsFuture).when(
-          //skipLoadingOnReload: true,
-          data: (data) {
-            if (data.isEmpty) {
-              return const CenterErrorText('Hiç Paylaşım Yok...');
-            }
-            List<String> blogTitles = data.keys.map((e) {
-              final firstLine = e.split('\n').first;
-              if (firstLine.length >= 2) {
-                return firstLine.substring(2);
-              } else {
-                debugPrint('Malformed blog post title: $firstLine');
-                return firstLine;
-              }
-            }).toList();
-            if (less600) {
-              return NestedScrollView(
-                floatHeaderSlivers: false,
-                headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                  buildLess600Selector(blogTitles, data),
-                ],
-                body: BlogCardListView(
-                  data: data,
-                  itemScrollController: itemScrollController,
-                  itemPositionsListener: itemPositionsListener,
-                  colorScheme: colorScheme,
+    return Scaffold(
+      backgroundColor: colorScheme.surface,
+      body: ref.watch(blogPostsFuture).when(
+        data: (data) {
+          if (data.isEmpty) {
+            return const CenterErrorText('Hiç Paylaşım Yok...');
+          }
+
+          final posts = data.entries.toList();
+
+          return SingleChildScrollView(
+            child: Center(
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 1400),
+                padding: EdgeInsets.symmetric(
+                  horizontal: isSmall ? 24.0 : 80.0,
+                  vertical: 40,
                 ),
-              );
-            }
-            return Row(
-              children: [
-                if (isVertical) Flexible(flex: 1, child: Container()),
-                Flexible(
-                  flex: 10,
-                  child: BlogCardListView(
-                    data: data,
-                    itemScrollController: itemScrollController,
-                    itemPositionsListener: itemPositionsListener,
-                    colorScheme: colorScheme,
-                  ),
-                ),
-                if (isVertical) Flexible(flex: 1, child: Container()),
-                BlogTitlesWidget(
-                  itemScrollController: itemScrollController,
-                  data: data,
-                ),
-              ],
-            );
-          },
-          error: (error, stackTrace) => CenterErrorText(error.toString()),
-          loading: () {
-            if (less600) {
-              return Shimmer(
-                linearGradient:
-                    isDark ? shimmerGradientDark : shimmerGradientLight,
-                child: const ShimmerBlogCards(less600: true),
-              );
-            } else {
-              return Shimmer(
-                linearGradient:
-                    isDark ? shimmerGradientDark : shimmerGradientLight,
-                child: Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (isVertical) Flexible(flex: 1, child: Container()),
-                    const Flexible(
-                        flex: 10,
-                        child: ShimmerBlogCards(
-                          less600: false,
-                        )),
-                    if (isVertical) Flexible(flex: 1, child: Container()),
-                    const ShimmerBlogTitles()
+                    const PageHeader(
+                      bigTitle: 'IDEAS',
+                      subtitle: 'Thoughts & Engineering',
+                      title: 'Blog Yazıları',
+                      description:
+                          'Kod, mimari ve dijital minimalizm üzerine keşifler. Teknik yolculuğumun bir günlüğü.',
+                    ),
+                    const SizedBox(height: 40),
+
+                    // FEATURED POST
+                    if (posts.isNotEmpty)
+                      BlogCardNew(
+                        isFeatured: true,
+                        title: _extractTitle(posts.first.key),
+                        description: _extractDescription(posts.first.key),
+                        date: posts.first.value.timeCreated,
+                        image: null,
+                        onTap: () {
+                          final title = _extractTitle(posts.first.key);
+                          final content = posts.first.key;
+                          final date = posts.first.value.timeCreated;
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => BlogDetailView(
+                                title: title,
+                                content: content,
+                                date: date,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+
+                    const SizedBox(height: 40),
+
+                    // GRID OF OTHER POSTS
+                    LayoutBuilder(
+                      builder: (context, constraints) {
+                        final crossAxisCount = constraints.maxWidth > 1200
+                            ? 3
+                            : constraints.maxWidth > 800
+                                ? 2
+                                : 1;
+
+                        return GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: crossAxisCount,
+                            crossAxisSpacing: 40,
+                            mainAxisSpacing: 60,
+                            mainAxisExtent: 450,
+                          ),
+                          itemCount: posts.length > 1 ? posts.length - 1 : 0,
+                          itemBuilder: (context, index) {
+                            final post = posts[index + 1];
+                            final title = _extractTitle(post.key);
+                            final content = post.key;
+                            final date = post.value.timeCreated;
+
+                            return BlogCardNew(
+                              title: title,
+                              description: _extractDescription(post.key),
+                              date: date,
+                              image: null,
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => BlogDetailView(
+                                      title: title,
+                                      content: content,
+                                      date: date,
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 100),
                   ],
                 ),
-              );
-            }
-          },
-        );
-  }
-
-  SliverAppBar buildLess600Selector(
-      List<String> blogTitles, Map<String, FullMetadata> data) {
-    return SliverAppBar(
-      pinned: true,
-      actions: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: DropdownButton<String>(
-            focusNode: FocusNode(canRequestFocus: false),
-            isExpanded: false,
-            underline: Container(),
-            value: blogTitles[selectedBlogIndex],
-            items: List.generate(data.length, (index) {
-              return DropdownMenuItem(
-                value: blogTitles[index],
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Text(blogTitles[index]),
-                ),
-              );
-            }),
-            onChanged: (item) {
-              setState(() {
-                selectedBlogIndex = blogTitles.indexOf(item!);
-                itemScrollController.scrollTo(
-                  index: selectedBlogIndex,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.easeInOut,
-                );
-              });
-            },
-          ),
-        ),
-      ],
+              ),
+            ),
+          );
+        },
+        error: (error, stackTrace) => CenterErrorText(error.toString()),
+        loading: () => const Center(child: CircularProgressIndicator()),
+      ),
     );
   }
-}
 
-class BlogCardListView extends StatefulWidget {
-  const BlogCardListView({
-    super.key,
-    required this.data,
-    required this.itemScrollController,
-    required this.itemPositionsListener,
-    required this.colorScheme,
-  });
-
-  final Map<String, FullMetadata> data;
-  final ItemScrollController itemScrollController;
-  final ItemPositionsListener itemPositionsListener;
-  final ColorScheme colorScheme;
-
-  @override
-  State<BlogCardListView> createState() => _BlogCardListViewState();
-}
-
-class _BlogCardListViewState extends State<BlogCardListView> {
-  late List<bool> isOpenList;
-
-  @override
-  void initState() {
-    super.initState();
-    isOpenList = List.filled(widget.data.length, false);
+  String _extractTitle(String content) {
+    final firstLine = content.split('\n').first;
+    if (firstLine.startsWith('# ')) {
+      return firstLine.substring(2);
+    }
+    return firstLine;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return ScrollablePositionedList.builder(
-      //physics: const AlwaysScrollableScrollPhysics(),
-      padding: const EdgeInsets.only(bottom: 250),
-      //shrinkWrap: less600,
-      itemScrollController: widget.itemScrollController,
-      itemPositionsListener: widget.itemPositionsListener,
-      itemCount: widget.data.length,
-      itemBuilder: (context, index) {
-        final text = widget.data.keys.elementAt(index);
-        final metadata = widget.data.values.elementAt(index);
-        final updateDate = metadata.timeCreated;
-        bool isOpen = isOpenList[index];
-        return DelayedWidget(
-            delayDuration: Duration(milliseconds: (index + 1) * 125),
-            from: DelayFrom.left,
-            child: Stack(
-              children: [
-                Card(
-                  child: Markdown(
-                    styleSheet: MarkdownStyleSheet(
-                      h1: Theme.of(context).textTheme.headlineMedium,
-                      blockquote: TextStyle(
-                          color: widget.colorScheme.onPrimaryContainer),
-                      blockquoteDecoration: BoxDecoration(
-                        color: widget.colorScheme.primaryContainer,
-                        borderRadius: BorderRadius.circular(2.0),
-                      ),
-                    ),
-                    onTapLink: (text, href, title) {
-                      href != null ? Utils.startUrl(href) : null;
-                    },
-                    selectable: true,
-                    data: text,
-                    shrinkWrap: true,
-                  ),
-                ),
-                AnimatedPositioned(
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.easeIn,
-                  top: 18,
-                  right: isOpen ? 18 : 0,
-                  child: SizedBox(
-                    width: isOpen ? null : 50,
-                    child: GestureDetector(
-                      onTap: () => setState(() {
-                        isOpenList[index] = !isOpenList[index];
-                      }),
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: isOpen
-                              ? BorderRadius.circular(6.0)
-                              : const BorderRadius.only(
-                                  topRight: Radius.circular(0),
-                                  bottomRight: Radius.circular(0),
-                                  topLeft: Radius.circular(6),
-                                  bottomLeft: Radius.circular(6),
-                                ),
-                        ),
-                        color: index == 0
-                            ? widget.colorScheme.primaryContainer
-                            : widget.colorScheme.secondaryContainer,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: isOpen
-                              ? Text(updateDate != null
-                                  ? DateFormat('EEEE, MMM d, yyyy', 'tr-TR')
-                                      .format(updateDate)
-                                  : 'Tarih Bilgisi Yok')
-                              : const Icon(
-                                  Icons.arrow_back_ios_new,
-                                  size: 18,
-                                ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ));
-      },
-    );
+  String _extractDescription(String content) {
+    final lines = content.split('\n');
+    if (lines.length > 1) {
+      for (var i = 1; i < lines.length; i++) {
+        if (lines[i].trim().isNotEmpty && !lines[i].startsWith('#')) {
+          return lines[i].trim();
+        }
+      }
+    }
+    return "Yazı içeriği yükleniyor...";
   }
 }
