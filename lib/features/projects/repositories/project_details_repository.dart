@@ -21,7 +21,7 @@ class ProjectDetailsRepository {
         .where('id', isEqualTo: id)
         .snapshots()
         .map((snapshot) => snapshot.docs
-            .map((doc) => ProjectDetailModel.fromJson(doc.data()))
+            .map((doc) => ProjectDetailModel.fromMap(doc.data()))
             .toList());
   }
 

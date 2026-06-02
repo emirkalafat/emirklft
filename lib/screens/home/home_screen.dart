@@ -4,12 +4,11 @@ import 'package:blog_web_site/screens/home/footer/home_funcs_section.dart';
 import 'package:blog_web_site/screens/home/footer/landing_footer.dart';
 import 'package:blog_web_site/screens/home/header/landing_header.dart';
 import 'package:blog_web_site/screens/home/info/about_me_section.dart';
-import 'package:blog_web_site/screens/home/info/timeline_section.dart';
 import 'package:blog_web_site/screens/home/sider/left_side_section.dart';
 import 'package:blog_web_site/screens/home/sider/right_side_section.dart';
 import 'package:blog_web_site/widgets/delayed_widget.dart';
 import 'package:blog_web_site/widgets/home/weather_side_card.dart';
-import 'package:blog_web_site/widgets/home/currency_side_card.dart';  // Add this import
+import 'package:blog_web_site/widgets/home/currency_side_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -31,16 +30,15 @@ class _AnaSayfaState extends ConsumerState<AnaSayfa> {
       ref.watch(themeNotifierProvider.notifier).theme == ThemeMode.dark;
 
   Widget _buildBlurCircle(Color color, double size) {
-    return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: color,
-      ),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 150, sigmaY: 150),
-        child: Container(color: Colors.transparent),
+    return ImageFiltered(
+      imageFilter: ImageFilter.blur(sigmaX: 150, sigmaY: 150),
+      child: Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: color,
+        ),
       ),
     );
   }
@@ -48,6 +46,7 @@ class _AnaSayfaState extends ConsumerState<AnaSayfa> {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final size = MediaQuery.of(context).size;
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
@@ -57,34 +56,22 @@ class _AnaSayfaState extends ConsumerState<AnaSayfa> {
           Positioned(
             top: -200,
             right: -200,
-            child: Container(
-              width: 800,
-              height: 800,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: colorScheme.primary.withOpacity(0.08),
-              ),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 150, sigmaY: 150),
-                child: Container(color: Colors.transparent),
-              ),
-            ),
+            child: _buildBlurCircle(colorScheme.primary.withOpacity(0.08), 800),
           ),
           Positioned(
             bottom: -100,
             left: -100,
-            child: Container(
-              width: 600,
-              height: 600,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: colorScheme.secondary.withOpacity(0.05),
-              ),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 120, sigmaY: 120),
-                child: Container(color: Colors.transparent),
-              ),
-            ),
+            child: _buildBlurCircle(colorScheme.secondary.withOpacity(0.05), 600),
+          ),
+          Positioned(
+            top: size.height * 0.4,
+            left: -150,
+            child: _buildBlurCircle(colorScheme.primary.withOpacity(0.04), 500),
+          ),
+          Positioned(
+            top: size.height * 0.7,
+            right: -100,
+            child: _buildBlurCircle(colorScheme.secondary.withOpacity(0.03), 400),
           ),
 
           // SCROLLABLE CONTENT

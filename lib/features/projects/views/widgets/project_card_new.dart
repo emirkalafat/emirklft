@@ -1,6 +1,7 @@
 import 'package:blog_web_site/features/projects/models/project_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:go_router/go_router.dart';
 
 class ProjectCardNew extends StatefulWidget {
   final ProjectModel project;
@@ -80,53 +81,59 @@ class _ProjectCardNewState extends State<ProjectCardNew> {
               ),
 
               // Content
-              Padding(
-                padding: const EdgeInsets.all(32.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.project.name.toUpperCase(),
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                            fontWeight: FontWeight.w900,
-                            color: Colors.white,
-                            letterSpacing: -1,
+              Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () => context.go('/projects/${widget.project.id}'),
+                  child: Padding(
+                    padding: const EdgeInsets.all(32.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.project.name.toUpperCase(),
+                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                fontWeight: FontWeight.w900,
+                                color: Colors.white,
+                                letterSpacing: -1,
+                              ),
+                        ),
+                        const SizedBox(height: 12),
+                        Container(
+                          width: 40,
+                          height: 1,
+                          color: colorScheme.primary,
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          widget.project.explanation,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.5),
+                            fontSize: 12,
+                            height: 1.5,
                           ),
-                    ),
-                    const SizedBox(height: 12),
-                    Container(
-                      width: 40,
-                      height: 1,
-                      color: colorScheme.primary,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      widget.project.explanation,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
-                        fontSize: 12,
-                        height: 1.5,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    if (widget.project.stack != null)
-                      Wrap(
-                        spacing: 8,
-                        children: widget.project.stack!.map((tag) => Text(
-                          tag,
-                          style: GoogleFonts.spaceMono(
-                            textStyle: TextStyle(
-                              color: Colors.white.withOpacity(0.3),
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        ),
+                        const SizedBox(height: 16),
+                        if (widget.project.stack != null)
+                          Wrap(
+                            spacing: 8,
+                            children: widget.project.stack!.map((tag) => Text(
+                              tag,
+                              style: GoogleFonts.spaceMono(
+                                textStyle: TextStyle(
+                                  color: Colors.white.withOpacity(0.3),
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            )).toList(),
                           ),
-                        )).toList(),
-                      ),
-                  ],
+                      ],
+                    ),
+                  ),
                 ),
               ),
 
@@ -254,7 +261,7 @@ class _ProjectCardNewState extends State<ProjectCardNew> {
                         opacity: _isHovered ? 1.0 : 0.0,
                         duration: const Duration(milliseconds: 300),
                         child: TextButton.icon(
-                          onPressed: () {},
+                          onPressed: () => context.go('/projects/${widget.project.id}'),
                           icon: const Text('PROJEYİ GÖR', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                           label: const Icon(Icons.arrow_outward, color: Colors.white, size: 16),
                           style: TextButton.styleFrom(padding: EdgeInsets.zero),
