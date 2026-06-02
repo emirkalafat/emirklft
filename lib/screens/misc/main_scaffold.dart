@@ -56,7 +56,7 @@ class NavigationService {
       label: 'Hakkımda',
       number: '05',
       icon: Icons.person_outline,
-      route: '/about', // We might need to add /about route
+      route: '/about',
       description: 'Geçmiş ve İletişim',
     ),
     NavigationItem(

@@ -21,6 +21,10 @@ class Activity {
   ActivityStatus status;
   ActivityType type;
 
+  // Personal Review Fields
+  String? personalNote;
+  double? personalRating; // 0.0 to 5.0
+
   Activity({
     required this.id,
     required this.title,
@@ -31,6 +35,8 @@ class Activity {
     this.finishedDate,
     this.status = ActivityStatus.unknown,
     this.type = ActivityType.unknown,
+    this.personalNote,
+    this.personalRating,
   });
 
   Activity copyWith({
@@ -43,6 +49,8 @@ class Activity {
     DateTime? finishedDate,
     ActivityType? type,
     ActivityStatus? status,
+    String? personalNote,
+    double? personalRating,
   }) {
     return Activity(
       id: id ?? this.id,
@@ -54,6 +62,8 @@ class Activity {
       finishedDate: finishedDate ?? this.finishedDate,
       type: type ?? this.type,
       status: status ?? this.status,
+      personalNote: personalNote ?? this.personalNote,
+      personalRating: personalRating ?? this.personalRating,
     );
   }
 
@@ -70,6 +80,8 @@ class Activity {
           finishedDate != null ? Timestamp.fromDate(finishedDate!) : null,
       'type': type.name,
       'status': status.name,
+      'personalNote': personalNote,
+      'personalRating': personalRating,
     };
   }
 
@@ -94,6 +106,8 @@ class Activity {
         (element) => element.name == map['status'],
         orElse: () => ActivityStatus.unknown,
       ),
+      personalNote: map['personalNote'],
+      personalRating: (map['personalRating'] as num?)?.toDouble(),
     );
   }
 

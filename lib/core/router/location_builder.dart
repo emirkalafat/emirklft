@@ -5,6 +5,7 @@ import 'package:blog_web_site/screens/blog/blog.dart';
 import 'package:blog_web_site/screens/contact_with_me/contact.dart';
 import 'package:blog_web_site/screens/home/home_screen.dart';
 import 'package:blog_web_site/screens/link_tree/link_tree.dart';
+import 'package:blog_web_site/screens/misc/about_view.dart';
 import 'package:blog_web_site/screens/misc/gizlilik_sozlesmesi.dart';
 import 'package:blog_web_site/screens/misc/main_scaffold.dart';
 import 'package:blog_web_site/screens/misc/yemek_tarifi_user_deletion.dart';
@@ -55,6 +56,7 @@ final router = GoRouter(
           GoRoute(
               path: '/contact', builder: (context, state) => ContactWithMe()),
           GoRoute(path: '/blog', builder: (context, state) => MyBlog()),
+          GoRoute(path: '/about', builder: (context, state) => const AboutView()),
           GoRoute(
               path: '/projects',
               builder: (context, state) => ProjectsView(),
