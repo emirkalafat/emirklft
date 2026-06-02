@@ -58,6 +58,16 @@ class _ProjectCardNewState extends State<ProjectCardNew> {
                       child: Image.network(
                         widget.project.image!,
                         fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          color: Colors.white.withOpacity(0.02),
+                          child: Center(
+                            child: Icon(
+                              Icons.data_thresholding_outlined,
+                              color: Colors.white.withOpacity(0.05),
+                              size: 40,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -186,6 +196,16 @@ class _ProjectCardNewState extends State<ProjectCardNew> {
                       child: Image.network(
                         widget.project.image!,
                         fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          color: Colors.white.withOpacity(0.02),
+                          child: Center(
+                            child: Icon(
+                              Icons.data_thresholding_outlined,
+                              color: Colors.white.withOpacity(0.05),
+                              size: 40,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),

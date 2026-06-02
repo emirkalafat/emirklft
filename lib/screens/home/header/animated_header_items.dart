@@ -1,6 +1,7 @@
 import 'package:blog_web_site/core/constants.dart';
 import 'package:blog_web_site/widgets/delayed_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AnimatedHeaderItems extends StatefulWidget {
@@ -195,9 +196,7 @@ class _AnimatedHeaderItemsState extends State<AnimatedHeaderItems> {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: () {
-          // Navigation logic
-        },
+        onTap: () => context.go('/about'),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
           decoration: BoxDecoration(

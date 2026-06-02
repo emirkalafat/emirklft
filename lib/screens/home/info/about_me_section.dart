@@ -21,7 +21,7 @@ class AboutMeSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // SECTION LABEL
-          _buildSectionLabel(context, '02 / IDENTITY'),
+          _buildSectionLabel(context, '04 / IDENTITY'),
           const SizedBox(height: 20),
 
           // TITLE

@@ -150,6 +150,16 @@ class _BlogCardNewState extends State<BlogCardNew> {
                   child: Image.network(
                     widget.image!,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      color: Colors.white.withOpacity(0.02),
+                      child: Center(
+                        child: Icon(
+                          Icons.article_outlined,
+                          color: Colors.white.withOpacity(0.05),
+                          size: 40,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               )

@@ -39,8 +39,8 @@ class PageHeader extends StatelessWidget {
                 bigTitle.toUpperCase(),
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
                       fontSize: isSmall ? 100 : 220,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: -10,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: -15,
                     ),
               ),
             ),

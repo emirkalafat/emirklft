@@ -1,0 +1,32 @@
+name: Deploy to Dev Channel
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    name: Build and Deploy to Dev Channel
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Build Web
+        run: |
+          flutter config --enable-web
+          flutter pub get
+          flutter build web --release
+
+      - name: Deploy to Firebase Hosting (Dev Channel)
+        uses: w9jds/firebase-action@master
+        with:
+          args: hosting:channel:deploy dev
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_PATH: ./

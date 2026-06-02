@@ -63,7 +63,7 @@ class NavigationService {
       label: 'Ekipman',
       number: '06',
       icon: Icons.terminal_outlined,
-      route: '/equipment', // We might need to add /equipment route
+      route: '/equipment',
       description: 'Teknoloji ve Donanım',
     ),
   ];

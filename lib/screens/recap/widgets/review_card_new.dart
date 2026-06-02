@@ -79,7 +79,7 @@ class _ReviewCardNewState extends State<ReviewCardNew> {
                     ),
                     const SizedBox(height: 24),
 
-                    // Quote/Summary with Border
+                    // Quote/Summary with Border (Now using personalNote if available)
                     Container(
                       padding: const EdgeInsets.only(left: 24),
                       decoration: BoxDecoration(
@@ -91,7 +91,7 @@ class _ReviewCardNewState extends State<ReviewCardNew> {
                         ),
                       ),
                       child: Text(
-                        widget.activity.description,
+                        widget.activity.personalNote ?? widget.activity.description,
                         style: GoogleFonts.playfairDisplay(
                           textStyle: TextStyle(
                             color: Colors.white.withOpacity(0.8),
@@ -103,6 +103,20 @@ class _ReviewCardNewState extends State<ReviewCardNew> {
                       ),
                     ),
                     const SizedBox(height: 32),
+
+                    // Technical Note (Original description as a small detail if note is separate)
+                    if (widget.activity.personalNote != null)
+                       Padding(
+                         padding: const EdgeInsets.only(bottom: 24),
+                         child: Text(
+                           widget.activity.description,
+                           style: TextStyle(
+                             color: Colors.white.withOpacity(0.3),
+                             fontSize: 13,
+                             height: 1.4,
+                           ),
+                         ),
+                       ),
 
                     // Full Review Link
                     Row(

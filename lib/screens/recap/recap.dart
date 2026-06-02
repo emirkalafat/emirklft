@@ -7,6 +7,63 @@ import 'package:blog_web_site/services/firestore/activities/activities_controlle
 import 'widgets/year_month_timeline_new.dart';
 import 'activity.dart';
 
+// UI Helper classes
+class ActivityUIHelper {
+  static Color getTypeColor(ActivityType type) {
+    switch (type) {
+      case ActivityType.book:
+        return Colors.blue;
+      case ActivityType.movie:
+        return Colors.red;
+      case ActivityType.tvShow:
+        return Colors.purple;
+      case ActivityType.other:
+        return Colors.grey;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  static IconData getTypeIcon(ActivityType type) {
+    switch (type) {
+      case ActivityType.book:
+        return Icons.book;
+      case ActivityType.movie:
+        return Icons.movie;
+      case ActivityType.tvShow:
+        return Icons.tv;
+      case ActivityType.other:
+        return Icons.category;
+      default:
+        return Icons.category;
+    }
+  }
+}
+
+class DateFormatter {
+  static final List<String> _monthNames = [
+    'Ocak',
+    'Şubat',
+    'Mart',
+    'Nisan',
+    'Mayıs',
+    'Haziran',
+    'Temmuz',
+    'Ağustos',
+    'Eylül',
+    'Ekim',
+    'Kasım',
+    'Aralık'
+  ];
+
+  static String formatDate(DateTime? date) {
+    if (date == null) return '';
+    return '${date.day} ${getMonthName(date.month)} ${date.year}';
+  }
+
+  static String getMonthName(int month) => _monthNames[month - 1];
+}
+
 class RecapScreen extends ConsumerWidget {
   final String? selectedActivityId;
 

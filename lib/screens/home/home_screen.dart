@@ -4,6 +4,9 @@ import 'package:blog_web_site/screens/home/footer/home_funcs_section.dart';
 import 'package:blog_web_site/screens/home/footer/landing_footer.dart';
 import 'package:blog_web_site/screens/home/header/landing_header.dart';
 import 'package:blog_web_site/screens/home/info/about_me_section.dart';
+import 'package:blog_web_site/screens/home/info/expertise_section.dart';
+import 'package:blog_web_site/screens/home/info/tech_arsenal_section.dart';
+import 'package:blog_web_site/screens/home/info/projects_preview_section.dart';
 import 'package:blog_web_site/screens/home/sider/left_side_section.dart';
 import 'package:blog_web_site/screens/home/sider/right_side_section.dart';
 import 'package:blog_web_site/widgets/delayed_widget.dart';
@@ -23,7 +26,6 @@ class _AnaSayfaState extends ConsumerState<AnaSayfa> {
   final double sideSpacing = 200;
 
   ScrollController scroll = ScrollController();
-  ScrollController verticalScroll = ScrollController();
   bool showButton = false;
 
   bool get isDark =>
@@ -52,7 +54,17 @@ class _AnaSayfaState extends ConsumerState<AnaSayfa> {
       backgroundColor: colorScheme.surface,
       body: Stack(
         children: [
-          // BACKGROUND EFFECTS
+          // 1. GRID PATTERN (Subtle)
+          Positioned.fill(
+            child: Opacity(
+              opacity: 0.03,
+              child: CustomPaint(
+                painter: _GridPainter(),
+              ),
+            ),
+          ),
+
+          // 2. ATMOSPHERIC BLURS
           Positioned(
             top: -200,
             right: -200,
@@ -74,7 +86,7 @@ class _AnaSayfaState extends ConsumerState<AnaSayfa> {
             child: _buildBlurCircle(colorScheme.secondary.withOpacity(0.03), 400),
           ),
 
-          // SCROLLABLE CONTENT
+          // 3. MAIN SCROLLABLE CONTENT
           NotificationListener(
             onNotification: (notification) {
               if (notification is ScrollEndNotification) {
@@ -88,18 +100,26 @@ class _AnaSayfaState extends ConsumerState<AnaSayfa> {
               controller: scroll,
               child: SingleChildScrollView(
                 controller: scroll,
-                child: Column(
-                  children: [
-                    LandingHeader(
-                      scroll: scroll,
+                child: Center(
+                  child: Container(
+                    constraints: const BoxConstraints(maxWidth: 1600),
+                    child: Column(
+                      children: [
+                        LandingHeader(
+                          scroll: scroll,
+                        ),
+                        const ExpertiseSection(),
+                        const ProjectsPreviewSection(),
+                        const AboutMeSection(),
+                        const TechArsenalSection(),
+                        const SizedBox(height: 60.0),
+                        const HomeScreenFunctionsSection(),
+                        const SizedBox(height: 60.0),
+                        const LandingFooter(),
+                        const SizedBox(height: 60.0),
+                      ],
                     ),
-                    const AboutMeSection(),
-                    const SizedBox(height: 100),
-                    const HomeScreenFunctionsSection(),
-                    const SizedBox(height: 60.0),
-                    const LandingFooter(),
-                    const SizedBox(height: 60.0),
-                  ],
+                  ),
                 ),
               ),
             ),
@@ -122,4 +142,26 @@ class _AnaSayfaState extends ConsumerState<AnaSayfa> {
       ),
     );
   }
+}
+
+class _GridPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.white
+      ..strokeWidth = 1;
+
+    const step = 80.0;
+
+    for (double i = 0; i < size.width; i += step) {
+      canvas.drawLine(Offset(i, 0), Offset(i, size.height), paint);
+    }
+
+    for (double i = 0; i < size.height; i += step) {
+      canvas.drawLine(Offset(0, i), Offset(size.width, i), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
