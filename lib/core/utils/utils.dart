@@ -4,7 +4,7 @@ import '../color_schemes.dart';
 
 class Utils {
   static final messengerKey = GlobalKey<ScaffoldMessengerState>();
-  static showSnackBar(String? text, {bool isError = true}) {
+  static void showSnackBar(String? text, {bool isError = true}) {
     if (text == null) {
       return;
     }
@@ -18,7 +18,7 @@ class Utils {
       ..showSnackBar(snackBar);
   }
 
-  static startUrl(String url) async {
+  static Future<void> startUrl(String url) async {
     final uri = Uri.parse(url);
     if (!await launchUrl(uri)) {
       throw 'Could not launch $uri';

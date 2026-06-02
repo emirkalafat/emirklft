@@ -96,7 +96,7 @@ class _ActivityFormDialogState extends ConsumerState<ActivityFormDialog> {
                 ],
               ),
               DropdownButtonFormField<ActivityType>(
-                value: _selectedType,
+                initialValue: _selectedType,
                 decoration: const InputDecoration(labelText: 'Type'),
                 items: ActivityType.values.map((type) {
                   return DropdownMenuItem(
@@ -111,7 +111,7 @@ class _ActivityFormDialogState extends ConsumerState<ActivityFormDialog> {
                 },
               ),
               DropdownButtonFormField<ActivityStatus>(
-                value: _selectedStatus,
+                initialValue: _selectedStatus,
                 decoration: const InputDecoration(labelText: 'Status'),
                 items: ActivityStatus.values.map((status) {
                   return DropdownMenuItem(

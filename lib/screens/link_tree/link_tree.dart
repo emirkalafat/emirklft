@@ -7,7 +7,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 const linkTreeModelList = [
-  LinkTreeModel(title: 'Siteye Devam Et', icon: Icons.home, route: '/'),
+  LinkTreeModel(
+    title: 'Siteye Devam Et',
+    icon: FontAwesomeIcons.house,
+    route: '/',
+  ),
   LinkTreeModel(
       title: 'Instagram',
       icon: FontAwesomeIcons.instagram,
@@ -34,7 +38,7 @@ class LinkTreeModel {
   final String title;
   final String? route;
   final String? url;
-  final IconData icon;
+  final FaIconData icon;
   const LinkTreeModel(
       {required this.title, this.route, this.url, required this.icon})
       : assert(route != null || url != null);
@@ -160,7 +164,7 @@ class LinkTreeCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
               BoxShadow(
-                color: Theme.of(context).colorScheme.shadow.withOpacity(0.25),
+                color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.25),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
@@ -170,7 +174,7 @@ class LinkTreeCard extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Row(
             children: [
-              Icon(
+              FaIcon(
                 linkTreeModel.icon,
                 size: 64,
               ),

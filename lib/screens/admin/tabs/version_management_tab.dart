@@ -34,7 +34,7 @@ class _VersionManagementTabState extends ConsumerState<VersionManagementTab> {
               padding: const EdgeInsets.all(8.0),
               child: changelogs.when(
                 data: (changelogList) => DropdownButtonFormField<String>(
-                  value: selectedChangelogId,
+                  initialValue: selectedChangelogId,
                   decoration: const InputDecoration(
                     labelText: 'Select Project',
                     border: OutlineInputBorder(),

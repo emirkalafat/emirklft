@@ -30,13 +30,13 @@ class ProjectDetailContent extends StatelessWidget {
           ),
           if (project.googlePlayLink != null)
             TextButton.icon(
-              icon: const Icon(FontAwesomeIcons.googlePlay),
+              icon: const FaIcon(FontAwesomeIcons.googlePlay),
               onPressed: () => Utils.startUrl(project.googlePlayLink!),
               label: const Text('Google Play\'den indirmek için tıklayın'),
             ),
           if (project.appStoreLink != null)
             TextButton.icon(
-              icon: const Icon(FontAwesomeIcons.apple),
+              icon: const FaIcon(FontAwesomeIcons.apple),
               onPressed: () => Utils.startUrl(project.appStoreLink!),
               label: const Text('App Store\'den indirmek için tıklayın'),
             ),

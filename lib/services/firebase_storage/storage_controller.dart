@@ -24,7 +24,10 @@ class StorageController extends StateNotifier<bool> {
   Future<Map<String, FullMetadata>> get blogPosts async {
     final res = await _storageRepository.blogPosts;
     return res.fold(
-      (l) => Utils.showSnackBar(l.message),
+      (l) {
+        Utils.showSnackBar(l.message);
+        return <String, FullMetadata>{};
+      },
       (r) {
         return r;
       },

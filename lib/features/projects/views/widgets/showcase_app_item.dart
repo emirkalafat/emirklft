@@ -100,7 +100,7 @@ class ShowcaseAppItem extends StatelessWidget {
   }
 
   Widget _buildIconButton({
-    required IconData icon,
+    required FaIconData icon,
     required VoidCallback onTap,
   }) {
     return IconButton(

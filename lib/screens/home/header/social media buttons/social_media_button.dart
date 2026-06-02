@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:blog_web_site/widgets/delayed_widget.dart';
 import 'package:blog_web_site/widgets/animated_opacity_when_hovered.dart';
 import 'package:blog_web_site/core/utils/utils.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SocialMediaButton extends StatelessWidget {
   final String url;
-  final IconData iconData;
+  final FaIconData iconData;
   final double size;
   final int index;
   final int delayDuration;
@@ -30,7 +31,7 @@ class SocialMediaButton extends StatelessWidget {
       child: AnimatedOpacityWhenHovered(
         child: IconButton(
           onPressed: () => Utils.startUrl(url),
-          icon: Icon(
+          icon: FaIcon(
             iconData,
             color: colorScheme.onSurface,
             size: size,

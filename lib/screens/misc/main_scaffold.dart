@@ -219,7 +219,7 @@ class ResponsiveDrawer extends ConsumerWidget {
             enabled: false,
             leading: Icon(
               Icons.bolt,
-              color: colorScheme.onSurface.withOpacity(0.5),
+              color: colorScheme.onSurface.withValues(alpha: 0.5),
             ),
             title: Text(AppConstants.appVersion),
           ),

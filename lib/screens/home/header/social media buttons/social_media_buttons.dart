@@ -35,7 +35,7 @@ class SocialMediaButtons extends StatelessWidget {
             delayDuration: delayDuration,
             index: 1,
             url: AppConstants.eMail,
-            iconData: Icons.alternate_email_rounded,
+            iconData: FontAwesomeIcons.at,
           ),
           //CV Butonu
           SocialMediaButton(
