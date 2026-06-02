@@ -1,3 +1,4 @@
+import 'package:blog_web_site/core/color_schemes.dart';
 import 'package:blog_web_site/core/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class ThemeNotifier extends StateNotifier<ThemeData> {
 
   ThemeNotifier({
     ThemeMode mode = ThemeMode.dark,
-    ColorSeed colorSeed = ColorSeed.orange,
+    ColorSeed colorSeed = ColorSeed.baseColor,
   })  : _mode = mode,
         _colorSeed = colorSeed,
         super(darkThemeMode(colorSeed)) {
@@ -57,7 +58,7 @@ class ThemeNotifier extends StateNotifier<ThemeData> {
       theme ??= 'dark';
     }
 
-    _colorSeed = ColorSeed.values[colorSeed ?? 2];
+    _colorSeed = ColorSeed.values[colorSeed ?? 0];
 
     if (theme == 'light') {
       _mode = ThemeMode.light;
@@ -83,21 +84,63 @@ class ThemeNotifier extends StateNotifier<ThemeData> {
   }
 }
 
-ThemeData darkThemeMode(ColorSeed seedColor) => ThemeData(
-      brightness: Brightness.dark,
-      visualDensity: VisualDensity.adaptivePlatformDensity,
-      fontFamily: GoogleFonts.ubuntu().fontFamily,
-      colorSchemeSeed: seedColor.color,
-      useMaterial3: true,
-    );
+ThemeData darkThemeMode(ColorSeed seedColor) {
+  final baseTheme = ThemeData(
+    brightness: Brightness.dark,
+    colorScheme: darkColorScheme,
+    useMaterial3: true,
+  );
 
-ThemeData lightThemeMode(ColorSeed seedColor) => ThemeData(
-      brightness: Brightness.light,
-      visualDensity: VisualDensity.adaptivePlatformDensity,
-      fontFamily: GoogleFonts.ubuntu().fontFamily,
-      colorSchemeSeed: seedColor.color,
-      useMaterial3: true,
-    );
+  return baseTheme.copyWith(
+    textTheme: GoogleFonts.spaceGroteskTextTheme(baseTheme.textTheme).copyWith(
+      displayLarge: GoogleFonts.syne(
+        textStyle: baseTheme.textTheme.displayLarge,
+        fontWeight: FontWeight.w900,
+      ),
+      displayMedium: GoogleFonts.syne(
+        textStyle: baseTheme.textTheme.displayMedium,
+        fontWeight: FontWeight.bold,
+      ),
+      displaySmall: GoogleFonts.syne(
+        textStyle: baseTheme.textTheme.displaySmall,
+        fontWeight: FontWeight.bold,
+      ),
+      labelLarge: GoogleFonts.spaceMono(
+        textStyle: baseTheme.textTheme.labelLarge,
+        letterSpacing: 1.5,
+      ),
+    ),
+  );
+}
+
+ThemeData lightThemeMode(ColorSeed seedColor) {
+  final baseTheme = ThemeData(
+    brightness: Brightness.light,
+    colorScheme: lightColorScheme,
+    useMaterial3: true,
+  );
+
+  return baseTheme.copyWith(
+    textTheme: GoogleFonts.spaceGroteskTextTheme(baseTheme.textTheme).copyWith(
+      displayLarge: GoogleFonts.syne(
+        textStyle: baseTheme.textTheme.displayLarge,
+        fontWeight: FontWeight.w900,
+      ),
+      displayMedium: GoogleFonts.syne(
+        textStyle: baseTheme.textTheme.displayMedium,
+        fontWeight: FontWeight.bold,
+      ),
+      displaySmall: GoogleFonts.syne(
+        textStyle: baseTheme.textTheme.displaySmall,
+        fontWeight: FontWeight.bold,
+      ),
+      labelLarge: GoogleFonts.spaceMono(
+        textStyle: baseTheme.textTheme.labelLarge,
+        letterSpacing: 1.5,
+      ),
+    ),
+  );
+}
 
 final darkGreenPalette = [
   const Color(0xFF35374B),

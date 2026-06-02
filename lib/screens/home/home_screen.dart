@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:blog_web_site/core/theme.dart';
 import 'package:blog_web_site/screens/home/footer/home_funcs_section.dart';
 import 'package:blog_web_site/screens/home/footer/landing_footer.dart';
@@ -32,9 +33,81 @@ class _AnaSayfaState extends ConsumerState<AnaSayfa> {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
+      backgroundColor: colorScheme.surface,
+      body: Stack(
+        children: [
+          // BACKGROUND EFFECTS
+          Positioned(
+            top: -200,
+            right: -200,
+            child: Container(
+              width: 800,
+              height: 800,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: colorScheme.primary.withOpacity(0.08),
+              ),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 150, sigmaY: 150),
+                child: Container(color: Colors.transparent),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: -100,
+            left: -100,
+            child: Container(
+              width: 600,
+              height: 600,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: colorScheme.secondary.withOpacity(0.05),
+              ),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 120, sigmaY: 120),
+                child: Container(color: Colors.transparent),
+              ),
+            ),
+          ),
+
+          // SCROLLABLE CONTENT
+          NotificationListener(
+            onNotification: (notification) {
+              if (notification is ScrollEndNotification) {
+                setState(() {
+                  showButton = scroll.position.pixels > 100;
+                });
+              }
+              return true;
+            },
+            child: Scrollbar(
+              controller: scroll,
+              child: SingleChildScrollView(
+                controller: scroll,
+                child: Column(
+                  children: [
+                    LandingHeader(
+                      scroll: scroll,
+                    ),
+                    const AboutMeSection(),
+                    const SizedBox(height: 100),
+                    const TimelineSection(),
+                    const SizedBox(height: 100),
+                    const HomeScreenFunctionsSection(),
+                    const SizedBox(height: 60.0),
+                    const LandingFooter(),
+                    const SizedBox(height: 60.0),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
       floatingActionButton: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 300), //scroll.offset == 0,
+        duration: const Duration(milliseconds: 300),
         child: showButton
             ? FloatingActionButton(
                 onPressed: () {
@@ -46,66 +119,6 @@ class _AnaSayfaState extends ConsumerState<AnaSayfa> {
                 },
                 child: const Icon(Icons.arrow_upward))
             : null,
-      ),
-      backgroundColor: colorScheme.surface,
-      body: NotificationListener(
-        onNotification: (notification) {
-          if (notification is ScrollEndNotification) {
-            setState(() {
-              showButton = scroll.position.pixels > 100;
-            });
-          }
-          return true;
-        },
-        child: Scrollbar(
-          controller: scroll,
-          child: SingleChildScrollView(
-            controller: scroll,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //TODO: Bu boşluklar belli bir ekran boyutundan sonra görünmez yapılacak
-                if (MediaQuery.of(context).size.width > 725)
-                  LeftSideSection(sideSpacing: sideSpacing),
-                Expanded(
-                  child: Column(
-                    children: [
-                      LandingHeader(
-                        scroll: scroll,
-                      ),
-                      //const SizedBox(height: 56),
-                      const AboutMeSection(),
-                      const SizedBox(height: 20),
-                      if (MediaQuery.of(context).size.width <= 725)
-                        const DelayedWidget(
-                          from: DelayFrom.top,
-                          delayDuration: Duration(milliseconds: 2000),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              WeatherSideCard(width: 200),
-                              CurrencySideCard(width: 200),
-                            ],
-                          ),
-                        ),
-
-                      const TimelineSection(),
-                      const HomeScreenFunctionsSection(),
-                      const SizedBox(height: 60.0),
-                      // 2 Buttons at bottom of landing: flutter.dev, github.com.
-                      const LandingFooter(),
-                      const SizedBox(height: 60.0),
-                    ],
-                  ),
-                ),
-                if (MediaQuery.of(context).size.width > 725)
-                  const RightSideSection(sideSpacing: 12),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }
