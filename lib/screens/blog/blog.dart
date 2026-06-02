@@ -63,8 +63,15 @@ class _MyBlogState extends ConsumerState<MyBlog> {
             if (data.isEmpty) {
               return const CenterErrorText('Hiç Paylaşım Yok...');
             }
-            List<String> blogTitles =
-                data.keys.map((e) => e.split('\n').first.substring(2)).toList();
+            List<String> blogTitles = data.keys.map((e) {
+              final firstLine = e.split('\n').first;
+              if (firstLine.length >= 2) {
+                return firstLine.substring(2);
+              } else {
+                debugPrint('Malformed blog post title: $firstLine');
+                return firstLine;
+              }
+            }).toList();
             if (less600) {
               return NestedScrollView(
                 floatHeaderSlivers: false,
@@ -260,8 +267,10 @@ class _BlogCardListViewState extends State<BlogCardListView> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: isOpen
-                              ? Text(DateFormat('EEEE, MMM d, yyyy', 'tr-TR')
-                                  .format(updateDate!))
+                              ? Text(updateDate != null
+                                  ? DateFormat('EEEE, MMM d, yyyy', 'tr-TR')
+                                      .format(updateDate)
+                                  : 'Tarih Bilgisi Yok')
                               : const Icon(
                                   Icons.arrow_back_ios_new,
                                   size: 18,

@@ -32,8 +32,14 @@ class BlogTitlesWidget extends StatelessWidget {
             shrinkWrap: true,
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             itemBuilder: (context, index) {
-              final blogPostTitle =
-                  data.keys.elementAt(index).split('\n').first.substring(2);
+              final firstLine = data.keys.elementAt(index).split('\n').first;
+              String blogPostTitle;
+              if (firstLine.length >= 2) {
+                blogPostTitle = firstLine.substring(2);
+              } else {
+                debugPrint('Malformed blog post title in BlogTitlesWidget: $firstLine');
+                blogPostTitle = firstLine;
+              }
               return DelayedWidget(
                 delayDuration: Duration(milliseconds: (index + 1) * 125),
                 from: DelayFrom.right,

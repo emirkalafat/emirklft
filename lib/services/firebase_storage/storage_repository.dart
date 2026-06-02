@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -39,22 +40,29 @@ class StorageRepository {
 
   FutureEither<Map<String, FullMetadata>> get blogPosts async {
     Map<String, FullMetadata> dataList = {};
-    Map<String, FullMetadata> reversed = {};
     try {
       final storageRef = _firebaseStorage.ref();
       final list = await storageRef.child('blog').child('posts').list();
       for (var item in list.items) {
-        final FullMetadata metadata = await item.getMetadata();
-        final data = await item.getData();
-        final String s = String.fromCharCodes(data!)
-            .replaceAll('ð', 'ğ')
-            .replaceAll('þ', 'ş')
-            .replaceAll('ý', 'ı')
-            .replaceAll('Ý', 'İ');
+        try {
+          final FullMetadata metadata = await item.getMetadata();
+          final data = await item.getData();
+          if (data == null) {
+            debugPrint('Error: Data is null for blog post: ${item.name}');
+            continue;
+          }
+          final String s = String.fromCharCodes(data)
+              .replaceAll('ð', 'ğ')
+              .replaceAll('þ', 'ş')
+              .replaceAll('ý', 'ı')
+              .replaceAll('Ý', 'İ');
 
-        dataList.addAll({s: metadata});
-        reversed = Map.fromEntries(dataList.entries.toList().reversed);
+          dataList[s] = metadata;
+        } catch (e) {
+          debugPrint('Error processing blog post ${item.name}: $e');
+        }
       }
+      final reversed = Map.fromEntries(dataList.entries.toList().reversed);
       return right(reversed);
     } catch (e) {
       return left(Failure(e.toString()));
