@@ -3,10 +3,17 @@ import 'package:blog_web_site/widgets/delayed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AnimatedHeaderItems extends StatelessWidget {
+class AnimatedHeaderItems extends StatefulWidget {
   const AnimatedHeaderItems({
     super.key,
   });
+
+  @override
+  State<AnimatedHeaderItems> createState() => _AnimatedHeaderItemsState();
+}
+
+class _AnimatedHeaderItemsState extends State<AnimatedHeaderItems> {
+  bool _isRealitiesHovered = false;
 
   @override
   Widget build(BuildContext context) {
@@ -85,23 +92,42 @@ class AnimatedHeaderItems extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Stack(
-                    children: [
-                      // Outline Text
-                      Text(
-                        'REALITIES.',
-                        style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                              fontSize: isSmall ? 80 : 160,
-                              height: 0.8,
-                              letterSpacing: -5,
-                              foreground: Paint()
-                                ..style = PaintingStyle.stroke
-                                ..strokeWidth = 1
-                                ..color = Colors.white.withOpacity(0.2),
-                            ),
-                      ),
-                      // Hover overlay could be added here if needed
-                    ],
+                  MouseRegion(
+                    onEnter: (_) => setState(() => _isRealitiesHovered = true),
+                    onExit: (_) => setState(() => _isRealitiesHovered = false),
+                    child: Stack(
+                      children: [
+                        // Background Stroke (Static)
+                        Text(
+                          'REALITIES.',
+                          style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                                fontSize: isSmall ? 80 : 160,
+                                height: 0.8,
+                                letterSpacing: -5,
+                                color: null,
+                                foreground: Paint()
+                                  ..style = PaintingStyle.stroke
+                                  ..strokeWidth = 1
+                                  ..color = Colors.white.withOpacity(0.2),
+                              ),
+                        ),
+                        // Animated Fill Overlay
+                        AnimatedOpacity(
+                          duration: const Duration(milliseconds: 600),
+                          curve: Curves.easeInOut,
+                          opacity: _isRealitiesHovered ? 1.0 : 0.0,
+                          child: Text(
+                            'REALITIES.',
+                            style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                                  fontSize: isSmall ? 80 : 160,
+                                  height: 0.8,
+                                  letterSpacing: -5,
+                                  color: Colors.white,
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -166,7 +192,6 @@ class AnimatedHeaderItems extends StatelessWidget {
   }
 
   Widget _buildAboutButton(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(

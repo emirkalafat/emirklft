@@ -30,6 +30,21 @@ class _AnaSayfaState extends ConsumerState<AnaSayfa> {
   bool get isDark =>
       ref.watch(themeNotifierProvider.notifier).theme == ThemeMode.dark;
 
+  Widget _buildBlurCircle(Color color, double size) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: color,
+      ),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 150, sigmaY: 150),
+        child: Container(color: Colors.transparent),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -92,8 +107,6 @@ class _AnaSayfaState extends ConsumerState<AnaSayfa> {
                       scroll: scroll,
                     ),
                     const AboutMeSection(),
-                    const SizedBox(height: 100),
-                    const TimelineSection(),
                     const SizedBox(height: 100),
                     const HomeScreenFunctionsSection(),
                     const SizedBox(height: 60.0),
