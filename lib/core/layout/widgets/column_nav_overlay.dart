@@ -71,9 +71,11 @@ class _ColumnNavOverlayState extends State<ColumnNavOverlay>
           ),
 
           // Sliding Columns
-          Row(
+          Flex(
+            direction: isSmall ? Axis.vertical : Axis.horizontal,
             children: [
               if (!isSmall) const SizedBox(width: 80),
+              if (isSmall) const SizedBox(height: 60),
               ...NavigationService.menuItems.map((item) {
                 final index = NavigationService.menuItems.indexOf(item);
                 final isSelected = index == widget.currentIndex;
@@ -93,15 +95,25 @@ class _ColumnNavOverlayState extends State<ColumnNavOverlay>
                       ).value;
 
                       return Transform.translate(
-                        offset: Offset(0, size.height * (1 - slideProgress)),
+                        offset: isSmall
+                            ? Offset(size.width * (1 - slideProgress), 0)
+                            : Offset(0, size.height * (1 - slideProgress)),
                         child: Opacity(
                           opacity: slideProgress.clamp(0.0, 1.0),
                           child: Container(
                             decoration: BoxDecoration(
                               color: Colors.black.withValues(alpha: 0.05),
                               border: Border(
-                                right: BorderSide(
-                                    color: Colors.white.withValues(alpha: 0.05)),
+                                right: isSmall
+                                    ? BorderSide.none
+                                    : BorderSide(
+                                        color: Colors.white
+                                            .withValues(alpha: 0.05)),
+                                bottom: isSmall
+                                    ? BorderSide(
+                                        color: Colors.white
+                                            .withValues(alpha: 0.05))
+                                    : BorderSide.none,
                               ),
                             ),
                             child: InkWell(
@@ -109,58 +121,70 @@ class _ColumnNavOverlayState extends State<ColumnNavOverlay>
                                 NavigationService.navigateTo(context, index);
                                 widget.onClose();
                               },
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    '${item.number} — ${item.label.toUpperCase()}',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelSmall
-                                        ?.copyWith(
-                                          color: isSelected
-                                              ? colorScheme.primary
-                                              : Colors.white.withValues(alpha: 0.4),
-                                          letterSpacing: 2,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 20),
-                                  Text(
-                                    item.label,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displaySmall
-                                        ?.copyWith(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20),
-                                    child: Text(
-                                      item.description,
-                                      textAlign: TextAlign.center,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      '${item.number} — ${item.label.toUpperCase()}',
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodySmall
+                                          .labelSmall
                                           ?.copyWith(
-                                            color:
-                                                Colors.white.withValues(alpha: 0.4),
+                                            color: isSelected
+                                                ? colorScheme.primary
+                                                : Colors.white
+                                                    .withValues(alpha: 0.4),
+                                            letterSpacing: 2,
+                                            fontSize: isSmall ? 10 : null,
                                           ),
                                     ),
-                                  ),
-                                  if (isSelected)
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 20),
-                                      child: Container(
-                                        width: 40,
-                                        height: 2,
-                                        color: colorScheme.primary,
+                                    SizedBox(height: isSmall ? 8 : 20),
+                                    Text(
+                                      item.label,
+                                      style: (isSmall
+                                              ? Theme.of(context)
+                                                  .textTheme
+                                                  .headlineSmall
+                                              : Theme.of(context)
+                                                  .textTheme
+                                                  .displaySmall)
+                                          ?.copyWith(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                ],
+                                    if (!isSmall) ...[
+                                      const SizedBox(height: 10),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20),
+                                        child: Text(
+                                          item.description,
+                                          textAlign: TextAlign.center,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall
+                                              ?.copyWith(
+                                                color: Colors.white
+                                                    .withValues(alpha: 0.4),
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                    if (isSelected)
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            top: isSmall ? 8 : 20),
+                                        child: Container(
+                                          width: 40,
+                                          height: 2,
+                                          color: colorScheme.primary,
+                                        ),
+                                      ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

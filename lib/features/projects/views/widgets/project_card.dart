@@ -46,6 +46,7 @@ class _ProjectCardState extends State<ProjectCard> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(4),
           child: Stack(
+            fit: StackFit.expand,
             children: [
               // Background Image
               if (widget.project.image != null)
@@ -184,6 +185,7 @@ class _ProjectCardState extends State<ProjectCard> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(4),
           child: Stack(
+            fit: StackFit.expand,
             children: [
               // Background Image
               if (widget.project.image != null)
@@ -229,66 +231,73 @@ class _ProjectCardState extends State<ProjectCard> {
               ),
 
               // Content
-              Padding(
-                padding: const EdgeInsets.all(48.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (widget.project.stack != null)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 16),
-                        child: Wrap(
-                          spacing: 12,
-                          children: widget.project.stack!.map((tag) => Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
-                              color: Colors.white.withValues(alpha: 0.05),
+              Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () => context.go('/projects/${widget.project.id}'),
+                  child: Padding(
+                    padding: const EdgeInsets.all(48.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (widget.project.stack != null)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 16),
+                            child: Wrap(
+                              spacing: 12,
+                              children: widget.project.stack!.map((tag) => Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+                                  color: Colors.white.withValues(alpha: 0.05),
+                                ),
+                                child: Text(
+                                  tag.toUpperCase(),
+                                  style: GoogleFonts.spaceMono(
+                                    textStyle: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              )).toList(),
                             ),
-                            child: Text(
-                              tag.toUpperCase(),
-                              style: GoogleFonts.spaceMono(
-                                textStyle: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
-                              ),
+                          ),
+                        Text(
+                          widget.project.name,
+                          style: GoogleFonts.playfairDisplay(
+                            textStyle: const TextStyle(
+                              fontSize: 48,
+                              fontStyle: FontStyle.italic,
+                              color: Colors.white,
+                              height: 1.0,
                             ),
-                          )).toList(),
+                          ),
                         ),
-                      ),
-                    Text(
-                      widget.project.name,
-                      style: GoogleFonts.playfairDisplay(
-                        textStyle: const TextStyle(
-                          fontSize: 48,
-                          fontStyle: FontStyle.italic,
-                          color: Colors.white,
-                          height: 1.0,
+                        const SizedBox(height: 16),
+                        Container(
+                          constraints: const BoxConstraints(maxWidth: 400),
+                          child: Text(
+                            widget.project.explanation,
+                            style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 14, height: 1.6),
+                          ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Container(
-                      constraints: const BoxConstraints(maxWidth: 400),
-                      child: Text(
-                        widget.project.explanation,
-                        style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 14, height: 1.6),
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    AnimatedTranslation(
-                      offset: _isHovered ? Offset.zero : const Offset(0, 20),
-                      child: AnimatedOpacity(
-                        opacity: _isHovered ? 1.0 : 0.0,
-                        duration: const Duration(milliseconds: 300),
-                        child: TextButton.icon(
-                          onPressed: () => context.go('/projects/${widget.project.id}'),
-                          icon: const Text('PROJEYİ GÖR', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                          label: const Icon(Icons.arrow_outward, color: Colors.white, size: 16),
-                          style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                        const SizedBox(height: 24),
+                        AnimatedTranslation(
+                          offset: _isHovered ? Offset.zero : const Offset(0, 20),
+                          child: AnimatedOpacity(
+                            opacity: _isHovered ? 1.0 : 0.0,
+                            duration: const Duration(milliseconds: 300),
+                            child: Row(
+                              children: [
+                                const Text('PROJEYİ GÖR', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                                const SizedBox(width: 8),
+                                const Icon(Icons.arrow_outward, color: Colors.white, size: 16),
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ],
