@@ -49,4 +49,6 @@ app.*.map.json
 # kişisel ignore klasörlerim
 test/main.dart
 /posts/
+lib/core/secrets.dart
+.env
 
