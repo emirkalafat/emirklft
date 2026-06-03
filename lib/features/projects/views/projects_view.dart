@@ -1,9 +1,9 @@
 import 'package:blog_web_site/core/utils/center_error.dart';
 import 'package:blog_web_site/features/projects/viewmodels/projects_view_model.dart';
-import 'package:blog_web_site/widgets/page_header.dart';
+import 'package:blog_web_site/shared/widgets/page_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'widgets/project_card_new.dart';
+import 'widgets/project_card.dart';
 
 class ProjectsView extends ConsumerWidget {
   const ProjectsView({super.key});
@@ -67,7 +67,7 @@ class ProjectsView extends ConsumerWidget {
                             stack: project.stack ?? ['Flutter', 'Firebase'],
                           );
                           
-                          return ProjectCardNew(project: displayProject);
+                          return ProjectCard(project: displayProject);
                         },
                       );
                     },
@@ -97,7 +97,7 @@ class ProjectsView extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(vertical: 80),
       decoration: BoxDecoration(
         border: Border(
-          top: BorderSide(color: Colors.white.withOpacity(0.05)),
+          top: BorderSide(color: Colors.white.withValues(alpha: 0.05)),
         ),
       ),
       child: Column(
@@ -130,7 +130,7 @@ class ProjectsView extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 18),
       decoration: BoxDecoration(
         color: isPrimary ? Colors.white : Colors.transparent,
-        border: Border.all(color: Colors.white.withOpacity(0.2)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Text(

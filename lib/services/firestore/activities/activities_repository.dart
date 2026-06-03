@@ -1,4 +1,4 @@
-import 'package:blog_web_site/screens/recap/activity.dart';
+import 'package:blog_web_site/features/recap/models/activity.dart';
 import 'package:blog_web_site/services/providers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:blog_web_site/screens/admin/dialogs/activity_form_dialog.dart';
-import 'package:blog_web_site/screens/recap/activity.dart';
+import 'package:blog_web_site/features/recap/models/activity.dart';
 import 'package:blog_web_site/services/firestore/activities/activities_controller.dart';
 
 // Arama ve filtreleme için provider'lar

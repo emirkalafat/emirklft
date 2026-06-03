@@ -9,7 +9,7 @@ import '../models/project_version_filter_model.dart';
 import '../viewmodels/project_details_view_model.dart';
 import '../viewmodels/version_view_model.dart';
 import 'widgets/app_version_card.dart';
-import 'package:blog_web_site/widgets/page_header.dart';
+import 'package:blog_web_site/shared/widgets/page_header.dart';
 import 'package:blog_web_site/core/utils/utils.dart';
 
 class ProjectDetailView extends ConsumerStatefulWidget {
@@ -76,7 +76,7 @@ class _ProjectDetailViewState extends ConsumerState<ProjectDetailView> {
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
                               colors: [
-                                colorScheme.surface.withOpacity(0.4),
+                                colorScheme.surface.withValues(alpha: 0.4),
                                 colorScheme.surface,
                               ],
                             ),
@@ -211,14 +211,14 @@ class _ProjectDetailViewState extends ConsumerState<ProjectDetailView> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.03),
-          border: Border.all(color: Colors.white.withOpacity(0.1)),
+          color: Colors.white.withValues(alpha: 0.03),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
           borderRadius: BorderRadius.circular(4),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, color: Colors.white.withOpacity(0.6), size: 18),
+            Icon(icon, color: Colors.white.withValues(alpha: 0.6), size: 18),
             const SizedBox(width: 12),
             Text(
               label,
@@ -243,11 +243,11 @@ class _ProjectDetailViewState extends ConsumerState<ProjectDetailView> {
       children: [
         Text(
           'Beta sürümlerini göster',
-          style: TextStyle(color: Colors.white.withOpacity(0.4), fontSize: 14),
+          style: TextStyle(color: Colors.white.withValues(alpha: 0.4), fontSize: 14),
         ),
         const SizedBox(width: 12),
         Switch(
-          activeColor: Theme.of(context).colorScheme.primary,
+          activeThumbColor: Theme.of(context).colorScheme.primary,
           value: showBetaVersions,
           onChanged: (value) {
             setState(() {

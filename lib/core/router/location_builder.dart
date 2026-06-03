@@ -1,17 +1,17 @@
 import 'package:blog_web_site/features/projects/views/project_detail_view.dart';
 import 'package:blog_web_site/features/projects/views/projects_view.dart';
 import 'package:blog_web_site/screens/admin/auth_page.dart';
-import 'package:blog_web_site/screens/blog/blog.dart';
+import 'package:blog_web_site/features/blog/views/blog_view.dart';
 import 'package:blog_web_site/screens/contact_with_me/contact.dart';
-import 'package:blog_web_site/screens/home/home_screen.dart';
+import 'package:blog_web_site/features/home/views/home_view.dart';
 import 'package:blog_web_site/screens/link_tree/link_tree.dart';
-import 'package:blog_web_site/screens/misc/about_view.dart';
-import 'package:blog_web_site/screens/misc/equipment_view.dart';
+import 'package:blog_web_site/features/about/views/about_view.dart';
+import 'package:blog_web_site/features/equipment/views/equipment_view.dart';
 import 'package:blog_web_site/screens/misc/gizlilik_sozlesmesi.dart';
-import 'package:blog_web_site/screens/misc/main_scaffold.dart';
+import 'package:blog_web_site/core/layout/main_scaffold.dart';
 import 'package:blog_web_site/screens/misc/yemek_tarifi_user_deletion.dart';
-import 'package:blog_web_site/screens/recap/activity_detail.dart';
-import 'package:blog_web_site/screens/recap/recap.dart';
+import 'package:blog_web_site/features/recap/views/recap_detail_view.dart';
+import 'package:blog_web_site/features/recap/views/recap_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:blog_web_site/screens/admin/admin_page.dart';
 
